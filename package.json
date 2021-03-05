@@ -1,0 +1,19 @@
+{
+  "name": "bootstrap-4-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.2",
+    "@popperjs/core": "^2.9.0",
+    "bootstrap": "^4.6.0",
+    "bootstrap-icons": "^1.4.0",
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./css/style.css"
+  },
+  "author": "",
+  "license": "ISC"
+}
