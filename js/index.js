@@ -1,7 +1,10 @@
     
     (async function(){
         const meubles = await getMeubles(); // await pour dire on attends que la promesse du fonction getMeubles tenir ses promesses ou echoue ses promesses
-        afficherArticles();
+        for(let i = 0; i < meubles.lenth; i++){
+            const meuble = meubles[i];
+            afficherArticles(meubles);
+        }
     })
 
     async function getMeubles() { // je crée une fonction qui va chercher l'API du meuble
@@ -17,8 +20,8 @@
             })
     }
 
-    async function afficherArticles() { // pour afficheer l'article 
-        document.getElementById("main").innerHTML = '<article class="card mb-4 mb-lg-0 border-primary shadow-lg rounded"> <div class="card-body"> <h5 class="card-title">Devenez diplômé</h5> <p class="card-text">De zéro à héros, obtenez un diplôme en informatique.</p> </div> </article>'
-    }
+    function afficherArticles(meubles) { // pour afficheer l'article 
+        document.getElementById("main").innerHTML += '<article class="card mb-4 mb-lg-0 border-primary shadow-lg rounded"> <div class="card-body"> <h5 class="card-title">Devenez diplômé</h5> <p class="card-text">De zéro à héros, obtenez un diplôme en informatique.</p> </div> </article>';
+    };
 
     
