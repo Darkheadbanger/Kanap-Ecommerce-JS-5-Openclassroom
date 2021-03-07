@@ -1,6 +1,6 @@
 (async function () {
     const articles = await getArticles()
-    for (article of articles) {
+    for ( const article of articles) {
         displayArticles(articles)
     }
 })()
@@ -18,11 +18,6 @@ function getArticles() {
             document.getElementById("main").textContent = "Error :("
         })
 }
-
-/*
-function displayArticles(article) {
-    document.getElementById("main").innerHTML += '<article class="blog text-center"><h2>${article.title}</h2><p>${article.body}</p></article>'
-}*/
 
 function displayArticles(article) {
     const templateElt = document.getElementById("templateArticle")
