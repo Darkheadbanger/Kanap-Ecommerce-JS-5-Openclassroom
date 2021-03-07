@@ -1,27 +1,37 @@
-    
-    (async function(){
-        const meubles = await getMeubles(); // await pour dire on attends que la promesse du fonction getMeubles tenir ses promesses ou echoue ses promesses
-        for(let i = 0; i < meubles.lenth; i++){
-            const meuble = meubles[i];
-            afficherArticles(meubles);
-        }
-    })
-
-    async function getMeubles() { // je crée une fonction qui va chercher l'API du meuble
-        return fetch("http://localhost:3000/api/furniture") // je récupère les données API directement dans son URL via HTTPS et puis je retourne tous les fêtch c'est à dire la fonction qui récupère les articles meubles
-            .then(function(reponseBodyHttp) { // On atache une fonction qui va executer le corps de HTTP API
-                return reponseBodyHttp.json() // on tran,forme en JSON
-            })
-            .then(function(meubles) {// on reècupère le then d'avant  pour récupèrer les articles dans l'API
-                return meubles; 
-            })
-            .catch(function(error) { // Parfois l'API ne fonctionne donc je cfrée une fonctionne catch pour capturer les erreurs
-                alert(error);
-            })
+(async function () {
+    const articles = await getArticles()
+    for (article of articles) {
+        displayArticles(articles)
     }
+})()
 
-    function afficherArticles(meubles) { // pour afficheer l'article 
-        document.getElementById("main").innerHTML += '<article class="card mb-4 mb-lg-0 border-primary shadow-lg rounded"> <div class="card-body"> <h5 class="card-title">Devenez diplômé</h5> <p class="card-text">De zéro à héros, obtenez un diplôme en informatique.</p> </div> </article>';
-    };
+function getArticles() {
+    return fetch("http://localhost:3000/api/furniture")
+        .then(function(httpBodyResponse) {
+            return httpBodyResponse.json()
+        })
+        .then(function(articles) {
+            return articles
+        })
+        .catch(function(error) {
+            alert(error)
+            document.getElementById("main").textContent = "Error :("
+        })
+}
 
-    
+/*
+function displayArticles(article) {
+    document.getElementById("main").innerHTML += '<article class="blog text-center"><h2>${article.title}</h2><p>${article.body}</p></article>'
+}*/
+
+function displayArticles(article) {
+    const templateElt = document.getElementById("templateArticle")
+    const cloneElt = document.importNode(templateElt.content, true)
+
+    cloneElt.getElementById("blog__image").textContent = article.image
+    cloneElt.getElementById("blog__title").textContent = article.title
+    cloneElt.getElementById("blog__price").textContent = article.price
+
+
+    document.getElementById("main").appendChild(cloneElt)
+}
