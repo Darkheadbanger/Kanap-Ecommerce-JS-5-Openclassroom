@@ -1,26 +1,24 @@
-(async function () {
+(async () => {
     const meubles = await getMeubles();
-    for(const meuble of meubles) {
-        displayMeubles()
+    for (meuble of meubles) {
+        displayMeubles();
     }
 })
 
 function getMeubles() {
     return fetch("http://localhost:3000/api/furniture")
-        .then(function(response) {
-            /*
-            let myVarr = JSON.parse(this.response)
-            response.myVarr()*/
-            response.json()
-        })
+        .then((response) => {
+                /*
+                let myVarr = JSON.parse(this.response)
+                response.myVarr()*/
+                response.json();
+            })
         
-        .then(function(meubles) {
-            return meubles
-        })
-        .catch(function(error) {
-            alert(error)
-            document.getElementById('main').textContent = "Error :("
-        })
+        .then((meubles) => meubles)
+        .catch((error) => {
+                alert(error);
+                document.getElementById('main').textContent = "Error :(";
+            })
 }
 
 
