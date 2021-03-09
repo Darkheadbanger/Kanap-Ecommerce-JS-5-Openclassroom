@@ -23,7 +23,7 @@ function displayMeuble(meuble) {
 
   cloneElt.getElementById("blog__image").src = meuble.imageUrl
   cloneElt.getElementById("blog__title").textContent = meuble.name
-  cloneElt.getElementById("blog__body").textContent = meuble.price + " €"
+  cloneElt.getElementById("blog__price").textContent = meuble.price + (' €')
 
   document.getElementById("main").appendChild(cloneElt)
 }

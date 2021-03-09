@@ -9,14 +9,15 @@
   <meta name="description" content="">
   <meta name="author" content="David Bouhaben"/>
   <meta name="robots" content="index, follow" />
+  <link rel="shortcut icon" href="image/favicon.ico"/>
 
   <link defer rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css"/>
   
-  <script src="./js/index.js" defer></script>
+  <script src="js/panier.js" defer></script>
   <script>// Google analytics</script>
 
-  <title>Spécialsite en meuble en chêne Français | Orinoco meuble</title>
+  <title>Pannier | Orinoco meuble</title>
 </head> 
 
 <body>  
@@ -26,7 +27,7 @@
         <div class="row">
           <nav class="col navbar navbar-expand navbar-light bg-wood justify-content-between">
             <a class="navbar-brand" href="index.html">
-              <img src="" alt="Orinoco" />
+              <img src="image/logo.png" alt="Logo Orinoco" class="img-fluid" />
             </a>
             <div class="collapse navbar-collapse w-100 order-3 dual-collapse2">
               <ul class="navbar-nav ml-auto">
@@ -48,7 +49,39 @@
     </div>
   </header>
 
-
+  <main class="main" id="main">
+    <div class="container">
+      <div class="row d-flex justify-content-center d-wrap">
+        <div class="col-md-4 mx-md-n3 mt-md-5 mt-3 mr-md-1">
+          <div class="card mb-4 mb-lg-0 border-primary shadow-lg rounded">
+            <article class="card-body">
+              <img id="blog__image" src="" class="img-fluid rounded mx-auto d-block" alt="table"/>
+              <div class="d-md-none">
+                <h2 class="h4 mt-3" id="blog__title"></h2>
+                <p class="p text-justify" id="blog__description"></p>
+                <p>Ici quantité</p>
+                <p>Ici type Varnish</p>
+                <p>Ici prix total si on ajoute la quantité</p>
+                <button class="btn">Ici button ajouter au pannier</button>  
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="col-md-4 mx-md-n3 mt-md-5 mt-3 mr-md-1 d-none d-md-block">
+          <div class="card mb-4 mb-lg-0 border-primary shadow-lg rounded">
+            <article class="card-body">
+              <h2 class="h4 mt-3" id="blog__title"></h2>
+              <p class="p text-justify" id="blog__description"></p>
+              <p>Ici quantité</p>
+              <p>Ici type Varnish</p>
+              <p>Ici prix total si on ajoute la quantité</p>
+              <button class="btn">Ici button ajouter au pannier</button>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
   <footer id="footer">
     <div class="bg-woodFooter mt-5">
@@ -72,8 +105,8 @@
 
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script defer src="./node_modules/jquery/dist/jquery.min.js" crossorigin="anonymous"></script>
-  <script defer src="./node_modules/@popperjs/core/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-  <script defer src="./node_modules/bootstrap/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script defer src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script defer src="./node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+  <script defer src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
