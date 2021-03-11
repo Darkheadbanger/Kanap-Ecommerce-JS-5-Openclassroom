@@ -13,7 +13,7 @@
   <link defer rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css"/>
   
-  <script src="./js/index.js" defer></script>
+  <script src="./js/produit.js" defer></script>
   <script>// Google analytics</script>
 
   <title>Spécialsite en meuble en chêne Français | Orinoco meuble</title>
@@ -65,8 +65,8 @@
               <p class="p text-justify" id="blog__description">Déscription</p>
               <h2 class="h4" id="blog__price">500€</h2>
               <form>
-                <div input="input-group mb-4" id="blog__choix">
-                  <label class="exampleFormControlSelect1">Varnish</label>
+                <div input="input-group mb-4">
+                  <label class="exampleFormControlSelect1" id="blog__choix">Varnish</label>
                   <select class="form-control" id="blog__option">
                     <option>1</option>
                     <option>2</option>
@@ -84,6 +84,7 @@
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span><input placeholder="Quanitité" required type="number" value="1" min="1" max="100" class="form-control w-50"/></span>                  
+                      <button type="button" class="btn btn-wood btn-md"><i class="fas fa-shopping-basket"></i><span class="p ml-1">Ajouter au pannier</span></button>
                     </div>
                   </div>  
                   </div>
@@ -117,8 +118,8 @@
 
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script defer src="./node_modules/jquery/dist/jquery.min.js" crossorigin="anonymous"></script>
-  <script defer src="./node_modules/@popperjs/core/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-  <script defer src="./node_modules/bootstrap/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script defer src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script defer src="./node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+  <script defer src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

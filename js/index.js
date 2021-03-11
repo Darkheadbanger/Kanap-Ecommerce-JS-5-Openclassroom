@@ -11,7 +11,7 @@ function getMeubles() {
     .then((responseHttp) => responseHttp.json())
     //.then((meubles) => meubles)
     .catch((error) => {
-        alert(error)
+        alert(error) + `Error :(`
       })
 }
 
