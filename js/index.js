@@ -9,13 +9,11 @@
 function getMeubles() {
   return fetch("http://localhost:3000/api/furniture")
     .then((responseHttp) => responseHttp.json())
-    .then((meubles) => meubles)
+    //.then((meubles) => meubles)
     .catch((error) => {
         alert(error)
       })
 }
-
-
 
 function displayMeuble(meuble) {
   const templateElt = document.getElementById("templateArticle")
@@ -23,7 +21,9 @@ function displayMeuble(meuble) {
 
   cloneElt.getElementById("blog__image").src = meuble.imageUrl
   cloneElt.getElementById("blog__title").textContent = meuble.name
-  cloneElt.getElementById("blog__price").textContent = meuble.price + (' €')
+  cloneElt.getElementById("blog__price").textContent = meuble.price / 100 + (' €')
 
-  document.getElementById("main").appendChild(cloneElt)
+  cloneElt.getElementById("blog__lien").href = "produit.html?id=" + meuble._id
+
+  document.getElementById("produits").appendChild(cloneElt)
 }
