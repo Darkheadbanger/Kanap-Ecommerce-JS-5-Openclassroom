@@ -61,30 +61,25 @@
         <div class="col-md-4 mx-md-n3 mt-md-5 mt-3 mr-md-1 d-none d-md-block">
           <div class="card mb-4 mb-lg-0 border-primary shadow-lg rounded">
             <article class="card-body">
-              <h1 class="h3 mt-3" id="blog__title">Titre</h1>
-              <p class="p text-justify" id="blog__description">Déscription</p>
-              <h2 class="h4" id="blog__price">500€</h2>
+              <h1 class="h3 mt-3" id="blog__title"></h1>
+              <p class="p text-justify" id="blog__description"></p>
+              <h2 class="h4" id="blog__price"></h2>
               <form>
                 <div input="input-group mb-4">
-                  <label class="exampleFormControlSelect1" id="blog__choix">Varnish</label>
-                  <select class="form-control" id="blog__option">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
+                  <label class="exampleFormControlSelect1"></label>
+                  <select  required class="form-control" name="Couleur" >
+                    <option value="Dark Oak" selected id="blog__option0"></option>
+                    <option value="Light Oak" selected id="blog__option1"></option>
+                    <option value="Mahogany" selected id="blog__option2"></option>
                   </select>
                 </div>
               </form>
-
-              <img src=""/>
-              <img src=""/>
-              <img src=""/>
-              
               <div class="justify-content-md-between">
                 <form>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span><input placeholder="Quanitité" required type="number" value="1" min="1" max="100" class="form-control w-50"/></span>                  
-                      <button type="button" class="btn btn-wood btn-md"><i class="fas fa-shopping-basket"></i><span class="p ml-1">Ajouter au pannier</span></button>
+                      <span><input placeholder="Quanitité" required type="number" value="1" min="1" max="100" class="form-control w-75 quantity" id="quantity"/></span>                  
+                      <button type="button" class="btn btn-wood btn-md" id="buttonAdd"><i class="fas fa-shopping-basket"></i><span class="p ml-1">Ajouter au pannier</span></button>
                     </div>
                   </div>  
                   </div>
