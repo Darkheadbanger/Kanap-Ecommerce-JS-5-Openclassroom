@@ -32,15 +32,15 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
     document.getElementById('blog__option2').textContent = meubleData.varnish[2]
     // Evenement pour ajouter le produit au panier au moment de clique "ajouter au pannier"
     //document.getElementById('buttonAdd').onclick('click', async (event) => {
-    document.getElementById('buttonAdd').onclick = (event) => {
+    document.getElementById('buttonAdd').onclick = async (event) => {
         //addArticleToCharts(event, meubleData)
-        addArticleToCharts(meubleData, event)
+        let meublesPanier = await getAAddToCharts()
         event.preventDefault()
         //event.stopPropagation()
     }
 }
 
-function addArticleToCharts (meubleData, event) {
+function getAAddToCharts () {
     // Creation du panier, si le panier exist alors c'est bon, si non on donne un message qu'il nexiste pas et on en crée un autre
     let utilisateurPannier = JSON.parse(localStorage.getItem('utilisateurPanier'))
 
@@ -52,9 +52,18 @@ function addArticleToCharts (meubleData, event) {
         localStorage.setItem("utilisateurPannier", JSON.stringify(panierInit)); // On crée un pannier
     }
 
-    //ajouter les produits dans le pannier
+    //tableau et objet demandé par l'API pour la commande
 
+    let contact
+    let meublesPanier = []
 
+    //ajouter les produits dans le panier
+
+    utilisateurPannier.push(meublesPanier)
+    localStorage.setItem("utilisateurPannier", JSON.stringify(utilisateurPannier))
+    console.log("Le produit a été ajouté au panier")
+
+    
 }
 
 /*
