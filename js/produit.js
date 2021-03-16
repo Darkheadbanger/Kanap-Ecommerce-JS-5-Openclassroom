@@ -1,5 +1,5 @@
 (async () => {
-    const meubleId = await getMeubleId() // Chercher l'identifation avec get depuis l'URL
+    const meubleId = getMeubleId() // Chercher l'identifation avec get depuis l'URL
     const meubleData = await getMeubleData(meubleId)
     displayMeuble(meubleData)
 })()
@@ -30,17 +30,62 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
     document.getElementById('blog__option0').textContent = meubleData.varnish[0]
     document.getElementById('blog__option1').textContent = meubleData.varnish[1]
     document.getElementById('blog__option2').textContent = meubleData.varnish[2]
-
-    document.getElementById('buttonAdd').addEventListener('click', (event) => {
-        addArticleToCharts(event, meubleData)
+    // Evenement pour ajouter le produit au panier au moment de clique "ajouter au pannier"
+    //document.getElementById('buttonAdd').onclick('click', async (event) => {
+    document.getElementById('buttonAdd').onclick = (event) => {
+        //addArticleToCharts(event, meubleData)
+        addArticleToCharts(meubleData, event)
         event.preventDefault()
-        event.stopPropagation()
-    })
+        //event.stopPropagation()
+    }
 }
 
-function addArticleToCharts(event, meubleData) { // Si le produit est cliqué et supérieur ou egal à un on peut ajouter le produit au pannier si non error
-    const meubleAAjouter = getMeubleAAjouter() // meuble a ajouter va récuperer l'id de meuble pour ajouter au pannier
-    const meubleDejaAjouter = getMeubleDejaAjouter(meubleAAjouter, meubleData.id) // si le meuble est déjà au pannier, on peut toujours ajouter le panier tant que le produit est disponible si non message erreur "produit n'est plus disponible"
-    
+function addArticleToCharts (meubleData, event) {
+    // Creation du panier, si le panier exist alors c'est bon, si non on donne un message qu'il nexiste pas et on en crée un autre
+    let utilisateurPannier = JSON.parse(localStorage.getItem('utilisateurPanier'))
+
+    if (localStorage.getItem("utilisateurPannier")) {
+        console.log("Le panier existe");
+    } else { // le panier n'existe pas, on en créer une
+        console.log("Le panier n'existe");
+        let panierInit = []; // panier qui s'initialise à 0 donc dynamique 
+        localStorage.setItem("utilisateurPannier", JSON.stringify(panierInit)); // On crée un pannier
+    }
+
+    //ajouter les produits dans le pannier
+
+
+}
+
+/*
+class CartObject {
+    get meuble() { // On récupère depuis le format JSON et on pose en format JS
+        return JSON.parse(localStorage.getItem("utilisateurPannier"));
+    }
+
+    //Ici on utilise le set pour déposer
+    set meuble(meubles) {
+        localStorage.setItem("utilisateurPannier", JSON.stringify(meubles))
+    }
+
+    addMeuble(meubleObject) {
+        let meubles = this.meubles
+        // Consta le produit deja sur le panier reçois, le meuble id
+        const produitDejaSurLePanier = !!meubles[meubleObject.meubleId] //meubleId ou _id
+        console.log(addmeuble)
+    }
+
+    /*
+    creationPannier() {
+        if (localStorage.getItem("utilisateurPannier")) {
+            console.log("Le panier existe");
+        } else { // le panier n'existe pas, on en créer une
+            console.log("Le panier n'existe");
+            let panierInit = []; // panier qui s'initialise à 0 donc dynamique 
+            localStorage.setItem("utilisateurPannier", JSON.stringify(panierInit)); // On crée un pannier
+        }
+    }
     
 }
+
+const Cart = new CartObject ()*/
