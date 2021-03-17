@@ -44,59 +44,24 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
     )
 }
 
-function getAjoutMeuble(meubleData){
+function getAjoutMeuble(meubleData) {
     // Creation du panier, si le panier exist alors c'est bon, si non on donne un message qu'il nexiste pas et on en crée un autre au chargement
-    let getUtilisateurPanier = JSON.parse(localStorage.getItem('getUtilisateurPanier') || `{}`)
-    console.log(getUtilisateurPanier)
-    //return JSON.parse(localStorage.getItem('getUtilisateurPanier')) || []
-    /*
-    if (localStorage.getItem("utilisateurPanier")) {
-        console.log("Le panier existe");
-    } else { // le panier n'existe pas, on en créer une
-        console.log("Le panier n'existe");
-        let panierInit = []; // panier qui s'initialise à 0 donc dynamique 
-        localStorage.setItem("utilisateurPanier", JSON.stringify(panierInit)); // On crée un pannier
-    }*/
+    let utilisateurPanier = JSON.parse(localStorage.getItem("utilisateurPanier") || `{}`)
+    console.log(utilisateurPanier)
 
-    //lire les valeurs dans le localStorage; settLocalStorage
-    /*let meubleData = []
-    let setUtilisateurPanier = localStorage.setItem("getUtilisateurPanier", JSON.stringify(meubleData))
-    console.log(setUtilisateurPanier)*/
-
-    //let meubleInit = []
-    let meubleInit = [meubleData]
-
-    let setUtilisateurPanier = localStorage.setItem("getUtilisateurPanier", JSON.stringify(meubleInit))
-    console.log(setUtilisateurPanier)
-
-    
-}
-
-
-/*
-function getMeubleProduits () {
-    // Creation du panier, si le panier exist alors c'est bon, si non on donne un message qu'il nexiste pas et on en crée un autre
-    
-    if (localStorage.getItem("utilisateurPanier")) {
-        console.log("Le panier existe");
-    } else { // le panier n'existe pas, on en créer une
-        console.log("Le panier n'existe");
-        let panierInit = []; // panier qui s'initialise à 0 donc dynamique 
-        localStorage.setItem("utilisateurPanier", JSON.stringify(panierInit)); // On crée un pannier
-    }
-
-    //tableau et objet demandé par l'API pour la commande
-
-    let contact 
-    let productsMeuble = []
-
-    let utilisateurPanier = JSON.parse(localStorage.getItem('utilisateurPanier')) || []
+    //Ici pour pouvoir ajouter au tableau via push donc les données d'avant ne disparaissent pas
+    utilisateurPanier.push(meubleData)
 
     //ajouter les produits dans le panier
-
-    utilisateurPanier.push(productsMeuble)
     localStorage.setItem("utilisateurPanier", JSON.stringify(utilisateurPanier))
-    console.log("Le produit a été ajouté au panier")
+    console.log(utilisateurPanier)
+    
+    
 
-    // Creation une fonction si le produit 
-} */
+    //si meuble est déjç présent on ajoute +1, si non on met une quantité
+
+    if(utilisateurPanier.length >= 1)
+        utilisateurPanier.i++ //Si il y a au moins 1 produit dans le panier on incremente 1, si non on ajoute 1 meuble
+    
+
+}
