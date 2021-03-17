@@ -39,6 +39,7 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
             //event.stopPropagation()
             event.preventDefault()
             const ajoutMeuble = getAjoutMeuble(meubleData)
+            inputNumberMeuble(ajoutMeuble)
             // Une fonction pour aller à la page shopping avec le ID et le nom
         }
     )
@@ -63,5 +64,9 @@ function getAjoutMeuble(meubleData) {
     if(utilisateurPanier.length >= 1)
         utilisateurPanier.i++ //Si il y a au moins 1 produit dans le panier on incremente 1, si non on ajoute 1 meuble
     
+    return utilisateurPanier
+}
+
+function inputNumberMeuble(ajoutMeuble){// Liaison entre input number au ajouter au panier pour que si je choisi la quantité, le prix change 
 
 }
