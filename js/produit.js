@@ -1,11 +1,18 @@
-const meubleId = (new URL(document.location)).searchParams.get('id')
-
-
 (async () => {
+    const meubleId = getMeubleId() // Chercher l'identifation avec get depuis l'URL
     const meubleData = await getMeubleData(meubleId)
     displayMeuble(meubleData)
 })()
 
+function getMeubleId(){
+    // L'extraction de l'ID pour idenitifier quel lien on a cliquer et plus tard pour afficher le bon API (qui se trouve dans ID)
+    
+    //let params = (new URL(document.location)).searchParams// new pour créer une autre instance qu'on peut retourner plus tard
+    //let id = params.get('id')
+    
+    return (new URL(document.location)).searchParams.get('id')
+    //console.log(location)
+}
 
 function getMeubleData(meubleId) { // je crée une fetch pour chercher les données l'API et eventuellement l'API avec ID pour n'afficher qu'un seul donnée donc celui qui à le bon ID
     return fetch(`http://localhost:3000/api/furniture/${meubleId}`)// j'imagine que la variable meubleId va injecter l'ID dans l'url donc chercher la bonne Id de l'API
@@ -46,18 +53,19 @@ function getAAddToCharts () {
     let utilisateurPanier = JSON.parse(localStorage.getItem('utilisateurPanier')) || []
 
     /*
-    if (localStorage.getItem("utilisateurPannier")) {
+    if (localStorage.getItem("utilisateurPanier")) {
         console.log("Le panier existe");
     } else { // le panier n'existe pas, on en créer une
         console.log("Le panier n'existe");
         let panierInit = []; // panier qui s'initialise à 0 donc dynamique 
-        localStorage.setItem("utilisateurPannier", JSON.stringify(panierInit)); // On crée un pannier
+        localStorage.setItem("utilisateurPanier", JSON.stringify(panierInit)); // On crée un pannier
     }*/
 
     //tableau et objet demandé par l'API pour la commande
 
     let contact
-    let meublesPanier = {id:meubleId}
+    let meublesPanier = this.meublesPanier
+
     //ajouter les produits dans le panier
 
     utilisateurPanier.push(meublesPanier)
