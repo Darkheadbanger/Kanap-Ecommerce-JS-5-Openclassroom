@@ -46,15 +46,17 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
 
 function getAjoutMeuble(meubleData) {
     // Creation du panier, si le panier exist alors c'est bon, si non on donne un message qu'il nexiste pas et on en crée un autre au chargement
-    let utilisateurPanier = JSON.parse(localStorage.getItem("utilisateurPanier"));
-    console.log(utilisateurPanier);
+    let utilisateur = JSON.parse(localStorage.getItem("utilisateur"));
+    console.log(utilisateur);
     //Ici pour pouvoir ajouter au tableau via push donc les données d'avant ne disparaissent pas
     
-    const meubleInit = [meubleData]
+    //const meubleInit = [meubleData]
 
-    utilisateurPanier.push(meubleData)
+    const meubleInit = [utilisateur.push(meubleData)]
+
+    //utilisateur.push(meubleData)
 
     //ajouter les produits dans le panier
-    localStorage.setItem("utilisateurPanier",JSON.stringify(utilisateurPanier));
-    console.log(utilisateurPanier);
+    localStorage.setItem("utilisateur",JSON.stringify(meubleInit));
+    console.log(utilisateur);
 }
