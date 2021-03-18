@@ -40,28 +40,31 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
             //event.stopPropagation()
             event.preventDefault()
             const ajoutMeuble = await getAjoutMeuble(meubleData)
-            //inputNumberMeuble(ajoutMeuble)
+            const meublePricing = getMeublePricing(ajoutMeuble)
             // Une fonction pour aller à la page shopping avec le ID et le nom
         }
     )
 }
 
 function getAjoutMeuble(meubleData) {
-    /*//L'user a maintenant un panier
-    let userPanier = JSON.parse(localStorage.getItem("userPanier") || `{}`)
+    //L'user a maintenant un panier
+    let userPanier = JSON.parse(localStorage.getItem("userPanier") || [])
 
     //Récupération du panier dans le localStorage et ajout du produit dans le panier avant revoit dans le localStorage
-    userPanier.push(meubleData);
+    userPanier.push(meubleData._id);
     localStorage.setItem("userPanier", JSON.stringify(userPanier))
     console.log("Administration : le produit a été ajouté au panier")
-    console.log(userPanier)*/
+    console.log(userPanier)
 
-    let p = JSON.parse(localStorage.getItem("p") || `{}`)
+    // dire si il y a au moins un meuble alors on incremente d'autres meubles si non on ajoute un meuble dans le panier
 
-    //Récupération du panier dans le localStorage et ajout du produit dans le panier avant revoit dans le localStorage
-    p.push(meubleData);
-    localStorage.setItem("p", JSON.stringify(p))
-    console.log("Administration : le produit a été ajouté au panier")
-    console.log(p)
+    for (let i = 0; i < userPanier.length; i++) {
+        const meublePanier = userPanier[i];
+        if(leMeuble >= 1)
+            meublePanier.incremente++
+    }
+}
+
+function getMeublePricing(ajoutMeuble) {
 
 }
