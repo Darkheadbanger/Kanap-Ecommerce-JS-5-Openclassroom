@@ -34,12 +34,12 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
     // Evenement pour ajouter le produit au panier au moment de clique "ajouter au pannier"
     //document.getElementById('buttonAdd').onclick('click', async (event) => {
         const buttonAjout = document.getElementById('buttonAdd')
-            buttonAjout.addEventListener ('click', async (event) => {
+            buttonAjout.addEventListener ('click', (event) => {
             //addArticleToCharts(event, meubleData)
             //const productsMeuble = await getMeubleProduits()
             //event.stopPropagation()
             event.preventDefault()
-            const ajoutMeuble = await getAjoutMeuble(meubleData)
+            const ajoutMeuble = getAjoutMeuble(meubleData)
             const meublePricing = getMeublePricing(ajoutMeuble)
             // Une fonction pour aller à la page shopping avec le ID et le nom
         }
@@ -60,11 +60,28 @@ function getAjoutMeuble(meubleData) {
 
     for (let i = 0; i < userPanier.length; i++) {
         const meublePanier = userPanier[i];
-        if(leMeuble >= 1)
+        if(userPanier >= 1){
             meublePanier.incremente++
+        }
     }
 }
 
 function getMeublePricing(ajoutMeuble) {
 
 }
+
+/* Pour la page order, le bouton enlever, si on clique le bnouton enlever le prix descends
+function getMeublePricing(ajoutMeuble) { //la function qui permet de lier select option au prix, c'est a dire si je choisi deux le prix va doubler etc. Si je clique 2 fois, la page panier va doubler de sa quantité
+    //let cartContainer = document.getElementsByClassName("cart-container")[0]
+    let cartContainer = document.getElementById("cart-container")[0]
+    let cartRows = cartContainer.getElementById("cart-rows")
+    let totalPrice = 0
+    for (let i = 0; i < cartRows.length; i++) {
+        let cartRow = cartRows[i]
+        let priceElement = cartRow.getElementById("blog__price")
+        let quantityElement = cartRow.getElementById("cart-quantity-input")[0]
+        let quantity = quantityElement.value
+        totalPrice = (priceElement * quantity)    
+    }
+    document.getElementById("blog__price").innerText = totalPrice
+}*/
