@@ -39,7 +39,6 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
             //event.stopPropagation()
             event.preventDefault()
             const ajoutMeuble = getAjoutMeuble(meubleData)
-            inputNumberMeuble(ajoutMeuble)
             // Une fonction pour aller à la page shopping avec le ID et le nom
         }
     )
@@ -47,26 +46,15 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
 
 function getAjoutMeuble(meubleData) {
     // Creation du panier, si le panier exist alors c'est bon, si non on donne un message qu'il nexiste pas et on en crée un autre au chargement
-    let utilisateurPanier = JSON.parse(localStorage.getItem("utilisateurPanier") || `{}`)
-    console.log(utilisateurPanier)
-
+    let utilisateurPanier = JSON.parse(localStorage.getItem("utilisateurPanier"));
+    console.log(utilisateurPanier);
     //Ici pour pouvoir ajouter au tableau via push donc les données d'avant ne disparaissent pas
+    
+    const meubleInit = [meubleData]
+
     utilisateurPanier.push(meubleData)
 
     //ajouter les produits dans le panier
-    localStorage.setItem("utilisateurPanier", JSON.stringify(utilisateurPanier))
-    console.log(utilisateurPanier)
-    
-    
-
-    //si meuble est déjç présent on ajoute +1, si non on met une quantité
-
-    if(utilisateurPanier.length >= 1)
-        utilisateurPanier.i++ //Si il y a au moins 1 produit dans le panier on incremente 1, si non on ajoute 1 meuble
-    
-    return utilisateurPanier
-}
-
-function inputNumberMeuble(ajoutMeuble){// Liaison entre input number au ajouter au panier pour que si je choisi la quantité, le prix change 
-
+    localStorage.setItem("utilisateurPanier",JSON.stringify(utilisateurPanier));
+    console.log(utilisateurPanier);
 }
