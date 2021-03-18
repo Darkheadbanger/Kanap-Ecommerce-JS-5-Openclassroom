@@ -33,30 +33,35 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
     
     // Evenement pour ajouter le produit au panier au moment de clique "ajouter au pannier"
     //document.getElementById('buttonAdd').onclick('click', async (event) => {
-        document.getElementById('buttonAdd').addEventListener ('click', async (event) => {
+        const buttonAjout = document.getElementById('buttonAdd')
+            buttonAjout.addEventListener ('click', async (event) => {
             //addArticleToCharts(event, meubleData)
             //const productsMeuble = await getMeubleProduits()
             //event.stopPropagation()
             event.preventDefault()
-            const ajoutMeuble = getAjoutMeuble(meubleData)
+            const ajoutMeuble = await getAjoutMeuble(meubleData)
+            //inputNumberMeuble(ajoutMeuble)
             // Une fonction pour aller à la page shopping avec le ID et le nom
         }
     )
 }
 
 function getAjoutMeuble(meubleData) {
-    // Creation du panier, si le panier exist alors c'est bon, si non on donne un message qu'il nexiste pas et on en crée un autre au chargement
-    let utilisateur = JSON.parse(localStorage.getItem("utilisateur"));
-    console.log(utilisateur);
-    //Ici pour pouvoir ajouter au tableau via push donc les données d'avant ne disparaissent pas
-    
-    //const meubleInit = [meubleData]
+    /*//L'user a maintenant un panier
+    let userPanier = JSON.parse(localStorage.getItem("userPanier") || `{}`)
 
-    const meubleInit = [utilisateur.push(meubleData)]
+    //Récupération du panier dans le localStorage et ajout du produit dans le panier avant revoit dans le localStorage
+    userPanier.push(meubleData);
+    localStorage.setItem("userPanier", JSON.stringify(userPanier))
+    console.log("Administration : le produit a été ajouté au panier")
+    console.log(userPanier)*/
 
-    //utilisateur.push(meubleData)
+    let p = JSON.parse(localStorage.getItem("p") || `{}`)
 
-    //ajouter les produits dans le panier
-    localStorage.setItem("utilisateur",JSON.stringify(meubleInit));
-    console.log(utilisateur);
+    //Récupération du panier dans le localStorage et ajout du produit dans le panier avant revoit dans le localStorage
+    p.push(meubleData);
+    localStorage.setItem("p", JSON.stringify(p))
+    console.log("Administration : le produit a été ajouté au panier")
+    console.log(p)
+
 }
