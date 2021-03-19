@@ -2,6 +2,7 @@
     const meubleId = getMeubleId() // Chercher l'identifation avec get depuis l'URL
     const meubleData = await getMeubleData(meubleId)
     displayMeuble(meubleData)
+    buttonAndInput(meubleData)
 })()
 
 function getMeubleId(){
@@ -33,17 +34,20 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
     
     // Evenement pour ajouter le produit au panier au moment de clique "ajouter au pannier"
     //document.getElementById('buttonAdd').onclick('click', async (event) => {
-        const buttonAjout = document.getElementById('buttonAdd')
-            buttonAjout.addEventListener ('click', (event) => {
-            //addArticleToCharts(event, meubleData)
-            //const productsMeuble = await getMeubleProduits()
-            //event.stopPropagation()
-            event.preventDefault()
-            const ajoutMeuble = getAjoutMeuble(meubleData)
-            const meublePricing = getMeublePricing(ajoutMeuble)
-            // Une fonction pour aller à la page shopping avec le ID et le nom
-        }
-    )
+}
+
+function buttonAndInput(meubleData){
+    const buttonAjout = document.getElementById('buttonAdd')
+    buttonAjout.addEventListener ('click', (event) => {
+    //addArticleToCharts(event, meubleData)
+    //const productsMeuble = await getMeubleProduits()
+    //event.stopPropagation()
+    event.preventDefault()
+    const ajoutMeuble = getAjoutMeuble(meubleData)
+    const meublePricing = getMeublePricing(ajoutMeuble)
+    // Une fonction pour aller à la page shopping avec le ID et le nom
+}
+)
 }
 
 function getAjoutMeuble(meubleData) {

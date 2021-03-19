@@ -38,16 +38,105 @@
                   <a class="nav-link" href=""><i class="fas fa-shopping-cart"></i></a>
                 </li>
               </ul>
-              <form class="form-inline">
-                <button class="btn btn-search border-right-0-border mx-l" type="submit"><span class="d-none d-md-block">Search</span><span class="d-md-none"><i class="fas fa-search"></i></span></button>
-                <input class="form-control" type="search"  placeholder="Chercher meuble..." id="" aria-label="search"/>
-              </form>  
             </div>
           </nav>
         </div>
       </div>
     </div>
   </header>
+
+  <main id="main">
+    <section>
+      <div class="container" id="container-achat">
+        <h1 class="text-center h3 mt-5 text-woodTitle">Vos achats</h1>
+        <div class="row" id="row-achat">
+          <div class="col d-flex justify-content-md-around mt-2">
+            <div>
+              <p class="text-justify mx-5">
+                Meuble
+              </p>
+              <div class="text-center mt-n4">
+                <article class="card-body">
+                  <img id="blog__image" src="" alt="meuble image" class="img-fluid rounded shadow-lg">
+                </article>
+              </div>
+            </div>
+            <div>
+              <p class="text-justify mx-5">
+                Couleur
+              </p>
+              <div class="text-center mt-n5">
+                <article class="card-body">
+                  <form>
+                    <div input="input-group mb-4">
+                      <label class="exampleFormControlSelect1"></label>
+                      <select  required class="form-control" name="Couleur" >
+                        <option value="Dark Oak" selected id="blog__option0"></option> <!-- Plus tard quand tout sera finit -->
+                        <option value="Light Oak" selected id="blog__option1"></option>
+                        <option value="Mahogany" selected id="blog__option2"></option>
+                      </select>
+                    </div>
+                  </form>    
+                </article>
+              </div>
+            </div>
+            <div>
+              <p class="text-justify mx-5 divider py-1 bg-dark">
+                Prix
+              </p>
+              <div class="text-center mt-n4">
+                <article class="card-body">
+                  <h2 class="h4" id="blog__price">Price</h2>
+                </article>
+              </div>
+            </div>
+            <div>
+              <p class="text-justify mx-5">
+                Quantité
+              </p>
+              <div class="text-center mt-n2">
+                <form>
+                  <div class="input-group mb-3 ml-4">
+                    <div class="input-group-prepend">
+                      <span><input placeholder="Quanitité" required type="number" value="1" min="1" max="100" class="form-control w-50" id="cart-quantity-input"/></span>                  
+                    </div>
+                  </div>  
+                  </div>
+                </form>
+              </div>
+              <div>
+                <div class="text-center mt-md-0 mt-lg-3 ml-lg-n5">
+                  <form>
+                    <div class="input-group ">
+                      <button type="button" class="btn btn-danger btn-md mt-md-3" id="buttonAdd"><i class="fas fa-trash"></i><span class="p ml-1">Ajouter au pannier</span></button>
+                    </div>  
+                    </div>
+                  </form>
+                </div>  
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--
+        <div class="row d-flex justify-content-center flex-wrap" id="produits">
+            <div class="col-12 col-lg-4 mx-lg-6 mt-lg-5 mt-3">
+              <div class="card mb-4 mb-lg-0 border-primary shadow-lg rounded">
+                <article class="card-body">
+                  <img id="blog__image" src="" class="img-fluid rounded mx-auto d-block" alt="table"/>
+                  <h2 class="h4 mt-3" id="blog__title"></h2>
+                  <div class="d-flex justify-content-between">
+                    <p class="h5" id="blog__price"></p>
+                    <div class="d-flex justify-content-start">
+                      <a href="" class="btn btn-wood" id="blog__lien">Voir le détail du produit</a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+        </div>-->
+    </section>
+  </main>
 
   <footer id="footer">
     <div class="bg-woodFooter mt-5">
