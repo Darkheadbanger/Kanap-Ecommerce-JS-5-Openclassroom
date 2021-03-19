@@ -1,8 +1,12 @@
 $theme-colors: (
   "wood": #966F33,
-  "search": rgba(39,6,3),
-  "woodFooter": rgba(63, 33, 26),
+  "search": #270603,
+  "woodFooter": #3f211a,
   "woodTitle": #3f211a,
 );
+
+hr.style{
+  border-top: 1px solid black;
+}
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
