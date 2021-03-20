@@ -82,7 +82,7 @@ function getAjoutMeuble(meubleData) {
     }
 }
 
-/*
+
 function getUpadePrice() { //Lier l'input value au bouton pour dire si on choisi l'input plus de un alors si on clique le bouton ajouter le panier, il va avoir 2 produits qui va se mettre au localStorage et le prix se mutiplie en rapport avec le nombre choisi sur l'input value
 
 }
