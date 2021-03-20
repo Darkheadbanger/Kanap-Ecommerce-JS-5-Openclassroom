@@ -1,17 +1,17 @@
 (async function() {
   const meubles = await getMeubles()
   for (meuble of meubles) {
-    displayMeuble(meuble)
+      displayMeuble(meuble)
   }
 })()
 
 
 function getMeubles() {
   return fetch("http://localhost:3000/api/furniture")
-    .then((responseHttp) => responseHttp.json())
-    //.then((meubles) => meubles)
-    .catch((error) => {
-        alert(error) + document.getElementById(`Error :(`)
+      .then((responseHttp) => responseHttp.json())
+      //.then((meubles) => meubles)
+      .catch((error) => {
+          alert(error) + document.getElementById(`Error :(`)
       })
 }
 

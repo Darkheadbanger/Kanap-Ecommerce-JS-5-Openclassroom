@@ -1,4 +1,8 @@
 @charset "UTF-8";
+hr.style {
+  border-top: 1px solid black;
+}
+
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
