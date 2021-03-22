@@ -56,31 +56,35 @@
                         <h1 class="h3 mt-3" id="blog__title"></h1>
                         <p class="p text-justify" id="blog__description"></p>
                         <h2 class="h4" id="blog__price"></h2>
-                        <form>
+                        <form id="form">
                            <div input="input-group mb-4">
                               <label class="exampleFormControlSelect1"></label>
-                              <select  required class="form-control" name="Couleur" >
+                              <select required class="form-control" name="Couleur">
                                  <option value="Dark Oak" selected id="blog__option0"></option>
-                                 <!-- Plus tard quand tout sera finit -->
                                  <option value="Light Oak" selected id="blog__option1"></option>
                                  <option value="Mahogany" selected id="blog__option2"></option>
                               </select>
                            </div>
+                           <div class="justify-content-md-between">
+                              <div class="input-group mb-3">
+                                 <div class="input-group-prepend">
+                                    <span>
+                                    <input placeholder="Quanitité" required type="number" value="1" min="1" max="100"
+                                       class="form-control w-75 mt-md-3 quantity" id="quantity" />
+                                    </span>
+                                    <button type="submit" class="btn btn-wood btn-md mt-md-3" id="buttonAdd">
+                                    <i class="fas fa-shopping-basket"></i>
+                                    <span class="p ml-1">Ajouter au pannier</span>
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
                         </form>
-                        <div class="justify-content-md-between">
-                          <form>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                  <span><input placeholder="Quanitité" required type="number" value="1" min="1" max="100" class="form-control w-75 mt-md-3 cart-quantity-input"/></span>                  
-                                  <button type="button" class="btn btn-wood btn-md mt-md-3" id="buttonAdd"><i class="fas fa-shopping-basket"></i><span class="p ml-1">Ajouter au pannier</span></button>
-                               </div>
-                              </div>                       
-                            </form>
-                        </div>
-                     </article>
                   </div>
+                  </article>
                </div>
             </div>
+         </div>
          </div>
       </main>
       <footer id="footer">
