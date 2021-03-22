@@ -2,11 +2,12 @@
     const meubleId = getMeubleId() // Chercher l'identifation avec get depuis l'URL
     const meubleData = await getMeubleData(meubleId)
     displayMeuble(meubleData)
+    
     //ready(meubleData)
 
-    if(document.readyState == 'loading') { //Une fois que la page se télécharge le bouton va être pret aant les autres car si les boutons fonctionne après les autres, cela peut apporter des prpblèmes aux utilisateurs
+    if (document.readyState == 'loading') { //Une fois que la page se télécharge le bouton va être pret aant les autres car si les boutons fonctionne après les autres, cela peut apporter des prpblèmes aux utilisateurs
         document.addEventListener('DOMContentLoaded', ready)
-    }else{
+    } else {
         ready(meubleData)
     }
 })()
@@ -39,19 +40,6 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
     let option3 = document.getElementById('blog__option2').textContent = meubleData.varnish[2]
     //document.getElementById('blog__option3').textContent = meubleData.varnish[2]
     //if(option3)// si l'option trois n'existe pas alors on efface la balise option de varnish numéro 3 si non la balise varnish numéro trois se montre
-    
-    
-    /*
-    let listVarnish = meubleData.varnish
-    let leSElect = document.getElementById('leSelect')
-    let optionVarnish = document.createElement('option')
-    for (let i = 0; i < listVarnish.length; i++) { // looper tous ce qui es à l'interieur de varnish pour que le seledct option deviens dynamqiue 
-        //const element = listVarnish[i];
-        optionVarnish.innerHTML = listVarnish[i]['0']
-        optionVarnish.innerHTML = listVarnish[i]['1']
-        optionVarnish.innerHTML = listVarnish[i]['2']
-        leSelect.appendChild(optionVarnish)
-    }*/
 
 }
 
@@ -61,97 +49,62 @@ function ready(meubleData) {
 
     const buttonAjout = document.getElementById('buttonAdd')
     buttonAjout.addEventListener('click', (event) => {
-        //addArticleToCharts(event, meubleData)
-        //const productsMeuble = await getMeubleProduits()
-        //event.stopPropagation()
         event.preventDefault()
         //let ajoutMeuble = await getAjoutMeuble(meubleData, event)
-        getAjoutMeuble(meubleData, event)
+        getAjoutMeuble(meubleData)
         //getUpdatePrice()
         // Une fonction pour aller à la page shopping avec le ID et le nom
-
-        quantityChanged(event)// Pour que si on choisit l'input value, l'input value et le prix va changer dans la page order
+        
+        
+        //quantityChanged(event) // Pour que si on choisit l'input value, l'input value et le prix va changer dans la page order
     })
 
     //ici pour input value pour dire aux utilisateurs que l'utilisateur ne peut choisir au moins 1 produit et non negative ou autre choses que le nombre
     let quantityInput = document.getElementsByClassName("quantity")
     for (let i = 0; i < quantityInput.length; i++) {
         let input = quantityInput[i];
+        input.addEventListener("change", quantityChanged)
+        
+        /*
         input.addEventListener("change", (event) => {
-            quantityChanged(event)
-        })
+            quantityChanged()
+        })*/
     }
-}
-
-function getAjoutMeuble(meubleData, event) {
-
-    /*L'utilisateur à besoin d'un panier dans le localStorage de son navigateur
-Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer dans le localStorage au premier chargement du site quelque soit la page*/
-
-    buttonAjout = event.target
-
-    if(localStorage.getItem("userPanier")){
-        console.log("Administration : le panier de l'utilisateur existe dans le localStorage");
-    }else{
-        console.log("Administration : Le panier n'existe pas, il va être créer et l'envoyer dans le localStorage");
-          //Le panier est un tableau de produits
-          let panierInit = [];
-          localStorage.setItem("userPanier", JSON.stringify(panierInit));
-      };
-    
-          //Tableau et objet demandé par l'API pour la commande
-          let contact;
-          let products = [];
-    
-        //L'user a maintenant un panier
-        let userPanier = JSON.parse(localStorage.getItem("userPanier"));
-
-        userPanier.push(meubleData._id);
-        localStorage.setItem("userPanier", JSON.stringify(userPanier))
-        console.log("Administration : le produit a été ajouté au panier")
-        console.log(userPanier)    /*L'user a maintenant un panier*/
-
-    // dire si il y a au moins un meuble alors on incremente d'autres meubles si non on ajoute un meuble dans le panier
-      /*
-    for (let i = 0; i < userPanier.length; i++) { // si on touche le bouton ajouter au panier plus de 1 fois alors on multiplie le prix avec le nombre lui même si non on ne multiplie qu'avec 1
-        let meublePanier = userPanier[i];
-        const price = document.getElementById('blog__price').innerText = meubleData.price / 100 + " €"
-        if (userPanier.length >= 1) {
-            meublePanier.incremente++,
-                total = meublePanier * price
-        } else if (userPanier.length === 1) {
-            total = price * 1
-        }
-    }*/
 }
 
 function quantityChanged(event) { //Lier l'input value au bouton pour dire si on choisi l'input plus de un alors si on clique le bouton ajouter le panier, il va avoir 2 produits qui va se mettre au localStorage et le prix se mutiplie en rapport avec le nombre choisi sur l'input value
     let input = event.target
-
-    let quantityElement = document.getElementById("quantity")[0]
-
+    let quantity = input.value
     // si l'utilisateur choisi un nombre 0 ou moins ou pas un nombre alors le nombre va automatiquement revenir à 1, et si l'utilisateur choisi le nombre plus de 100 alors le chiffre va revenir à 100
-    for (let i = 0; i < quantityElement.length; i++) {
-        const quantityInput = quantityElement[i];
-        let quantity = quantityInput.value
-        if(isNaN(quantity) || quantity < 0){
-            quantity = 1
-        } else if(quantity > 100){
-            quantity = 100
-        }
+    if (isNaN(quantity) || quantity < 0) {
+        quantity = 1
+    } else if (quantity > 100) {
+        quantity = 100
     }
+    quantity = Math.round(quantity)
+    console.log(quantity)
+}
 
-    /*let containerAchat = document.getElementById("container-achat")
-    let rowAchat = containerAchat.getElementById("row-achat")
-    let colAchat = document.getElementById("col-achat")
-    for (let i = 0; i < colAchat.length; i++) {
-        const quantityAchat = colAchat[i];
-        let quantityElement = quantityAchat.getElementsByClassName("cart-quantity-input")[0]
-        let quantity = quantityElement.value
-        if(isNaN(quantity) || quantity <= 0 || quantity > 100) { // Si le nombre n'est pas un chiffre ou le nombre est inférieur à 0 alors l'utilisateur n'as pas le droit de choisir si non il faut minimum 1 meuble
-            quantity = 1
-        }
-    }*/
+function getAjoutMeuble(meubleData) {
 
-    //getUpdatePrice()// Si on choisit la quantité de l'input le prix va changer en arrière plan et si on clique "ajouter au panier, le prix et la quantité va changer dans la page order"
+    /*L'utilisateur à besoin d'un panier dans le localStorage de son navigateur
+Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer dans le localStorage au premier chargement du site quelque soit la page*/
+    if (localStorage.getItem("userPanier")) {
+        console.log("Administration : le panier de l'utilisateur existe dans le localStorage");
+    } else {
+        console.log("Administration : Le panier n'existe pas, il va être créer et l'envoyer dans le localStorage");
+        //Le panier est un tableau de produits
+        let panierInit = [];
+        localStorage.setItem("userPanier", JSON.stringify(panierInit));
+    };
+
+    //Tableau et objet demandé par l'API pour la commande
+
+    //L'user a maintenant un panier
+    let userPanier = JSON.parse(localStorage.getItem("userPanier"));
+
+    userPanier.push(meubleData._id);
+    localStorage.setItem("userPanier", JSON.stringify(userPanier))
+    console.log("Administration : le produit a été ajouté au panier")
+    console.log(userPanier) /*L'user a maintenant un panier*/
 }
