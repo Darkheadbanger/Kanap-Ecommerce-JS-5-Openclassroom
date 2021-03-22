@@ -74,7 +74,7 @@ function ready(meubleData) {
 
 function quantityChanged(event) { //Lier l'input value au bouton pour dire si on choisi l'input plus de un alors si on clique le bouton ajouter le panier, il va avoir 2 produits qui va se mettre au localStorage et le prix se mutiplie en rapport avec le nombre choisi sur l'input value
     let input = event.target
-    let quantity = input.value
+    let quantity = parseInt(input.value)
     // si l'utilisateur choisi un nombre 0 ou moins ou pas un nombre alors le nombre va automatiquement revenir à 1, et si l'utilisateur choisi le nombre plus de 100 alors le chiffre va revenir à 100
     if (isNaN(quantity) || quantity < 0) {
         quantity = 1
@@ -83,6 +83,7 @@ function quantityChanged(event) { //Lier l'input value au bouton pour dire si on
     }
     quantity = Math.round(quantity)
     console.log(quantity)
+    return quantity
 }
 
 function getAjoutMeuble(meubleData) {
@@ -102,7 +103,8 @@ Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer
 
     //L'user a maintenant un panier
     let userPanier = JSON.parse(localStorage.getItem("userPanier"));
-
+    quantityChanged(event)
+    
     userPanier.push(meubleData._id);
     localStorage.setItem("userPanier", JSON.stringify(userPanier))
     console.log("Administration : le produit a été ajouté au panier")
