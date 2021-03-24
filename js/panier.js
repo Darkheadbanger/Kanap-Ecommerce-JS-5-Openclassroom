@@ -3,7 +3,7 @@ const { ready } = require("jquery")
 (async () => {
     let panierData = getPanierData()
     let panierAchatMeuble = getPanierAchatMeuble(panierData)
-    displayPanier()
+    displayPanier()  
 
     if(document.readyState == "loading"){
         document.addEventListener("DOMContentLoaded", ready)
@@ -13,7 +13,7 @@ const { ready } = require("jquery")
 })()
 
 function ready(){
-    
+
 }
 
 function getPanierData() {
