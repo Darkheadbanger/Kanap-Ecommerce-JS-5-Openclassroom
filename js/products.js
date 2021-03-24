@@ -2,7 +2,7 @@
     const meubleId = getMeubleId() // Chercher l'identifation avec get depuis l'URL
     const meubleData = await getMeubleData(meubleId)
     displayMeuble(meubleData)
-    
+
     //ready(meubleData)
 
     if (document.readyState == 'loading') { //Une fois que la page se télécharge le bouton va être pret aant les autres car si les boutons fonctionne après les autres, cela peut apporter des prpblèmes aux utilisateurs
@@ -35,17 +35,24 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
     document.getElementById('blog__title').textContent = meubleData.name
     document.getElementById('blog__description').textContent = meubleData.description
     document.getElementById('blog__price').textContent = meubleData.price / 100 + " €"
-    document.getElementById('blog__option0').textContent = meubleData.varnish[0]
+    /*document.getElementById('blog__option0').textContent = meubleData.varnish[0]
     document.getElementById('blog__option1').textContent = meubleData.varnish[1]
-    let option3 = document.getElementById('blog__option2').textContent = meubleData.varnish[2]
-    //document.getElementById('blog__option3').textContent = meubleData.varnish[2]
+    document.getElementById('blog__option2').textContent = meubleData.varnish[2]
+    //document.getElementById('blog__option3').textContent = meubleData.varnish[2]*/
     //if(option3)// si l'option trois n'existe pas alors on efface la balise option de varnish numéro 3 si non la balise varnish numéro trois se montre
 
+    for (let i = 0; i < meubleData.varnish.length; i++) {
+        const varnish = meubleData.varnish[i];
+        document.getElementById("selectOption").innerHTML +=
+            `
+        <option value="` + varnish + `">` + varnish + `</option>
+        `
+        // On peut faire ${meubleData.varnish[0]}
+    }
 }
 
 function ready(meubleData) {
     // Evenement pour ajouter le produit au panier au moment de clique "ajouter au pannier"
-    //document.getElementById('buttonAdd').onclick('click', async (event) => {
 
     const buttonAjout = document.getElementById('buttonAdd')
     buttonAjout.addEventListener('click', (event) => {
@@ -54,22 +61,13 @@ function ready(meubleData) {
         getAjoutMeuble(meubleData)
         //getUpdatePrice()
         // Une fonction pour aller à la page shopping avec le ID et le nom
-        
-        
+
         //quantityChanged(event) // Pour que si on choisit l'input value, l'input value et le prix va changer dans la page order
     })
 
     //ici pour input value pour dire aux utilisateurs que l'utilisateur ne peut choisir au moins 1 produit et non negative ou autre choses que le nombre
-    let quantityInput = document.getElementsByClassName("quantity")
-    for (let i = 0; i < quantityInput.length; i++) {
-        let input = quantityInput[i];
-        input.addEventListener("change", quantityChanged)
-        
-        /*
-        input.addEventListener("change", (event) => {
-            quantityChanged()
-        })*/
-    }
+    let quantityInput = document.getElementById('quantity')
+    quantityInput.addEventListener("change", quantityChanged)
 }
 
 function quantityChanged(event) { //Lier l'input value au bouton pour dire si on choisi l'input plus de un alors si on clique le bouton ajouter le panier, il va avoir 2 produits qui va se mettre au localStorage et le prix se mutiplie en rapport avec le nombre choisi sur l'input value
@@ -83,11 +81,13 @@ function quantityChanged(event) { //Lier l'input value au bouton pour dire si on
     }
     quantity = Math.round(quantity)
     console.log(quantity)
+
+    input.value = quantity //Une fois la quantité validé, on l'as reinjecte dans l'input value
+
     return quantity
 }
 
 function getAjoutMeuble(meubleData) {
-
     /*L'utilisateur à besoin d'un panier dans le localStorage de son navigateur
 Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer dans le localStorage au premier chargement du site quelque soit la page*/
     if (localStorage.getItem("userPanier")) {
@@ -99,13 +99,27 @@ Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer
         localStorage.setItem("userPanier", JSON.stringify(panierInit));
     };
 
-    //Tableau et objet demandé par l'API pour la commande
-
     //L'user a maintenant un panier
     let userPanier = JSON.parse(localStorage.getItem("userPanier"));
-    quantityChanged(event)
+    //quantityChanged(event)
+
+    let quantityElement = document.getElementById('quantity').value // On récupère
+
+    //for (let i = 0; i < quantityElement; i++) { //il va pusher la quantité qui se trouve dans le boucle for c'est à dire le quantité de 1 à 100
+    //const quantity = quantityElement[i];
     
-    userPanier.push(meubleData._id);
+    let structureMeuble = {
+        _id: meubleData._id,
+        quantity: quantityElement,
+        color: document.getElementById("selectOption").value,
+        price: meubleData.price,
+        imageUrl: meubleData.imageUrl
+    }
+
+
+    userPanier.push(structureMeuble); // on récupère toutes les données du structureMeuble
+    //}
+
     localStorage.setItem("userPanier", JSON.stringify(userPanier))
     console.log("Administration : le produit a été ajouté au panier")
     console.log(userPanier) /*L'user a maintenant un panier*/
