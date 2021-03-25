@@ -45,121 +45,123 @@
     </div>
   </header>
 
-  <main id="main">
+  <main class="main" id="main">
     <section>
-      <div class="container" id="container-achat">
+      <div class="container" id="container">
         <h1 class="text-center h3 mt-5 text-woodTitle">Vos achats</h1>
-        <div class="row" id="row-achat">
-          <div class="col d-flex justify-content-md-around mt-2">
-            <div>
-              <p class="text-justify mx-5">
-                Meuble
-              </p>
-              <hr class="style mt-n2"/>
-              <div class="text-center mt-n4">
-                <article class="card-body">
-                  <img id="blog__image" src="" alt="meuble image" class="img-fluid rounded shadow-lg">
-                </article>
-              </div>
-            </div>
-            <div>
-              <p class="text-justify mx-5">
-                Couleur
-              </p>
-              <hr class="style mt-n2"/>
-              <div class="text-center mt-n5">
-                <article class="card-body">
-                  <form>
-                    <div input="input-group mb-4">
-                      <label class="exampleFormControlSelect1"></label>
-                      <select  required class="form-control" name="Couleur" >
-                        <option value="Dark Oak" selected id="blog__option0"></option> <!-- Plus tard quand tout sera finit -->
-                        <option value="Light Oak" selected id="blog__option1"></option>
-                        <option value="Mahogany" selected id="blog__option2"></option>
-                      </select>
-                    </div>
-                  </form>    
-                </article>
-              </div>
-            </div>
-            <div>
-              <p class="text-justify mx-5">
-                Prix
-              </p>
-              <hr class="style mt-n2"/>
-              <div class="text-center mt-n4">
-                <article class="card-body">
-                  <h2 class="h4" id="blog__price">Price</h2>
-                </article>
-              </div>
-            </div>
-            <div>
-              <p class="text-justify mx-5">
-                Quantité
-              </p>
-              <hr class="style mt-n2"/>
-              <div class="text-center mt-n2">
-                <form>
-                  <div class="input-group mb-3 ml-4">
-                    <div class="input-group-prepend">
-                      <span><input placeholder="Quanitité" required type="number" value="1" min="1" max="100" class="form-control w-50" id="cart-quantity-input"/></span>                  
-                    </div>
-                  </div>  
-                  </div>
-                </form>
+        <div class="container container-achat" id="container-achat">
+          <div class="row" id="row-achat">
+            <div class="col d-flex justify-content-md-around mt-2 col-achat" id="col-achat">
+              <div>
+                <p class="text-justify mx-5">
+                  Meuble
+                </p>
+                <hr class="style mt-n2"/>
+                <div class="text-center mt-n4">
+                  <article class="card-body">
+                    <img id="blog__image" src="" alt="meuble image" class="img-fluid rounded shadow-lg">
+                  </article>
+                </div>
               </div>
               <div>
-                <div class="text-center mt-md-4 mt-lg-4 ml-lg-n5">
+                <p class="text-justify mx-5">
+                  Couleur
+                </p>
+                <hr class="style mt-n2"/>
+                <div class="text-center mt-n5">
+                  <article class="card-body">
+                    <form>
+                      <div input="input-group mb-4">
+                        <label class="exampleFormControlSelect1"></label>
+                        <select  required class="form-control" name="Couleur" >
+                          <!--<option value="Dark Oak" selected id="blog__option0"></option> <!-- Plus tard quand tout sera finit
+                          <option value="Light Oak" selected id="blog__option1"></option>
+                          <option value="Mahogany" selected id="blog__option2"></option>-->
+                        </select>
+                      </div>
+                    </form>    
+                  </article>
+                </div>
+              </div>
+              <div>
+                <p class="text-justify mx-5">
+                  Prix
+                </p>
+                <hr class="style mt-n2"/>
+                <div class="text-center mt-n4">
+                  <article class="card-body">
+                    <h2 class="h4" id="blog__price">Price</h2>
+                  </article>
+                </div>
+              </div>
+              <div>
+                <p class="text-justify mx-5">
+                  Quantité
+                </p>
+                <hr class="style mt-n2"/>
+                <div class="text-center mt-n2">
                   <form>
-                    <div class="input-group ">
-                      <button type="button" class="btn btn-danger btn-md mt-md-3" id="buttonAdd"><i class="fas fa-trash"></i><span class="p ml-1">Effacer</span></button>
+                    <div class="input-group mb-3 ml-4">
+                      <div class="input-group-prepend">
+                        <span><input placeholder="Quanitité" required type="number" value="1" min="1" max="100" class="form-control w-50" id="cart-quantity-input"/></span>                  
+                      </div>
                     </div>  
                     </div>
                   </form>
-                </div>  
+                </div>
+                <div>
+                  <div class="text-center mt-md-4 mt-lg-4 ml-lg-n5">
+                    <form>
+                      <div class="input-group ">
+                        <button type="button" class="btn btn-danger btn-md mt-md-3 danger-btn" ><i class="fas fa-trash"></i><span class="p ml-1">Effacer</span></button>
+                      </div>  
+                      </div>
+                    </form>
+                  </div>  
+                </div>
               </div>
-            </div>
-            <div class="col">
-              <form action="" class="was-validated">
-                <div class="form-group">
-                  <label for="name">Nom/Prénom:</label>
-                  <input type="text" class="form-control" id="name" placeholder="Entrez votre nom et prénom" name="name" required>
-                  <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group">
-                  <label for="adresse">Adresse:</label>
-                  <input type="text" class="form-control" id="adresse" placeholder="Enter votre adresse" name="adresse" required>
-                  <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group">
-                  <label for="codePostal">Adresse Postale:</label>
-                  <input type="text" class="form-control" id="codePostal" placeholder="Code postale" name="codePostal" maxlength="5" required>
-                  <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group">
-                  <label for="ville">Ville:</label>
-                  <input type="text" class="form-control" id="ville" placeholder="Votre ville" name="ville" required>
-                  <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group">
-                  <label for="email">Email:</label>
-                  <input type="email" pattern="^([0-9]{9})|([A-Za-z0-9._%\+\-]+@[a-z0-9.\-]+\.[a-z]{2,3})$" class="form-control" id="email" placeholder="Email" name="email" required>
-                  <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
+              <div class="col">
+                <form action="" class="was-validated">
+                  <div class="form-group">
+                    <label for="name">Nom/Prénom:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Entrez votre nom et prénom" name="name" required>
                     <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Check this checkbox to continue.</div>
-                  </label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>  
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="adresse">Adresse:</label>
+                    <input type="text" class="form-control" id="adresse" placeholder="Enter votre adresse" name="adresse" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="codePostal">Adresse Postale:</label>
+                    <input type="text" class="form-control" id="codePostal" placeholder="Code postale" name="codePostal" maxlength="5" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="ville">Ville:</label>
+                    <input type="text" class="form-control" id="ville" placeholder="Votre ville" name="ville" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" pattern="^([0-9]{9})|([A-Za-z0-9._%\+\-]+@[a-z0-9.\-]+\.[a-z]{2,3})$" class="form-control" id="email" placeholder="Email" name="email" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                  </div>
+                  <div class="form-group form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
+                      <div class="valid-feedback">Valid.</div>
+                      <div class="invalid-feedback">Check this checkbox to continue.</div>
+                    </label>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>  
+              </div>
             </div>
           </div>
         </div>

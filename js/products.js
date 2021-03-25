@@ -2,7 +2,7 @@
     const meubleId = getMeubleId() // Chercher l'identifation avec get depuis l'URL
     const meubleData = await getMeubleData(meubleId)
     displayMeuble(meubleData)
-
+    
     //ready(meubleData)
 
     if (document.readyState == 'loading') { //Une fois que la page se télécharge le bouton va être pret aant les autres car si les boutons fonctionne après les autres, cela peut apporter des prpblèmes aux utilisateurs
@@ -43,12 +43,14 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
 
     for (let i = 0; i < meubleData.varnish.length; i++) {
         const varnish = meubleData.varnish[i];
-        document.getElementById("selectOption").innerHTML +=
-            `
-        <option value="` + varnish + `">` + varnish + `</option>
+        document.getElementById("selectOption").innerHTML += 
+        `
+        <option value="`+ varnish +`">`+ varnish +`</option>
         `
         // On peut faire ${meubleData.varnish[0]}
     }
+
+
 }
 
 function ready(meubleData) {
@@ -61,7 +63,7 @@ function ready(meubleData) {
         getAjoutMeuble(meubleData)
         //getUpdatePrice()
         // Une fonction pour aller à la page shopping avec le ID et le nom
-
+        
         //quantityChanged(event) // Pour que si on choisit l'input value, l'input value et le prix va changer dans la page order
     })
 
@@ -105,20 +107,20 @@ Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer
 
     let quantityElement = document.getElementById('quantity').value // On récupère
 
-    //for (let i = 0; i < quantityElement; i++) { //il va pusher la quantité qui se trouve dans le boucle for c'est à dire le quantité de 1 à 100
-    //const quantity = quantityElement[i];
-    
-    let structureMeuble = {
-        _id: meubleData._id,
-        quantity: quantityElement,
-        color: document.getElementById("selectOption").value,
-        price: meubleData.price,
-        imageUrl: meubleData.imageUrl
+    for (let i = 0; i < quantityElement; i++) { //il va pusher la quantité qui se trouve dans le boucle for c'est à dire le quantité de 1 à 100
+        //const quantity = quantityElement[i];
+        let structureMeuble = 
+        {
+            _id:meubleData._id,
+            quantity:quantityElement,
+            color:document.getElementById("selectOption").value,
+            price:meubleData.price,
+            imageUrl:meubleData.imageUrl
+        }
+
+
+        userPanier.push(structureMeuble);
     }
-
-
-    userPanier.push(structureMeuble); // on récupère toutes les données du structureMeuble
-    //}
 
     localStorage.setItem("userPanier", JSON.stringify(userPanier))
     console.log("Administration : le produit a été ajouté au panier")
