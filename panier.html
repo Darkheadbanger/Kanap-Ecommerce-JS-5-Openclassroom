@@ -45,9 +45,103 @@
     </div>
   </header>
 
+
   <main class="main" id="main">
-    <section>
-      <div class="container" id="container">
+    <section class="container" id="container">
+        <h1 class="text-center h3 mt-5 text-woodTitle">Vos achats</h1>
+        <div class="container " id="container-tout">
+          <div class="container container-achat d-flex justify-content-center" id="container-achat">
+            <div class="row row-achat" id="row-achat">
+              <div class="col mt-2 col-achat d-flex justify-content-around" id="col-achat">
+                <hr class="separator mt-n2">
+                <p class=" text-justify mx-5">Produit</p>
+                <p class=" text-justify mx-5">Couleur</p>
+                <p class=" text-justify mx-5">Quantity</p>
+                <p class=" text-justify mx-5">Price</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <div class="row row-achat" id="row-achat">
+              <div class="col-achat d-flex justify-content-around">
+
+                <div class="col mt-2 col-achat d-flex justify-content-around" id="col-achat">
+
+                    <img id="blog__image" src="" alt="meuble image" class="img-fluid rounded shadow-lg ml-5">
+    
+                    <label class="exampleFormControlSelect1 "></label>
+                    <select  required class="form-control w-25 blog__color ml-5 " id="blog__color" name="Couleur" >
+                    </select>
+        
+                    <span><input placeholder="Quanitité" required type="number" value="1" min="1" max="100" class="form-control w-50 cart-quantity-input ml-5" id="cart-quantity-input"/></span>
+                    
+                    <span class="h4 mr-5" id="blog__price">50$</span>
+    
+                    <button type="button" class="btn btn-danger btn-md danger-btn mr-n5" ><i class="fas fa-trash"></i><span class="p ml-1">Effacer</span></button>    
+                </div>  
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+            <div class="col">
+              <form action="" class="was-validated">
+                <div class="form-group">
+                  <label for="name">Nom/Prénom:</label>
+                  <input type="text" class="form-control" id="name" placeholder="Entrez votre nom et prénom" name="name" required>
+                  <div class="valid-feedback">Valid.</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="form-group">
+                  <label for="adresse">Adresse:</label>
+                  <input type="text" class="form-control" id="adresse" placeholder="Enter votre adresse" name="adresse" required>
+                  <div class="valid-feedback">Valid.</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="form-group">
+                  <label for="codePostal">Adresse Postale:</label>
+                  <input type="text" class="form-control" id="codePostal" placeholder="Code postale" name="codePostal" maxlength="5" required>
+                  <div class="valid-feedback">Valid.</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="form-group">
+                  <label for="ville">Ville:</label>
+                  <input type="text" class="form-control" id="ville" placeholder="Votre ville" name="ville" required>
+                  <div class="valid-feedback">Valid.</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" pattern="^([0-9]{9})|([A-Za-z0-9._%\+\-]+@[a-z0-9.\-]+\.[a-z]{2,3})$" class="form-control" id="email" placeholder="Email" name="email" required>
+                  <div class="valid-feedback">Valid.</div>
+                  <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="form-group form-check">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Check this checkbox to continue.</div>
+                  </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>  
+            </div>
+          </div>
+        </div>
+  </section>
+</main>
+
+
+
+
+
+              <!--
+  <main class="main" id="main">
+    <section class="container" id="container">
         <h1 class="text-center h3 mt-5 text-woodTitle">Vos achats</h1>
         <div class="container container-achat" id="container-achat">
           <div class="row" id="row-achat">
@@ -74,9 +168,6 @@
                       <div input="input-group mb-4">
                         <label class="exampleFormControlSelect1"></label>
                         <select  required class="form-control" name="Couleur" >
-                          <!--<option value="Dark Oak" selected id="blog__option0"></option> <!-- Plus tard quand tout sera finit
-                          <option value="Light Oak" selected id="blog__option1"></option>
-                          <option value="Mahogany" selected id="blog__option2"></option>-->
                         </select>
                       </div>
                     </form>    
@@ -120,53 +211,18 @@
                   </div>  
                 </div>
               </div>
-              <div class="col">
-                <form action="" class="was-validated">
-                  <div class="form-group">
-                    <label for="name">Nom/Prénom:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Entrez votre nom et prénom" name="name" required>
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                  </div>
-                  <div class="form-group">
-                    <label for="adresse">Adresse:</label>
-                    <input type="text" class="form-control" id="adresse" placeholder="Enter votre adresse" name="adresse" required>
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                  </div>
-                  <div class="form-group">
-                    <label for="codePostal">Adresse Postale:</label>
-                    <input type="text" class="form-control" id="codePostal" placeholder="Code postale" name="codePostal" maxlength="5" required>
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                  </div>
-                  <div class="form-group">
-                    <label for="ville">Ville:</label>
-                    <input type="text" class="form-control" id="ville" placeholder="Votre ville" name="ville" required>
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                  </div>
-                  <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" pattern="^([0-9]{9})|([A-Za-z0-9._%\+\-]+@[a-z0-9.\-]+\.[a-z]{2,3})$" class="form-control" id="email" placeholder="Email" name="email" required>
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Please fill out this field.</div>
-                  </div>
-                  <div class="form-group form-check">
-                    <label class="form-check-label">
-                      <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
-                      <div class="valid-feedback">Valid.</div>
-                      <div class="invalid-feedback">Check this checkbox to continue.</div>
-                    </label>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>  
-              </div>
             </div>
           </div>
-        </div>
     </section>
-  </main>
+  </main>-->
+
+
+
+
+
+
+
+
 
   <footer id="footer">
     <div class="bg-woodFooter mt-5">

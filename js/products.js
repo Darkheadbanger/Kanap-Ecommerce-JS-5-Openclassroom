@@ -49,8 +49,6 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
         `
         // On peut faire ${meubleData.varnish[0]}
     }
-
-
 }
 
 function ready(meubleData) {
@@ -61,10 +59,9 @@ function ready(meubleData) {
         event.preventDefault()
         //let ajoutMeuble = await getAjoutMeuble(meubleData, event)
         getAjoutMeuble(meubleData)
-        //getUpdatePrice()
+
+        goToRedirectionToPanier(meubleData.name)
         // Une fonction pour aller à la page shopping avec le ID et le nom
-        
-        //quantityChanged(event) // Pour que si on choisit l'input value, l'input value et le prix va changer dans la page order
     })
 
     //ici pour input value pour dire aux utilisateurs que l'utilisateur ne peut choisir au moins 1 produit et non negative ou autre choses que le nombre
@@ -81,7 +78,6 @@ function quantityChanged(event) { //Lier l'input value au bouton pour dire si on
     } else if (quantity > 100) {
         quantity = 100
     }
-    quantity = Math.round(quantity)
     console.log(quantity)
 
     input.value = quantity //Une fois la quantité validé, on l'as reinjecte dans l'input value
@@ -111,6 +107,7 @@ Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer
         //const quantity = quantityElement[i];
         let structureMeuble = 
         {
+            name:getMeubleData.name,
             _id:meubleData._id,
             quantity:quantityElement,
             color:document.getElementById("selectOption").value,
@@ -125,4 +122,8 @@ Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer
     localStorage.setItem("userPanier", JSON.stringify(userPanier))
     console.log("Administration : le produit a été ajouté au panier")
     console.log(userPanier) /*L'user a maintenant un panier*/
+}
+
+function goToRedirectionToPanier(meubleDataNname){
+    window.location.href = `${window.location.origin}/panier.html?dernierProduitAjouterNom=${meubleDataNname}`
 }

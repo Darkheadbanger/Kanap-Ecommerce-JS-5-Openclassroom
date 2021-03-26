@@ -5,8 +5,8 @@ $theme-colors: (
   "woodTitle": #3f211a,
 );
 
-hr.style{
-  border-top: 1px solid black;
+.separator{
+  border-top: 5px solid red;
 }
 
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
