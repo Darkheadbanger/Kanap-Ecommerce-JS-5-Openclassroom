@@ -1,253 +1,182 @@
 <!DOCTYPE html>
 <html lang="fr">
-
-<head>
-
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="keywords" content="">
-  <meta name="description" content="">
-  <meta name="author" content="David Bouhaben"/>
-  <meta name="robots" content="index, follow" />
-  <link rel="shortcut icon" href="image/favicon.ico"/>
-
-  <link defer rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css"/>
-  
-  <script src="js/panier.js" defer></script>
-  <script>// Google analytics</script>
-
-  <title>Pannier | Orinoco meuble</title>
-</head> 
-
-<body>  
-  <header>
-    <div class="bg-wood">
-      <div class="container">
-        <div class="row">
-          <nav class="col navbar navbar-expand navbar-light bg-wood justify-content-between">
-            <a class="navbar-brand" href="index.html">
-              <img src="image/logo.png" alt="Logo Orinoco" class="img-fluid" />
-            </a>
-            <div class="collapse navbar-collapse w-100 order-3 dual-collapse2">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="index.html">Accueil <span class="sr-only">(curent)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href=""><i class="fas fa-shopping-cart"></i></a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </header>
-
-
-  <main class="main" id="main">
-    <section class="container" id="container">
-        <h1 class="text-center h3 mt-5 text-woodTitle">Vos achats</h1>
-        <div class="container " id="container-tout">
-          <div class="container container-achat d-flex justify-content-center" id="container-achat">
-            <div class="row row-achat" id="row-achat">
-              <div class="col mt-2 col-achat d-flex justify-content-around" id="col-achat">
-                <hr class="separator mt-n2">
-                <p class=" text-justify mx-5">Produit</p>
-                <p class=" text-justify mx-5">Couleur</p>
-                <p class=" text-justify mx-5">Quantity</p>
-                <p class=" text-justify mx-5">Price</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="d-flex justify-content-center">
-            <div class="row row-achat" id="row-achat">
-              <div class="col-achat d-flex justify-content-around">
-
-                <div class="col mt-2 col-achat d-flex justify-content-around" id="col-achat">
-
-                    <img id="blog__image" src="" alt="meuble image" class="img-fluid rounded shadow-lg ml-5">
-    
-                    <label class="exampleFormControlSelect1 "></label>
-                    <select  required class="form-control w-25 blog__color ml-5 " id="blog__color" name="Couleur" >
-                    </select>
-        
-                    <span><input placeholder="Quanitité" required type="number" value="1" min="1" max="100" class="form-control w-50 cart-quantity-input ml-5" id="cart-quantity-input"/></span>
-                    
-                    <span class="h4 mr-5" id="blog__price">50$</span>
-    
-                    <button type="button" class="btn btn-danger btn-md danger-btn mr-n5" ><i class="fas fa-trash"></i><span class="p ml-1">Effacer</span></button>    
-                </div>  
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-            <div class="col">
-              <form action="" class="was-validated">
-                <div class="form-group">
-                  <label for="name">Nom/Prénom:</label>
-                  <input type="text" class="form-control" id="name" placeholder="Entrez votre nom et prénom" name="name" required>
-                  <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group">
-                  <label for="adresse">Adresse:</label>
-                  <input type="text" class="form-control" id="adresse" placeholder="Enter votre adresse" name="adresse" required>
-                  <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group">
-                  <label for="codePostal">Adresse Postale:</label>
-                  <input type="text" class="form-control" id="codePostal" placeholder="Code postale" name="codePostal" maxlength="5" required>
-                  <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group">
-                  <label for="ville">Ville:</label>
-                  <input type="text" class="form-control" id="ville" placeholder="Votre ville" name="ville" required>
-                  <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group">
-                  <label for="email">Email:</label>
-                  <input type="email" pattern="^([0-9]{9})|([A-Za-z0-9._%\+\-]+@[a-z0-9.\-]+\.[a-z]{2,3})$" class="form-control" id="email" placeholder="Email" name="email" required>
-                  <div class="valid-feedback">Valid.</div>
-                  <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="form-group form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Check this checkbox to continue.</div>
-                  </label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>  
-            </div>
-          </div>
-        </div>
-  </section>
-</main>
-
-
-
-
-
-              <!--
-  <main class="main" id="main">
-    <section class="container" id="container">
-        <h1 class="text-center h3 mt-5 text-woodTitle">Vos achats</h1>
-        <div class="container container-achat" id="container-achat">
-          <div class="row" id="row-achat">
-            <div class="col d-flex justify-content-md-around mt-2 col-achat" id="col-achat">
-              <div>
-                <p class="text-justify mx-5">
-                  Meuble
-                </p>
-                <hr class="style mt-n2"/>
-                <div class="text-center mt-n4">
-                  <article class="card-body">
-                    <img id="blog__image" src="" alt="meuble image" class="img-fluid rounded shadow-lg">
-                  </article>
-                </div>
-              </div>
-              <div>
-                <p class="text-justify mx-5">
-                  Couleur
-                </p>
-                <hr class="style mt-n2"/>
-                <div class="text-center mt-n5">
-                  <article class="card-body">
-                    <form>
-                      <div input="input-group mb-4">
-                        <label class="exampleFormControlSelect1"></label>
-                        <select  required class="form-control" name="Couleur" >
-                        </select>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<meta name="keywords" content="">
+			<meta name="description" content="">
+				<meta name="author" content="David Bouhaben"/>
+				<meta name="robots" content="index, follow" />
+				<link rel="shortcut icon" href="image/favicon.ico"/>
+				<link defer rel="stylesheet" href="css/style.css">
+					<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css"/>
+					<script src="js/panier.js" defer></script>
+					<script>// Google analytics</script>
+					<title>Pannier | Orinoco meuble</title>
+				</head>
+				<body>
+					<header>
+						<div class="bg-wood">
+							<div class="container">
+								<div class="row">
+									<nav class="col navbar navbar-expand navbar-light bg-wood justify-content-between">
+										<a class="navbar-brand" href="index.html">
+											<img src="image/logo.png" alt="Logo Orinoco" class="img-fluid" />
+										</a>
+										<div class="collapse navbar-collapse w-100 order-3 dual-collapse2">
+											<ul class="navbar-nav ml-auto">
+												<li class="nav-item active">
+													<a class="nav-link" href="index.html">Accueil 
+														
+														<span class="sr-only">(curent)</span>
+													</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link" href="">
+														<i class="fas fa-shopping-cart"></i>
+													</a>
+												</li>
+											</ul>
+										</div>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</header>
+					<main class="main" id="main">
+						<section class="container" id="container">
+							<h1 class="text-center h3 mt-5 text-woodTitle">Vos achats</h1>
+							<div class="container " id="container-tout">
+								<div class="container container-achat d-flex justify-content-center" id="container-achat">
+									<div class="row row-achat" id="row-achat">
+										<div class="col mt-2 col-achat d-flex justify-content-around" id="col-achat">
+											<hr class="separator mt-n2">
+												<p class=" text-justify mx-5">Produit</p>
+												<p class=" text-justify mx-5">Couleur</p>
+												<p class=" text-justify mx-5">Quantity</p>
+												<p class=" text-justify mx-5">Price</p>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex justify-content-around">
+                    <div class="row row-achat" id="row-achat">
+                      <div class="cart-items">
+                        <div class="col-achat">
+                          <div class="col mt-2 col-achat d-flex justify-content-around">
+                            <img id="blog__image" src="" alt="meuble image" class="img-fluid rounded shadow-lg ml-5">
+                            <label class="exampleFormControlSelect1 "></label>
+                            <select  required class="form-control w-25 blog__color ml-5 " id="blog__color" name="Couleur" ></select>
+                            <span>
+                              <input placeholder="Quanitité" required type="number" value="1" min="1" max="100" class="form-control w-50 blog_quantity ml-5" id="cart-quantity-input"/>
+                            </span>
+                            <span class="h4 mr-5 blog__price">50</span>
+                            <button type="button" class="btn btn-danger btn-md danger-btn mr-n5" >
+                              <i class="fas fa-trash"></i>
+                              <span class="p ml-1">Effacer</span>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="col-achat d-flex justify-content-around">
+                          <div class="col mt-2 col-achat d-flex justify-content-around" id="col-achat">
+                            <img id="blog__image" src="" alt="meuble image" class="img-fluid rounded shadow-lg ml-5">
+                            <label class="exampleFormControlSelect1 "></label>
+                            <select  required class="form-control w-25 blog__color ml-5 " id="blog__color" name="Couleur" ></select>
+                            <span>
+                              <input placeholder="Quanitité" required type="number" value="1" min="1" max="100" class="form-control w-50 blog_quantity ml-5" id="cart-quantity-input"/>
+                            </span>
+                            <span class="h4 mr-5 blog__price">50</span>
+                            <button type="button" class="btn btn-danger btn-md danger-btn mr-n5" >
+                              <i class="fas fa-trash"></i>
+                              <span class="p ml-1">Effacer</span>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                          <div class="col-achat">
+                            <div class="col mt-2 col-achat d-flex justify-content-around mr-5 ml-n5" id="col-achat">
+                              <strong class="total-titre h3 mr-5">Total :</strong>
+                              <strong class="total-prix h3 mr-5 ml-3">0</strong>
+                            </div>
+                          </div>  
+                        </div>
                       </div>
-                    </form>    
-                  </article>
-                </div>
-              </div>
-              <div>
-                <p class="text-justify mx-5">
-                  Prix
-                </p>
-                <hr class="style mt-n2"/>
-                <div class="text-center mt-n4">
-                  <article class="card-body">
-                    <h2 class="h4" id="blog__price">Price</h2>
-                  </article>
-                </div>
-              </div>
-              <div>
-                <p class="text-justify mx-5">
-                  Quantité
-                </p>
-                <hr class="style mt-n2"/>
-                <div class="text-center mt-n2">
-                  <form>
-                    <div class="input-group mb-3 ml-4">
-                      <div class="input-group-prepend">
-                        <span><input placeholder="Quanitité" required type="number" value="1" min="1" max="100" class="form-control w-50" id="cart-quantity-input"/></span>                  
-                      </div>
-                    </div>  
                     </div>
-                  </form>
-                </div>
-                <div>
-                  <div class="text-center mt-md-4 mt-lg-4 ml-lg-n5">
-                    <form>
-                      <div class="input-group ">
-                        <button type="button" class="btn btn-danger btn-md mt-md-3 danger-btn" ><i class="fas fa-trash"></i><span class="p ml-1">Effacer</span></button>
-                      </div>  
-                      </div>
-                    </form>
-                  </div>  
-                </div>
-              </div>
-            </div>
-          </div>
-    </section>
-  </main>-->
-
-
-
-
-
-
-
-
-
-  <footer id="footer">
-    <div class="bg-woodFooter mt-5">
-      <div class="footer-container">
-        <div class="container">
-          <div class="row pt-4 pb-3">
-            <div class="col">
-              <ul class="list-inline text-center ">
-                <li class="list-inline-item "><a href="#" class="text-white">À propos</a></li>
-                <li class="list-inline-item">&middot;</li>
-                <li class="list-inline-item"><a href="#" class="text-white">Vie privée</a></li>
-                <li class="list-inline-item">&middot;</li>
-                <li class="list-inline-item"><a href="#" class="text-white">Conditions d'utilisations</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script defer src="./node_modules/jquery/dist/jquery.min.js"></script>
-  <script defer src="./node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
-  <script defer src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
+                    </div>
+									</div>
+									<div class="col">
+										<form action="" class="was-validated">
+											<div class="form-group">
+												<label for="name">Nom/Prénom:</label>
+												<input type="text" class="form-control" id="name" placeholder="Entrez votre nom et prénom" name="name" required>
+													<div class="valid-feedback">Valid.</div>
+													<div class="invalid-feedback">Please fill out this field.</div>
+												</div>
+												<div class="form-group">
+													<label for="adresse">Adresse:</label>
+													<input type="text" class="form-control" id="adresse" placeholder="Enter votre adresse" name="adresse" required>
+														<div class="valid-feedback">Valid.</div>
+														<div class="invalid-feedback">Please fill out this field.</div>
+													</div>
+													<div class="form-group">
+														<label for="codePostal">Adresse Postale:</label>
+														<input type="text" class="form-control" id="codePostal" placeholder="Code postale" name="codePostal" maxlength="5" required>
+															<div class="valid-feedback">Valid.</div>
+															<div class="invalid-feedback">Please fill out this field.</div>
+														</div>
+														<div class="form-group">
+															<label for="ville">Ville:</label>
+															<input type="text" class="form-control" id="ville" placeholder="Votre ville" name="ville" required>
+																<div class="valid-feedback">Valid.</div>
+																<div class="invalid-feedback">Please fill out this field.</div>
+															</div>
+															<div class="form-group">
+																<label for="email">Email:</label>
+																<input type="email" pattern="^([0-9]{9})|([A-Za-z0-9._%\+\-]+@[a-z0-9.\-]+\.[a-z]{2,3})$" class="form-control" id="email" placeholder="Email" name="email" required>
+																	<div class="valid-feedback">Valid.</div>
+																	<div class="invalid-feedback">Please fill out this field.</div>
+																</div>
+																<div class="form-group form-check">
+																	<label class="form-check-label">
+																		<input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
+																			
+																			<div class="valid-feedback">Valid.</div>
+																			<div class="invalid-feedback">Check this checkbox to continue.</div>
+																		</label>
+																	</div>
+																	<button type="submit" class="btn btn-primary">Submit</button>
+																</div>
+															</form>
+														</div>
+													</section>
+												</main>
+												<footer id="footer">
+													<div class="bg-woodFooter mt-5">
+														<div class="footer-container">
+															<div class="container">
+																<div class="row pt-4 pb-3">
+																	<div class="col">
+																		<ul class="list-inline text-center ">
+																			<li class="list-inline-item ">
+																				<a href="#" class="text-white">À propos</a>
+																			</li>
+																			<li class="list-inline-item">&middot;</li>
+																			<li class="list-inline-item">
+																				<a href="#" class="text-white">Vie privée</a>
+																			</li>
+																			<li class="list-inline-item">&middot;</li>
+																			<li class="list-inline-item">
+																				<a href="#" class="text-white">Conditions d'utilisations</a>
+																			</li>
+																		</ul>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</footer>
+												<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+												<script defer src="./node_modules/jquery/dist/jquery.min.js"></script>
+												<script defer src="./node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+												<script defer src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+											</body>
+										</html>
