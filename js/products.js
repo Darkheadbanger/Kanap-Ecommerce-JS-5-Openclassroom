@@ -3,8 +3,6 @@
     const meubleData = await getMeubleData(meubleId)
     displayMeuble(meubleData)
     
-    //ready(meubleData)
-
     if (document.readyState == 'loading') { //Une fois que la page se télécharge le bouton va être pret aant les autres car si les boutons fonctionne après les autres, cela peut apporter des prpblèmes aux utilisateurs
         document.addEventListener('DOMContentLoaded', ready)
     } else {
@@ -35,11 +33,6 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
     document.getElementById('blog__title').textContent = meubleData.name
     document.getElementById('blog__description').textContent = meubleData.description
     document.getElementById('blog__price').textContent = meubleData.price / 100 + " €"
-    /*document.getElementById('blog__option0').textContent = meubleData.varnish[0]
-    document.getElementById('blog__option1').textContent = meubleData.varnish[1]
-    document.getElementById('blog__option2').textContent = meubleData.varnish[2]
-    //document.getElementById('blog__option3').textContent = meubleData.varnish[2]*/
-    //if(option3)// si l'option trois n'existe pas alors on efface la balise option de varnish numéro 3 si non la balise varnish numéro trois se montre
 
     for (let i = 0; i < meubleData.varnish.length; i++) {
         const varnish = meubleData.varnish[i];
@@ -73,7 +66,7 @@ function quantityChanged(event) { //Lier l'input value au bouton pour dire si on
     let input = event.target
     let quantity = parseInt(input.value)
     // si l'utilisateur choisi un nombre 0 ou moins ou pas un nombre alors le nombre va automatiquement revenir à 1, et si l'utilisateur choisi le nombre plus de 100 alors le chiffre va revenir à 100
-    if (isNaN(quantity) || quantity < 0) {
+    if (isNaN(quantity) || quantity <= 0) {
         quantity = 1
     } else if (quantity > 100) {
         quantity = 100
@@ -115,6 +108,10 @@ Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer
             imageUrl:meubleData.imageUrl
         }
 
+        //essaie
+        let meubleLinea = JSON.stringify(structureMeuble)
+        localStorage.setItem("structMeuble", meubleLinea)
+        //essai finit
 
         userPanier.push(structureMeuble);
     }
@@ -125,5 +122,5 @@ Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer
 }
 
 function goToRedirectionToPanier(meubleDataNname){
-    window.location.href = `${window.location.origin}/panier.html?dernierProduitAjouterNom=${meubleDataNname}`
+    window.location.href = `${window.location.origin}/panier.html?dernierProduitAjouter:=${meubleDataNname}`
 }
