@@ -58,28 +58,36 @@
 											</div>
 										</div>
 									</div>
-                    <div class="d-flex justify-content-around" id="productsAddCenter">
-                      <template id="templateAdd">
+									<div class="d-flex justify-content-around">
+                    <template id="templateAdd">
                       <div class="row row-achat">
                         <div class="cart-items">
-                          <div class="col-achat">
-                            <div class="col mt-2 d-flex justify-content-around col-achat" id="col-items">
-                              <img id="blog__image" src="" alt="" class="img-fluid rounded shadow-lg ml-5">
-                              <span class="ml-2 mt-3 blog__name" id="blog__title"><!--Name--></span>
+                          <div class="col-achat" id="col__items">
+                            <div class="col mt-2 d-flex justify-content-around col-achat">
+                              <img id="blog__image" src="" alt="meuble image" class="img-fluid rounded shadow-lg ml-5">
+                              <h2 class="mt-2 ml-2 h4" id="blog__title">name</h2>
                               <label class="exampleFormControlSelect1 "></label>
                               <select  required class="form-control w-25 blog__color ml-5 " id="blog__color" name="Couleur" ></select>
                               <span>
                                 <input placeholder="Quanitité" required type="number" value="1" min="1" max="100" class="form-control w-50 quantity ml-5" id="blog__quantity"/>
                               </span>
-                              <span class="h4 mr-5 blog__price" id="price__blog"><!--50$--></span>
+                              <span class="h4 mr-5 blog__price" id="price__blog">50$</span>
                               <button type="button" class="btn btn-danger btn-md danger-btn mr-n5" id="danger-btn-first">
                                 <i class="fas fa-trash"></i>
                                 <span class="p ml-1">Effacer</span>
                               </button>
                             </div>
                           </div>
+                          <div class="d-flex justify-content-end element-achat">
+                            <div class="col-achat">
+                              <div class="col mt-2 col-achat d-flex justify-content-around mr-5 ml-n5" id="col-achat">
+                                <strong class="total-titre h3 mr-5" id="titre-total">Total :</strong>
+                                <strong class="total-prix h3 mr-5 ml-3" id="prix-total">50$</strong>
+                              </div>
+                            </div>  
+                          </div>
                         </div>
-                      </div>
+                      </div>  
                     </template>
                     </div>
 									</div>

@@ -1,6 +1,6 @@
 (() => {
-    let cliqueAjoutMeubleLocalStorage = getCliqueAjoutMeubleLocalStorage()
-    addDisplayPanier(ajoutMeubleLocalStorage)
+    let cliqueLocalStorageData = getCliqueLocalStorageData()
+    displayData(cliqueLocalStorageData)
 
     if (document.readyState == 'loading') { //Une fois que la page se télécharge le bouton va être pret aant les autres car si les boutons fonctionne après les autres, cela peut apporter des prpblèmes aux utilisateurs
         document.addEventListener('DOMContentLoaded', ready)
@@ -39,13 +39,7 @@ function quantityChanged(event) {
 function effacerElementCart(event) {
     let buttonEffacer = event.target // tous les buttons qu'on clique, on peut effacer
     buttonEffacer.parentElement.parentElement.remove()
-
-    if(JSON.parse(localStorage.getItem("userPanier")).length > 0){
-        buttonEffacer.parentElement.parentElement.remove()
-    }else{
-        document.getElementById("container-tout")//.remove()
-    }
-
+    
     updateTotalPrce()// je l'ai mis là pour dire que si on efface tout le produit le prix deviens 0
 }
 
@@ -67,54 +61,46 @@ function updateTotalPrce(){
     totalPrice.innerText = '$' + total
 }
 
-function getCliqueAjoutMeubleLocalStorage(){
-    /*On vérifie si un produit est dans un panier ou pas
-    if(JSON.parse(localStorage.getItem("userPanier")).length == 0){
-        document.getElementById("container-tout").remove()
+function getCliqueLocalStorageData(){
+
+    if (localStorage.getItem("structMeuble")) {
+        console.log("Administration : le panier de l'utilisateur existe dans le localStorage");
+    } else {
+        console.log("Administration : Le panier n'existe pas, il va être créer et l'envoyer dans le localStorage");
+        //Le panier est un tableau de produits
+        let panierInit = [];
+        localStorage.setItem("structMeuble", JSON.stringify(panierInit));
+    };
+
+    
+    // Je réucpere les données de localStorage
+    let structMeubleData = localStorage.getItem('structMeubleData')
+
+    // Verification qu'il ne soit pas vide
+    if (!structMeubleData) {
+        console.log("Oups, le panier est vide")
+        structMeubleData = '{}'
     }
-    JSON.parse(localStorage.getItem("userPanier"));
-    JSON.parse(localStorage.getItem("structureMeuble"));
-    */
-    /* Recuperation des données localStorage*/
-
-    updateTotalPrce()// à chaque fois que l'utilisateur clique sur "ajouter au panier" et le produit s'ajoute à la page panier, alors le prix peut changer dynamiquement
-
+    
+    console.log(structMeubleData)
+    let parseStructMeubleJSON = JSON.parse(structMeubleData)
+    return parseStructMeubleJSON
 }
 
-function addDisplayPanier(ajoutMeubleLocalStorage) {
-    //document.getElementById("blog__image").src = meubleLocalStorage.imageUrl
-    let colItems = document.getElementsByClassName("col-achat")
-    let meubleDejaAjouter = colItems.getElementsByClassName("blog__name") // pour éviter que le produit déjà ajouté s'ajoute
-    for (let i = 0; i < meubleDejaAjouter.length; i++) {
-        let nameExist = meubleDejaAjouter[i].innerText = ajoutMeubleLocalStorage.name
-        if(nameExist === name){
-            //alert('Produit déjà sous le panier')
-            return
-        }
+function displayData(cliqueLocalStorageData) {
+    // méthode template pour clonner le même balise HTML, pareil comme la page index
+
+    // pour chaque element appellé, on va pouvoir boucler les elements donc d'ajouter dynamiquement les elements
+    for (let i = 0; i < cliqueLocalStorageData.length; i++) {
+        const clique = cliqueLocalStorageData[i];
+        const templateAdd = getElementById("templateAdd")
+        const cloneAdd = document.importNode(templateAdd.content, true)
+        cloneAdd.getElementById("blog__image").src = clique.imageUrl
+        cloneAdd.getElementById("blog__title").textContent = clique.name
+        cloneAdd.getElementById("blog__color").value = clique.color
+        cloneAdd.getElementById("blog__quantity").value = clique.quantity
+        cloneAdd.getElementById("price__blog").textContent = clique.price
+    
+        document.getElementById("productsAddCenter").appendChild(cloneAdd)
     }
-    // le code en haut pour dire que si le produit est déjà sur le panier, si l'utilisateur reclique sur "ajouter au panier", le même produit ne peut pas s'ajouter en dessous le même produit
-
-    const templateAdd = getElementById("templateAdd")
-    const cloneAdd = document.importNode(templateAdd.content, true)
-    cloneAdd.getElementById("blog__image").src = ajoutMeubleLocalStorage.imageUrl
-    cloneAdd.getElementById("blog__color").value = ajoutMeubleLocalStorage.blog__color
-    cloneAdd.getElementById("blog__quantity").value = ajoutMeubleLocalStorage.quantity
-    cloneAdd.getElementById("price__blog").textContent = ajoutMeubleLocalStorage.price
-    const name = cloneAdd.getElementById("blog__title").textContent = ajoutMeubleLocalStorage.name
-
-    document.getElementById("productsAddCenter").appendChild(cloneAdd)
-
-    eraseAfterClick()
-    //colItems.document.getElementByclassName("danger-btn")[0].addEventListener("click", effacerElementCart) // J'imagine après qu'on ajoute le produit, le bouton effacer ne peut pas fonctionner car le bouton effacer fonctionne uniquement après que lapage se télécharge
-    quantityUpdateAfterClick() // J'imagine que la quantité ne fonctionne pas après que le produit s'ajoute, alors j'ajoute et j'appelle la fonctionne ajouter quantité pour pour povuvoir ajouter la quantité après clique donc le prix dynamique dépend du prix
-}
-
-function eraseAfterClick(){
-    let colItems = document.getElementsByClassName("col-achat")
-    colItems.getElementByclassName("danger-btn")[0].addEventListener("click", effacerElementCart) // J'imagine après qu'on ajoute le produit, le bouton effacer ne peut pas fonctionner car le bouton effacer fonctionne uniquement après que lapage se télécharge
-}
-
-function quantityUpdateAfterClick(){
-    let colItems = document.getElementsByClassName("col-achat")
-    colItems.getElementsByClassName("quantity").addEventListener("change", quantityChanged)
 }

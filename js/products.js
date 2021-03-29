@@ -52,9 +52,9 @@ function ready(meubleData) {
         event.preventDefault()
         //let ajoutMeuble = await getAjoutMeuble(meubleData, event)
         getAjoutMeuble(meubleData)
-
         goToRedirectionToPanier(meubleData.name)
         // Une fonction pour aller à la page shopping avec le ID et le nom
+        
     })
 
     //ici pour input value pour dire aux utilisateurs que l'utilisateur ne peut choisir au moins 1 produit et non negative ou autre choses que le nombre
@@ -98,7 +98,7 @@ Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer
 
     for (let i = 0; i < quantityElement; i++) { //il va pusher la quantité qui se trouve dans le boucle for c'est à dire le quantité de 1 à 100
         //const quantity = quantityElement[i];
-        let structureMeuble = 
+        let structMeuble = // toutes les données pusher dans le localStorage, je les garde ici
         {
             name:getMeubleData.name,
             _id:meubleData._id,
@@ -109,11 +109,10 @@ Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer
         }
 
         //essaie
-        let meubleLinea = JSON.stringify(structureMeuble)
-        localStorage.setItem("structMeuble", meubleLinea)
-        //essai finit
-
-        userPanier.push(structureMeuble);
+        let structMeubleData = JSON.parse(localStorage.getItem("structMeubleData"))
+        userPanier.push(structMeuble);
+        localStorage.setItem("structMeubleData", JSON.stringify(structMeubleData))
+        //essai finit        
     }
 
     localStorage.setItem("userPanier", JSON.stringify(userPanier))
