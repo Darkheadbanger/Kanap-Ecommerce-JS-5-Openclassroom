@@ -100,7 +100,7 @@ Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer
         //const quantity = quantityElement[i];
         let structMeuble = // toutes les données pusher dans le localStorage, je les garde ici
         {
-            name:getMeubleData.name,
+            name:meubleData.name,
             _id:meubleData._id,
             quantity:quantityElement,
             color:document.getElementById("selectOption").value,
@@ -110,9 +110,9 @@ Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer
 
         //essaie
         let structMeubleData = JSON.parse(localStorage.getItem("structMeubleData"))
-        userPanier.push(structMeuble);
         localStorage.setItem("structMeubleData", JSON.stringify(structMeubleData))
         //essai finit        
+        userPanier.push(structMeuble);
     }
 
     localStorage.setItem("userPanier", JSON.stringify(userPanier))
