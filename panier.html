@@ -62,7 +62,7 @@
                     <!--<template id="templateAdd">-->
                       <div class="row row-achat" id="achat-row">
                         <div class="cart-items">
-                          <template id="templateAdd">
+                          <template class="templateAdd">
                             <div class="col-achat" id="col__items">
                               <article class="col mt-2 d-flex justify-content-around col-achat h-25 d-inline-block">
                                 <div class="card w-25 p-3 h-25 d-inline-md-block">
@@ -71,15 +71,9 @@
                                 <h2 class="mt-2 h4 mt-5" id="blog__title"><!--name--></h2>
                                   <label class="exampleFormControlSelect1"></label>
                                 <div class="w-25 p-3 mt-4">
-                                  <select required class="blog__color form-control w-50" name="Couleur" id="blog__color">
-                                  <!--<option value="Dark Oak" selected id="blog__option0"></option>
-                                  <option value="Light Oak" selected id="blog__option1"></option>
-                                  <option value="Mahogany" selected id="blog__option2"></option>-->
-                                  </select>  
+                                  <span class="blog__color" id="blog__color"></span>
                                 </div>
-                                <span class="mt-5">
-                                  <input placeholder="Quanitité" required type="number" value="1" min="1" max="100" class="form-control w-50 quantity" id="blog__quantity"/>
-                                </span>
+                                <span class="mt-5 quantity ml-5" id="blog__quantity"></span>
                                 <span class="h4 blog__price mt-5" id="price__blog"><!--0$--></span>
                                 <button type="button" class="btn btn-danger btn-md danger-btn h-25 d-inline-block mt-5" id="danger-btn-first">
                                   <i class="fas fa-trash"></i>

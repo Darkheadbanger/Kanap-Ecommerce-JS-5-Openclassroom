@@ -54,7 +54,6 @@ function ready(meubleData) {
         getAjoutMeuble(meubleData)
         goToRedirectionToPanier(meubleData.name)
         // Une fonction pour aller à la page shopping avec le ID et le nom
-        
     })
 
     //ici pour input value pour dire aux utilisateurs que l'utilisateur ne peut choisir au moins 1 produit et non negative ou autre choses que le nombre
@@ -79,8 +78,8 @@ function quantityChanged(event) { //Lier l'input value au bouton pour dire si on
 }
 
 function getAjoutMeuble(meubleData) {
-    /*L'utilisateur à besoin d'un panier dans le localStorage de son navigateur
-Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer dans le localStorage au premier chargement du site quelque soit la page*/
+    meubleData.target
+
     if (localStorage.getItem("userPanier")) {
         console.log("Administration : le panier de l'utilisateur existe dans le localStorage");
     } else {
@@ -91,28 +90,59 @@ Vérifier si le panier existe dans le localStorage, sinon le créer et l'envoyer
     };
 
     //L'user a maintenant un panier
-    let userPanier = JSON.parse(localStorage.getItem("userPanier"));
+    let userPanier = JSON.parse(localStorage.getItem("userPanier"))
     //quantityChanged(event)
+    console.log(userPanier)
 
-    let quantityElement = document.getElementById('quantity').value // On récupère
+    //let objets = userPanier || []
+
+    let quantityElement = document.getElementById('quantity').value // On récupère la quantité de value input
 
     for (let i = 0; i < quantityElement; i++) { //il va pusher la quantité qui se trouve dans le boucle for c'est à dire le quantité de 1 à 100
-        //const quantity = quantityElement[i];
-        let structMeuble = // toutes les données pusher dans le localStorage, je les garde ici
+        //let quantity = quantityElement[i];
+        const structMeuble = // toutes les données pusher dans le localStorage, je les garde ici
         {
             name:meubleData.name,
-            _id:meubleData._id,
+            id:meubleData._id,
             quantity:quantityElement,
             color:document.getElementById("selectOption").value,
             price:meubleData.price,
             imageUrl:meubleData.imageUrl
         }
+        //userPanier.push(structMeuble)
 
-        //essaie
-        let structMeubleData = JSON.parse(localStorage.getItem("structMeubleData"))
-        localStorage.setItem("structMeubleData", JSON.stringify(structMeubleData))
-        //essai finit        
-        userPanier.push(structMeuble);
+        //ajout du produit, plusieurs cas possible
+        if(!userPanier){
+            // si le panier est vide
+            let meubleVide = [];
+            meubleVide.push(structMeuble)
+            localStorage.setItem("userPanier", JSON.stringify(meubleVide))
+        }else{
+            const produitFiltre = userPanier.filter(meuble => meuble.id === structMeuble.id && meuble.color === structMeuble.color)
+            if(produitFiltre.length === 0){
+                //si on ajoute un nouvel article on ajoute l'artile a la liste
+                userPanier.push(structMeuble)
+                localStorage.setItem('userPanier', JSON.stringify(userPanier))
+            }else{
+                //si on ajoute un article deja existant dans le panier = on incremente la quantité
+                userPanier.map(meuble => {
+                    if(meuble === produitFiltre){
+                        meuble.quantity += structMeuble.quantity
+                    }
+                })
+                localStorage.setItem('userPanier', JSON.stringify(userPanier))
+            }
+        }
+
+        //const found = structMeuble.find(quantity => quantity.quantity > 1) ne fonctionne pas
+
+        /* ne fonctionne pas
+        if(typeof userPanier[structMeuble.id] !== 'undefined'){
+            userPanier[structMeuble.id].quantity += push(quantity)
+        }else{
+            userPanier[structMeuble.id] = push(structMeuble.quantity)
+        }*/
+        
     }
 
     localStorage.setItem("userPanier", JSON.stringify(userPanier))
