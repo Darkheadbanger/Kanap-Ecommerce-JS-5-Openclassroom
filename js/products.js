@@ -118,16 +118,17 @@ function getAjoutMeuble(meubleData) {
             meubleVide.push(structMeuble)
             localStorage.setItem("userPanier", JSON.stringify(meubleVide))
         }else{
-            const produitFiltre = userPanier.filter(meuble => meuble.id === structMeuble.id && meuble.color === structMeuble.color)
-            if(produitFiltre.length === 0){
+            // On utilise filter pour pouvoir choisir deux data, et comparer si l'id et le color exist déjà ou non
+            const produitFiltre = userPanier.filter(item => item.id === structMeuble.id && item.color === structMeuble.color)
+            if(produitFiltre.length === 0){// Si l'id et le couleur est vide
                 //si on ajoute un nouvel article on ajoute l'artile a la liste
                 userPanier.push(structMeuble)
                 localStorage.setItem('userPanier', JSON.stringify(userPanier))
             }else{
                 //si on ajoute un article deja existant dans le panier = on incremente la quantité
-                userPanier.map(meuble => {
-                    if(meuble === produitFiltre){
-                        meuble.quantity += structMeuble.quantity
+                userPanier.forEach(item => {
+                    if(item === produitFiltre[0]){
+                        item.quantity
                     }
                 })
                 localStorage.setItem('userPanier', JSON.stringify(userPanier))
