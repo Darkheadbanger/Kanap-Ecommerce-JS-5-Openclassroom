@@ -7,7 +7,7 @@
       <meta name="description" content="">
       <meta name="author" content="David Bouhaben"/>
       <meta name="robots" content="index, follow" />
-      <link defer rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/style.css">
       <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css"/>
       <script src="./js/products.js" defer></script>
       <!--<script src="./js/MeubleObject.js" defer></script>-->
@@ -29,7 +29,7 @@
                               <a class="nav-link" href="index.html">Accueil <span class="sr-only">(curent)</span></a>
                            </li>
                            <li class="nav-item">
-                              <a class="nav-link" href="panier.html"><i class="fas fa-shopping-cart"></i><i class="fas fa-circle" id="numberUpdate"></i>0</i></a>
+                              <a class="nav-link" href="panier.html"><i class="fas fa-shopping-cart"></i><i class="fas fa-circle" id="numberUpdate"></i>0</a>
                            </li>
                         </ul>
                      </div>
@@ -43,26 +43,24 @@
             <div class="row d-flex justify-content-center d-wrap" id="row-achat">
                <div class="col-md-4 mx-md-n3 mt-md-5 mt-3 mr-md-1">
                   <div class="card mb-4 mb-lg-0 border-primary shadow-lg rounded">
-                     <article class="card-body">
-                        <img id="blog__image" src="" class="img-fluid rounded mx-auto d-block" alt="table"/>
-                     </article>
+                     <div class="card-body">
+                        <img id="blog__image" src="/" class="img-fluid rounded mx-auto d-block" alt="table"/>
+                     </div>
                   </div>
                </div>
                <div class="col-md-4 mx-md-n3 mt-md-5 mt-3 mr-md-1 d-none d-md-block" id="col-achat">
                   <div class="card mb-4 mb-lg-0 border-primary shadow-lg rounded">
-                     <article class="card-body">
-                        <h1 class="h3 mt-3" id="blog__title"></h1>
-                        <p class="p text-justify" id="blog__description"></p>
-                        <h2 class="h4" id="blog__price"></h2>
+                     <div class="card-body">
+                        <p><span class="h3 mt-3" id="blog__title"></span></p>
+                        <p><span class="p text-justify" id="blog__description"></span></p>
+                        <span class="h4" id="blog__price"></span>
                         <form id="form">
-                           <div input="input-group mb-4">
                               <label class="exampleFormControlSelect1"></label>
-                              <select required class="form-control" name="Couleur" id="selectOption">
+                              <select class="form-control" name="Couleur" id="selectOption">
                                  <!--<option value="Dark Oak" selected id="blog__option0"></option>
                                  <option value="Light Oak" selected id="blog__option1"></option>
                                  <option value="Mahogany" selected id="blog__option2"></option>-->
                               </select>
-                           </div>
                            <div class="justify-content-md-between">
                               <div class="input-group mb-3">
                                  <div class="input-group-prepend">
@@ -78,11 +76,10 @@
                               </div>
                            </div>
                         </form>
+                     </div>
                   </div>
-                  </article>
                </div>
             </div>
-         </div>
          </div>
       </main>
       <footer id="footer">

@@ -1,183 +1,169 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-		<meta name="keywords" content="">
-			<meta name="description" content="">
-				<meta name="author" content="David Bouhaben"/>
-				<meta name="robots" content="index, follow" />
-				<link rel="shortcut icon" href="image/favicon.ico"/>
-				<link defer rel="stylesheet" href="css/style.css">
-					<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css"/>
-					<script src="js/panier.js" defer></script>
-					<script>// Google analytics</script>
-					<title>Pannier | Orinoco meuble</title>
-				</head>
-				<body>
-					<header>
-						<div class="bg-wood">
-							<div class="container">
-								<div class="row">
-									<nav class="col navbar navbar-expand navbar-light bg-wood justify-content-between">
-										<a class="navbar-brand" href="index.html">
-											<img src="image/logo.png" alt="Logo Orinoco" class="img-fluid" />
-										</a>
-										<div class="collapse navbar-collapse w-100 order-3 dual-collapse2">
-											<ul class="navbar-nav ml-auto">
-												<li class="nav-item active">
-													<a class="nav-link" href="index.html">Accueil 
-														
-														<span class="sr-only">(curent)</span>
-													</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link" href="">
-														<i class="fas fa-shopping-cart"></i>
-													</a>
-												</li>
-											</ul>
-										</div>
-									</nav>
-								</div>
-							</div>
-						</div>
-					</header>
-					<main class="main" id="main">
-						<section class="container" id="container">
-							<h1 class="text-center h3 mt-5 text-woodTitle">Vos achats</h1>
-							<div class="container " id="container-tout">
-								<div class="container container-achat d-flex justify-content-center" id="container-achat">
-									<div class="row row-achat" id="row-achat">
-										<div class="col mt-2 col-achat d-flex justify-content-around" id="col-achat">
-											<hr class="separator mt-n2">
-												<p class=" text-justify mx-5">Produit</p>
-												<p class=" text-justify mx-5">Couleur</p>
-												<p class=" text-justify mx-5">Quantity</p>
-												<p class=" text-justify mx-5">Price</p>
-											</div>
-										</div>
-									</div>
-									<div class="d-flex flex-column container-items" id="productsAddCenter">
-                    <!--<template id="templateAdd">-->
-                      <div class="row row-achat" id="achat-row">
-                        <div class="cart-items">
-                          <template class="templateAdd">
-                            <div class="col-achat" id="col__items">
-                              <article class="col mt-2 d-flex justify-content-around col-achat h-25 d-inline-block">
-                                <div class="card w-25 p-3 h-25 d-inline-md-block">
-                                  <img id="blog__image" src="" alt="" class="img-fluid rounded shadow-lg">
-                                </div>
-                                <h2 class="mt-2 h4 mt-5" id="blog__title"><!--name--></h2>
-                                  <label class="exampleFormControlSelect1"></label>
-                                <div class="w-25 p-3 mt-4">
-                                  <span class="blog__color" id="blog__color"></span>
-                                </div>
-                                <span class="mt-5 quantity ml-5" id="blog__quantity"></span>
-                                <span class="h4 blog__price mt-5" id="price__blog"><!--0$--></span>
-                                <button type="button" class="btn btn-danger btn-md danger-btn h-25 d-inline-block mt-5" id="danger-btn-first">
-                                  <i class="fas fa-trash"></i>
-                                  <span class="p ml-1">Effacer</span>
-                                </button>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="David Bouhaben"/>
+      <meta name="robots" content="index, follow" />
+      <link rel="shortcut icon" href="image/favicon.ico"/>
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css"/>
+      <script src="js/panier.js" defer></script>
+      <script>// Google analytics</script>
+      <title>Pannier | Orinoco meuble</title>
+   </head>
+   <body>
+      <header>
+         <div class="bg-wood">
+            <div class="container">
+               <div class="row">
+                  <nav class="col navbar navbar-expand navbar-light bg-wood justify-content-between">
+                     <a class="navbar-brand" href="index.html">
+                     <img src="image/logo.png" alt="Logo Orinoco" class="img-fluid" />
+                     </a>
+                     <div class="collapse navbar-collapse w-100 order-3 dual-collapse2">
+                        <ul class="navbar-nav ml-auto">
+                           <li class="nav-item active">
+                              <a class="nav-link" href="index.html">Accueil 
+                              <span class="sr-only">(curent)</span>
+                              </a>
+                           </li>
+                           <li class="nav-item">
+                              <a class="nav-link" href="">
+                              <i class="fas fa-shopping-cart"></i>
+                              </a>
+                           </li>
+                        </ul>
+                     </div>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </header>
+      <main class="main" id="main">
+         <section class="container" id="container">
+            <h1 class="text-center h3 mt-5 text-woodTitle">Vos achats</h1>
+            <div class="container " id="container__tout">
+               <div class="container container-achat d-flex justify-content-center" id="container-achat">
+                  <div class="row row-achat" id="row-achat">
+                     <div class="col mt-2 col-achat d-flex justify-content-around" id="col-achat">
+                        <hr class="separator mt-n2">
+						<span class="ml-5"></span>
+                        <p class=" text-justify mx-5">Produit</p>
+                        <p class=" text-justify mx-5">Name</p>
+                        <p class=" text-justify mx-5">Color</p>
+                        <p class=" text-justify mx-5">Quantity</p>
+                        <p class=" text-justify mx-5">Price</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="d-flex flex-column container-items" id="productsAddCenter">
+                  <template class="templateAdd">
+                  <div class="row row-achat" id="achat-row">
+                     <div class="cart-items">
+                           <div class="col-achat" id="col__items">
+                              <article class="col mt-2 d-flex justify-content-around col-achat h-25 d-inline-block con__article">
+                                 <div class="card w-25 p-3 h-25 d-inline-md-block">
+                                    <img id="blog__image" src="" alt="" class="img-fluid rounded shadow-lg">
+                                 </div>
+                                 <span class="mt-5 h5" id="blog__title"></span>
+                                 <span class="mt-5 blog__color" id="blog__color"></span>
+                                 <span class="mt-5 quantity" id="blog__quantity"></span>
+                                 <span class="h4 blog__price mt-5" id="price__blog"></span>
+                                 <button type="button" class="btn btn-danger btn-md danger-btn h-25 d-inline-block mt-5" id="danger-btn-first">
+                                 <i class="fas fa-trash"></i>
+                                 <span class="p">Effacer</span>
+                                 </button>
                               </article>
-                            </div>
-                          </template>
-                          <!--<div class="d-flex justify-content-end element-achat">
-                            <div class="col-achat">
-                              <div class="col mt-2 col-achat d-flex justify-content-around mr-5 ml-n5" id="col-achat">
-                                <strong class="total-titre h3 mr-5" id="titre-total">Total :</strong>
-                                <strong class="total-prix h3 mr-5 ml-3" id="prix-total">0€</strong>
-                              </div>
-                            </div>  
-                          </div>-->
-                        </div>
-                      </div>  
-                    </template>
-                    </div>
-                    <!--l'emplacement originel de la balise Total prix qui fonctionne-->
-                    <div class="d-flex justify-content-end element-achat">
-                      <div class="col-achat">
-                        <div class="col mt-2 col-achat d-flex justify-content-around mr-5 ml-n5" id="col-achat">
-                          <strong class="total-titre h3 mr-5" id="titre-total">Total :</strong>
-                          <strong class="total-prix h3 mr-5 ml-3" id="prix-total">0€</strong>
-                        </div>
-                      </div>  
-                    </div>
-									</div>
-									<div class="col">
-										<form action="" class="was-validated">
-											<div class="form-group">
-												<label for="name">Nom/Prénom:</label>
-												<input type="text" class="form-control" id="name" placeholder="Entrez votre nom et prénom" name="name" required>
-													<div class="valid-feedback">Valid.</div>
-													<div class="invalid-feedback">Please fill out this field.</div>
-												</div>
-												<div class="form-group">
-													<label for="adresse">Adresse:</label>
-													<input type="text" class="form-control" id="adresse" placeholder="Enter votre adresse" name="adresse" required>
-														<div class="valid-feedback">Valid.</div>
-														<div class="invalid-feedback">Please fill out this field.</div>
-													</div>
-													<div class="form-group">
-														<label for="codePostal">Adresse Postale:</label>
-														<input type="text" class="form-control" id="codePostal" placeholder="Code postale" name="codePostal" maxlength="5" required>
-															<div class="valid-feedback">Valid.</div>
-															<div class="invalid-feedback">Please fill out this field.</div>
-														</div>
-														<div class="form-group">
-															<label for="ville">Ville:</label>
-															<input type="text" class="form-control" id="ville" placeholder="Votre ville" name="ville" required>
-																<div class="valid-feedback">Valid.</div>
-																<div class="invalid-feedback">Please fill out this field.</div>
-															</div>
-															<div class="form-group">
-																<label for="email">Email:</label>
-																<input type="email" pattern="^([0-9]{9})|([A-Za-z0-9._%\+\-]+@[a-z0-9.\-]+\.[a-z]{2,3})$" class="form-control" id="email" placeholder="Email" name="email" required>
-																	<div class="valid-feedback">Valid.</div>
-																	<div class="invalid-feedback">Please fill out this field.</div>
-																</div>
-																<div class="form-group form-check">
-																	<label class="form-check-label">
-																		<input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
-																			
-																			<div class="valid-feedback">Valid.</div>
-																			<div class="invalid-feedback">Check this checkbox to continue.</div>
-																		</label>
-																	</div>
-																	<button type="submit" class="btn btn-primary">Submit</button>
-																</div>
-															</form>
-														</div>
-													</section>
-												</main>
-												<footer id="footer">
-													<div class="bg-woodFooter mt-5">
-														<div class="footer-container">
-															<div class="container">
-																<div class="row pt-4 pb-3">
-																	<div class="col">
-																		<ul class="list-inline text-center ">
-																			<li class="list-inline-item ">
-																				<a href="#" class="text-white">À propos</a>
-																			</li>
-																			<li class="list-inline-item">&middot;</li>
-																			<li class="list-inline-item">
-																				<a href="#" class="text-white">Vie privée</a>
-																			</li>
-																			<li class="list-inline-item">&middot;</li>
-																			<li class="list-inline-item">
-																				<a href="#" class="text-white">Conditions d'utilisations</a>
-																			</li>
-																		</ul>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</footer>
-												<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-												<script defer src="./node_modules/jquery/dist/jquery.min.js"></script>
-												<script defer src="./node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
-												<script defer src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-											</body>
-										</html>
+                           </div>
+                     </div>
+                  </div>
+                  </template>
+               </div>
+               <!--l'emplacement originel de la balise Total prix qui fonctionne-->
+               <div class="d-flex justify-content-end element-achat">
+                  <div class="col-achat">
+                     <div class="col mt-2 d-flex justify-content-around" id="col__achat">
+                        <strong class="total-titre h3" id="titre-total">Total : </strong>
+                        <strong class="total-prix h3 mr-5" id="prix__total"> 0€</strong>
+						<span class="mr-5"></span>
+						<span class="mr-5"></span>
+						<span class="mr-5"></span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col">
+               <form action="/" class="was-validated" id="formId" method="POST">
+				<fieldset>
+					<legend>Entrez vos coordonnées</legend>
+					<div class="form-group">
+						<label for="name">Nom:</label>
+						<input type="text" class="form-control" id="name" placeholder="Entrez votre nom" name="name" required>
+						<div class="valid-feedback">Valid.</div>
+						<div class="invalid-feedback">Veuillez remplir ce champ.</div>
+					 </div>
+					 <div class="form-group">
+						<label for="Prenom">Prenom:</label>
+						<input type="text" class="form-control" id="Prenom" placeholder="Entrez votre prénom" name="prénom" maxlength="5" required>
+						<div class="valid-feedback">Valid.</div>
+						<div class="invalid-feedback">Veuillez remplir ce champ.</div>
+					 </div>
+					 <div class="form-group">
+						<label for="adresse">Adresse:</label>
+						<input type="text" class="form-control" id="adresse" placeholder="Enter votre adresse" name="adresse" required>
+						<div class="valid-feedback">Valid.</div>
+						<div class="invalid-feedback">Veuillez remplir ce champ.</div>
+					 </div>
+					 <div class="form-group">
+						<label for="ville">Ville:</label>
+						<input type="text" class="form-control" id="ville" placeholder="Votre ville" name="ville" required>
+						<div class="valid-feedback">Valid.</div>
+						<div class="invalid-feedback">Veuillez remplir ce champ.</div>
+					 </div>
+					 <div class="form-group">
+						<label for="email">Email:</label>
+						<input type="email" pattern="^([0-9]{9})|([A-Za-z0-9._%\+\-]+@[a-z0-9.\-]+\.[a-z]{2,3})$" class="form-control" id="email" placeholder="Email" name="email" required>
+						<div class="valid-feedback">Valid.</div>
+						<div class="invalid-feedback">Veuillez remplir ce champ.</div>
+					 </div>
+				</fieldset>
+				<button type="submit" class="btn btn-primary">Passer à la commande</button>   
+            </form>
+		</div>
+         </section>
+      </main>
+      <footer id="footer">
+         <div class="bg-woodFooter mt-5">
+            <div class="footer-container">
+               <div class="container">
+                  <div class="row pt-4 pb-3">
+                     <div class="col">
+                        <ul class="list-inline text-center ">
+                           <li class="list-inline-item ">
+                              <a href="#" class="text-white">À propos</a>
+                           </li>
+                           <li class="list-inline-item">&middot;</li>
+                           <li class="list-inline-item">
+                              <a href="#" class="text-white">Vie privée</a>
+                           </li>
+                           <li class="list-inline-item">&middot;</li>
+                           <li class="list-inline-item">
+                              <a href="#" class="text-white">Conditions d'utilisations</a>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script defer src="./node_modules/jquery/dist/jquery.min.js"></script>
+      <script defer src="./node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+      <script defer src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+   </body>
+</html>
+

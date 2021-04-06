@@ -55,7 +55,6 @@ function ready(meubleData) {
         goToRedirectionToPanier(meubleData.name)
         // Une fonction pour aller à la page shopping avec le ID et le nom
     })
-
     //ici pour input value pour dire aux utilisateurs que l'utilisateur ne peut choisir au moins 1 produit et non negative ou autre choses que le nombre
     let quantityInput = document.getElementById('quantity')
     quantityInput.addEventListener("change", quantityChanged)
@@ -91,59 +90,44 @@ function getAjoutMeuble(meubleData) {
 
     //L'user a maintenant un panier
     let userPanier = JSON.parse(localStorage.getItem("userPanier"))
-    //quantityChanged(event)
     console.log(userPanier)
-
-    //let objets = userPanier || []
+    let panierVide = '[]'
+    console.log(panierVide)
 
     let quantityElement = document.getElementById('quantity').value // On récupère la quantité de value input
+    let quantityElementParsed = parseInt(quantityElement)
+    console.log(quantityElementParsed)
 
-    for (let i = 0; i < quantityElement; i++) { //il va pusher la quantité qui se trouve dans le boucle for c'est à dire le quantité de 1 à 100
-        //let quantity = quantityElement[i];
-        const structMeuble = // toutes les données pusher dans le localStorage, je les garde ici
-        {
-            name:meubleData.name,
-            id:meubleData._id,
-            quantity:quantityElement,
-            color:document.getElementById("selectOption").value,
-            price:meubleData.price,
-            imageUrl:meubleData.imageUrl
+    const structMeuble = // toutes les données pusher dans le localStorage, je les garde ici
+    {
+        name:meubleData.name,
+        id:meubleData._id,
+        quantity:quantityElementParsed,
+        color:document.getElementById("selectOption").value,
+        price:meubleData.price,
+        imageUrl:meubleData.imageUrl
+    }
+
+    var produitFiltre = userPanier.filter(meuble => meuble.id === structMeuble.id && meuble.color === structMeuble.color)
+    //si le localStorage est vide on envoie rien
+    console.log(produitFiltre)
+    if(!userPanier)
+    {
+        panierVide.push(panierVide)
+    }
+    else// si il n'y a rien dans le panier, on envoie toutes les données
+    {
+        if(produitFiltre.length === 0){
+            userPanier.push(structMeuble)
         }
-        //userPanier.push(structMeuble)
-
-        //ajout du produit, plusieurs cas possible
-        if(!userPanier){
-            // si le panier est vide
-            let meubleVide = [];
-            meubleVide.push(structMeuble)
-            localStorage.setItem("userPanier", JSON.stringify(meubleVide))
-        }else{
-            // On utilise filter pour pouvoir choisir deux data, et comparer si l'id et le color exist déjà ou non
-            const produitFiltre = userPanier.filter(item => item.id === structMeuble.id && item.color === structMeuble.color)
-            if(produitFiltre.length === 0){// Si l'id et le couleur est vide
-                //si on ajoute un nouvel article on ajoute l'artile a la liste
-                userPanier.push(structMeuble)
-                localStorage.setItem('userPanier', JSON.stringify(userPanier))
-            }else{
-                //si on ajoute un article deja existant dans le panier = on incremente la quantité
-                userPanier.forEach(item => {
-                    if(item === produitFiltre[0]){
-                        item.quantity
-                    }
-                })
-                localStorage.setItem('userPanier', JSON.stringify(userPanier))
+        else// si le produit est déjà existant et on envoie une autre produit avec le même id et couleur alors on ne multiplie pas une autre row du même element mais on ajoute la quantité
+        {   
+            userPanier.find(element => { // si on choisit 5 quanitité, dans la page panier nous rotourne 25 comme si c'est 5 inout * 5 produits. ON peut ajouter
+            if(element === produitFiltre[0]){
+                element.quantity += structMeuble.quantity
             }
+            })
         }
-
-        //const found = structMeuble.find(quantity => quantity.quantity > 1) ne fonctionne pas
-
-        /* ne fonctionne pas
-        if(typeof userPanier[structMeuble.id] !== 'undefined'){
-            userPanier[structMeuble.id].quantity += push(quantity)
-        }else{
-            userPanier[structMeuble.id] = push(structMeuble.quantity)
-        }*/
-        
     }
 
     localStorage.setItem("userPanier", JSON.stringify(userPanier))
