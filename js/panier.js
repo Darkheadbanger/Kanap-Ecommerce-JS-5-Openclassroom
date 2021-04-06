@@ -177,7 +177,7 @@ function checkForm(){
     if(specialCharTest.test(formAdresse) == true || formAdresse == ""){
         messageTest = "Verifier votre adresse"
     }else{
-        console.log("L'adresse est OK")
+        console.log("L'adresse est OK") 
     }
     //check adresse postale, uniquement le nombre
     if(specialCharTest.test(formCodePostal) == true || stringTest.test(formCodePostal) == true || emailTest.test(formCodePostal) == true || formCodePostal == ""){
