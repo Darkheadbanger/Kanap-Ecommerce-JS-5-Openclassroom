@@ -2,6 +2,7 @@
     let cliqueLocalStorageData = getCliqueLocalStorageData()
     displayData(cliqueLocalStorageData)
     updateTotalPrice(cliqueLocalStorageData)
+    
     checkForm()
 
     if (document.readyState == 'loading') { //Une fois que la page se télécharge le bouton va être pret aant les autres car si les boutons fonctionne après les autres, cela peut apporter des prpblèmes aux utilisateurs
@@ -151,6 +152,7 @@ function checkForm(){
 
     //Regex
     let stringTest = new RegExp("^[a-zA-Z]")
+    console.log(stringTest)
     let numberTest = new RegExp('^[0-9]+$')
     //ici, test de mail
     let emailTest = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/y;
@@ -161,47 +163,50 @@ function checkForm(){
 
     //Recuperation de chaque form
     let formNom = document.getElementById("name").value
+    let formPrenom = document.getElementById("Prenom").value
     let formAdresse = document.getElementById("adresse").value
-    let formCodePostal = document.getElementById("codePostal").value
     let formVille = document.getElementById("ville").value
     let formMail = document.getElementById("email").value
 
     //une condition pour dire si chaque form est juste et on ne rentre pas n'importe quoi
     // nom, interdiction de nomnbre et de characteres spéciaux
-    if(specialCharTest.test(formNom) == true || numberTest.test(formNom) || formNom == ""){
-        messageTest = "Vérifiez/renseigner votre nom"
+    if(stringTest.test(formNom) == false){
+        messageTest = messageTest + "\n" + "Vérifiez/renseigner votre nom"
+    }else{
+        console.log("Le nom/prenom est OK")
+    }
+    if(stringTest.test(formPrenom) == false){
+        messageTest = messageTest + "\n" +"Vérifiez/renseigner votre prénom"
     }else{
         console.log("Le nom/prenom est OK")
     }
     //Check adresse si c'est ok et pas de numéro spéciale
-    if(specialCharTest.test(formAdresse) == true || formAdresse == ""){
-        messageTest = "Verifier votre adresse"
+    if(numberTest.test(formAdresse) == false || stringTest.test(formAdresse) == false){
+        messageTest = messageTest + "\n" +"Verifier votre adresse"
     }else{
         console.log("L'adresse est OK") 
     }
-    //check adresse postale, uniquement le nombre
-    if(specialCharTest.test(formCodePostal) == true || stringTest.test(formCodePostal) == true || emailTest.test(formCodePostal) == true || formCodePostal == ""){
-        messageTest = "verifiez votre code postale"
-    }else{
-        console.log("Le code postale est ok")
-    }
     //check la ville
     if(specialCharTest.test(formVille) == true || emailTest.test(formVille) == true || numberTest.test(formVille) == true || formVille == ""){
-        messageTest = "Verfiez votre ville"
+        messageTest = messageTest + "\n" +"Verfiez votre ville"
     }else{
         console.log("La ville est ok")
     }
     //check email
-    if(stringTest.test(formMail) == true || numberTest.test(formMail) || specialCharTest.test(formMail) == true || formail == ""){
-        messageTest = "Berifiez votre mail!"
+    if(emailTest.test(formMail) == false){
+        messageTest = "Verifiez votre mail!"
     }else{
         console.log("Mail OK")
+    }
+    
+    // si l'un de ces champs n'est pas bon; on montre le message d'alert plus la raison
+    if(messageTest !== ""){
+        alert("il est necessaire de " + "\n" +messageTest)
     }
 }
 
 function goToConfirmationPage(){
     //window.location.href = `${window.location.origin}/panier.html?confirmation.html`
-
 }
 
 function prepareFormData(){
@@ -209,11 +214,11 @@ function prepareFormData(){
 
     let postData = {
         contact: {
-           firstName: "",
-           lastName: formNom,
-           address: "",
-          city:"" ,
-           email:""
+        firstName: "",
+        lastName: formNom,
+        address: "",
+        city:"" ,
+        email:""
        },
 
         products: []//ajout Id des tous les produits
