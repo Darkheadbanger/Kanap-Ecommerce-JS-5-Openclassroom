@@ -2,8 +2,8 @@
     let cliqueLocalStorageData = getCliqueLocalStorageData()
     displayData(cliqueLocalStorageData)
     updateTotalPrice(cliqueLocalStorageData)
-    
     checkForm()
+    console.log(checkForm)
 
     if (document.readyState == 'loading') { //Une fois que la page se télécharge le bouton va être pret aant les autres car si les boutons fonctionne après les autres, cela peut apporter des prpblèmes aux utilisateurs
         document.addEventListener('DOMContentLoaded', ready)
@@ -25,14 +25,12 @@ function ready(cliqueLocalStorageData) {
                 // pour afficher un message "panier vide" si le panier est egal à 
            })// l'event à un property target qui va permetttre de remonter à tous les elements pour les effacer
         }
-    
-    })
-    document.addEventListener("DOMContentLoaded", () => {// à chaque fois que la page se télécharge
         let formId = document.getElementById("formId")
         formId.addEventListener("submit", (event) => {
-            event.preventDefault()
+            //event.preventDefault()
             confirmData(cliqueLocalStorageData)
             goToConfirmationPage()
+            checkForm()
         })
     })
 }
@@ -107,29 +105,47 @@ function getCliqueLocalStorageData(){
 }
 
 function confirmData(cliqueLocalStorageData){ // pour envoyer à la page de confirmation, le paramètre est une copie de la fonction qui appelle (setItem) le localStorage du produit 
-    //event.preventDefault()
-    //let confirmMeubleData = getCliqueLocalStorageData()
+    //checkForm()// recuperation du fonction checkForm et ses variables
     let getLocalStorageToConfirm = getCliqueLocalStorageData()
     const arrayForm = '[]'
+    let formNom = document.getElementById("name").value
+    let formPrenom = document.getElementById("Prenom").value
+    let formAdresse = document.getElementById("adresse").value
+    let formVille = document.getElementById("ville").value
+    let formMail = document.getElementById("email").value
+
 
     for (let i = 0; i < cliqueLocalStorageData.length; i++) {
         const element = cliqueLocalStorageData[i];
-
+        /*
         const formArrayConfirm = { // toutes les données que je vais pusheer à la page confirmation je les gardes ici
             leId:element.id,
-            lePrice:element.price,
-            leName: document.getElementById("name").value,
         }
         console.log(arrayForm)
         console.log(formArrayConfirm)
-        
+        */
+
+        let postData = {
+            contact: {
+            firstName: formPrenom,
+            lastName: formNom,
+            address: formAdresse,
+            city:formVille,
+            email:formMail
+           },
+    
+            products: [element.id]//ajout Id des tous les produits
+        }
+
+        console.log(postData)
+        /*
         if(formArrayConfirm){
             let arraySend = getLocalStorageToConfirm.push(formArrayConfirm)
             console.log(arraySend)
         }else{
             let array = arrayForm.push(arrayForm)
             console.log(array)
-        }
+        }*/
     }
 }
 
@@ -148,65 +164,90 @@ function displayData(cliqueLocalStorageData) { // ici pour clonner le produit da
 }
 
 function checkForm(){
-    // Ici, on va comparer le regex et ce que l'utilisateur écris sur le formulaire
-
-    //Regex
-    let stringTest = new RegExp("^[a-zA-Z]")
+    const stringTest = /[a-zA-Z]/
     console.log(stringTest)
-    let numberTest = new RegExp('^[0-9]+$')
+    const numberTest = /[0-9]/
+    console.log(numberTest)
     //ici, test de mail
-    let emailTest = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/y;
-    let specialCharTest = /[$-/:-?{-~!"^_`\[\]]/
-
+    const emailTest = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/y;
+    console.log(emailTest)
+    const specialCharTest = /[$-/:-?{-~!"^_`\[\]]/
+    console.log(specialCharTest)
     //message pour dire si le formulaire ne corresponds pas 
-    let messageTest = ""
-
+    let messageTest = []
     //Recuperation de chaque form
-    let formNom = document.getElementById("name").value
-    let formPrenom = document.getElementById("Prenom").value
-    let formAdresse = document.getElementById("adresse").value
-    let formVille = document.getElementById("ville").value
-    let formMail = document.getElementById("email").value
+    let formNom = document.getElementById("name").value.trim()//La méthode trim() permet de retirer les blancs en début et fin de chaîne
+    console.log(formNom)
+    let formPrenom = document.getElementById("Prenom").value.trim()
+    let formAdresse = document.getElementById("adresse").value.trim()
+    let formVille = document.getElementById("ville").value.trim()
+    let formMail = document.getElementById("email").value.trim()
 
-    //une condition pour dire si chaque form est juste et on ne rentre pas n'importe quoi
-    // nom, interdiction de nomnbre et de characteres spéciaux
-    if(stringTest.test(formNom) == false){
-        messageTest = messageTest + "\n" + "Vérifiez/renseigner votre nom"
+    //valid and invalid nom
+    const validNom = document.querySelector(".validNom")
+    const invalidNom = document.querySelector(".invalidNom")
+    console.log(validNom, invalidNom)
+    //valid and invalid preom
+    const validPrenom = document.querySelector(".validPrenom")
+    const invalidPrenom = document.querySelector(".invalidPrenom")
+    console.log(validPrenom, invalidPrenom)
+    //valid and invalid Nom
+    const validAdresse = document.querySelector(".validAdresse")
+    const invalidAdresse = document.querySelector(".invalidAdresse")
+    console.log(validAdresse, invalidAdresse)
+    //valid and invalid Nom
+    const validVille = document.querySelector(".validVille")
+    const invalidVille = document.querySelector(".invalidVille")
+    console.log(validVille, invalidVille)
+    //valid and invalid Nom
+    const validMail = document.querySelector(".validMail")
+    const invalidMail = document.querySelector(".invalidMail")
+    console.log(validMail, invalidMail)
+
+    if(stringTest.test(formNom) === false){
+        //messageTest = messageTest + "\n" + "Vérifiez/renseigner votre nom"
+        invalidNom.textContent = messageTest + "\n" + "Vérifiez/renseigner votre nom"
     }else{
-        console.log("Le nom/prenom est OK")
+        //if(numberTest.test(formPrenom) == true || emailTest.test(formPrenom) == true || specialCharTest.test(formPrenom) == true || messageTest == "")
+        //validNom.textContent = messageTest + "\n" + "Le nom est ok"
+        console.log("Le nom est OK")
     }
-    if(stringTest.test(formPrenom) == false){
-        messageTest = messageTest + "\n" +"Vérifiez/renseigner votre prénom"
+
+    if(stringTest.test(formPrenom) === false){
+        //messageTest = messageTest + "\n" + "Vérifiez/renseigner votre nom"
+        invalidPrenom.textContent = messageTest + "\n" + "Vérifiez/renseigner votre prénom"
     }else{
-        console.log("Le nom/prenom est OK")
+        console.log("Le prenom est OK")
     }
+    
     //Check adresse si c'est ok et pas de numéro spéciale
-    if(numberTest.test(formAdresse) == false || stringTest.test(formAdresse) == false){
-        messageTest = messageTest + "\n" +"Verifier votre adresse"
+    if(specialCharTest.test(formAdresse) == true || emailTest.test(formAdresse) === false || messageTest === ""){
+        invalidAdresse.textContent = messageTest + "\n" + "Vérifiez/renseigner votre adresse"
     }else{
         console.log("L'adresse est OK") 
     }
     //check la ville
     if(specialCharTest.test(formVille) == true || emailTest.test(formVille) == true || numberTest.test(formVille) == true || formVille == ""){
-        messageTest = messageTest + "\n" +"Verfiez votre ville"
+        invalidVille.textContent = messageTest + "\n" + "Vérifiez/renseigner votre ville"
     }else{
         console.log("La ville est ok")
     }
     //check email
     if(emailTest.test(formMail) == false){
-        messageTest = "Verifiez votre mail!"
+        invalidMail.textContent = messageTest + "\n" + "Vérifiez/renseigner votre email"
     }else{
-        console.log("Mail OK")
+        console.log("La mail est ok")
+        
     }
     
     // si l'un de ces champs n'est pas bon; on montre le message d'alert plus la raison
-    if(messageTest !== ""){
-        alert("il est necessaire de " + "\n" +messageTest)
+    if(messageTest != ""){
+        alert("il est necessaire de " + "\n" + messageTest)
     }
 }
 
 function goToConfirmationPage(){
-    //window.location.href = `${window.location.origin}/panier.html?confirmation.html`
+    window.location.href = `${window.location.origin}/panier.html?confirmation.html`
 }
 
 function prepareFormData(){
