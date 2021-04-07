@@ -1,9 +1,10 @@
-(() => {
+(async () => {
     let cliqueLocalStorageData = getCliqueLocalStorageData()
     displayData(cliqueLocalStorageData)
     updateTotalPrice(cliqueLocalStorageData)
     checkForm()
     console.log(checkForm)
+    await createData()
 
     if (document.readyState == 'loading') { //Une fois que la page se télécharge le bouton va être pret aant les autres car si les boutons fonctionne après les autres, cela peut apporter des prpblèmes aux utilisateurs
         document.addEventListener('DOMContentLoaded', ready)
@@ -27,9 +28,10 @@ function ready(cliqueLocalStorageData) {
         }
         let formId = document.getElementById("formId")
         formId.addEventListener("submit", (event) => {
-            //event.preventDefault()
-            confirmData(cliqueLocalStorageData)
-            goToConfirmationPage()
+            event.preventDefault()
+            //createData()
+            sendFormData(cliqueLocalStorageData)
+            //goToConfirmationPage()
             checkForm()
         })
     })
@@ -104,9 +106,31 @@ function getCliqueLocalStorageData(){
     return parseStructMeubleJSON
 }
 
-function confirmData(cliqueLocalStorageData){ // pour envoyer à la page de confirmation, le paramètre est une copie de la fonction qui appelle (setItem) le localStorage du produit 
-    //checkForm()// recuperation du fonction checkForm et ses variables
-    let getLocalStorageToConfirm = getCliqueLocalStorageData()
+function createData(){
+    // creation de la request XMLHttpRequest en utilisant fetch API
+    //const xhr = new XMLHttpRequest()
+
+    // créer une demande de post
+    return fetch('confirmation.html',{
+        method:"POST",
+        body: new FormData(this),//ou form
+        headers:{
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+    .then(response => response.text())
+    .then(html => console.log(html))
+    .catch((error) => {
+        console.log(error)
+        alert(error)
+    })
+}
+
+function sendFormData(cliqueLocalStorageData){ // pour envoyer à la page de confirmation, le paramètre est une copie de la fonction qui appelle (setItem) le localStorage du produit 
+    checkForm()// recuperation du fonction checkForm et ses variables
+    let create = getGreateAndSendData()
+    console.log(create)
+    //let getLocalStorageToConfirm = getCliqueLocalStorageData()
     const arrayForm = '[]'
     let formNom = document.getElementById("name").value
     let formPrenom = document.getElementById("Prenom").value
@@ -114,7 +138,20 @@ function confirmData(cliqueLocalStorageData){ // pour envoyer à la page de conf
     let formVille = document.getElementById("ville").value
     let formMail = document.getElementById("email").value
 
+    let postData = {
+        contact: {
+        firstName: formPrenom,
+        lastName: formNom,
+        address: formAdresse,
+        city:formVille,
+        email:formMail
+       },
 
+        products: [cliqueLocalStorageData.id]//ajout Id des tous les produits
+    }
+    //Si la reponse text e
+    console.log(postData)
+    /*
     for (let i = 0; i < cliqueLocalStorageData.length; i++) {
         const element = cliqueLocalStorageData[i];
         /*
@@ -124,20 +161,6 @@ function confirmData(cliqueLocalStorageData){ // pour envoyer à la page de conf
         console.log(arrayForm)
         console.log(formArrayConfirm)
         */
-
-        let postData = {
-            contact: {
-            firstName: formPrenom,
-            lastName: formNom,
-            address: formAdresse,
-            city:formVille,
-            email:formMail
-           },
-    
-            products: [element.id]//ajout Id des tous les produits
-        }
-
-        console.log(postData)
         /*
         if(formArrayConfirm){
             let arraySend = getLocalStorageToConfirm.push(formArrayConfirm)
@@ -145,8 +168,8 @@ function confirmData(cliqueLocalStorageData){ // pour envoyer à la page de conf
         }else{
             let array = arrayForm.push(arrayForm)
             console.log(array)
-        }*/
-    }
+        }
+    }*/
 }
 
 function displayData(cliqueLocalStorageData) { // ici pour clonner le produit dans le panier
@@ -245,23 +268,7 @@ function checkForm(){
         alert("il est necessaire de " + "\n" + messageTest)
     }
 }
-
+/*
 function goToConfirmationPage(){
     window.location.href = `${window.location.origin}/panier.html?confirmation.html`
-}
-
-function prepareFormData(){
-    let formNom = document.getElementById("name").value
-
-    let postData = {
-        contact: {
-        firstName: "",
-        lastName: formNom,
-        address: "",
-        city:"" ,
-        email:""
-       },
-
-        products: []//ajout Id des tous les produits
-    }
-}
+}*/
