@@ -1,10 +1,9 @@
-(async () => {
+(() => {
     let cliqueLocalStorageData = getCliqueLocalStorageData()
     displayData(cliqueLocalStorageData)
     updateTotalPrice(cliqueLocalStorageData)
     checkForm()
     console.log(checkForm)
-    await createData()
 
     if (document.readyState == 'loading') { //Une fois que la page se télécharge le bouton va être pret aant les autres car si les boutons fonctionne après les autres, cela peut apporter des prpblèmes aux utilisateurs
         document.addEventListener('DOMContentLoaded', ready)
@@ -26,15 +25,92 @@ function ready(cliqueLocalStorageData) {
                 // pour afficher un message "panier vide" si le panier est egal à 
            })// l'event à un property target qui va permetttre de remonter à tous les elements pour les effacer
         }
-        let formId = document.getElementById("formId")
-        formId.addEventListener("submit", (event) => {
-            event.preventDefault()
-            //createData()
+
+        let formId = document.getElementById("myForm")
+        formId.addEventListener("submit", async (e) => {
+            e.preventDefault()
+            let createData = await getCreateData()
             sendFormData(cliqueLocalStorageData)
             //goToConfirmationPage()
             checkForm()
         })
     })
+}
+
+function getCreateData(){
+    // créer une demande de post en utilisant fetch API promises
+
+    let myForm = document.getElementById("myForm")
+
+    //on crée la variable pour qui englobe toutes les données de form
+    const formData = new FormData(myForm)
+    console.log(formData)
+    //On passe l'instance de searchParams depuis l'URL string
+    const searchParams = new URLSearchParams()
+    console.log(searchParams)
+
+    // On transfer les datas depuis FormData au searchParams
+    for (let i = 0; i < formData.length; i++) {
+        const arrayFormData = formData[i];
+        searchParams.append(arrayFormData(0), arrayFormData(1))
+    }
+
+    //ic la creation de fetch API avec la méthode POST
+    return fetch('confirmation.html', {
+        method: 'POST',
+        body: searchParams,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    //Quand la réponse reviens, on va faire un log au console pour dire retpirner le text
+    .then(function (response){
+        return response.text()
+        //Une fois qu'on a le text, on va faire un console log du text
+    }).then(function (text){
+        console.log(text)
+        //si jamais il y aun problème on catch une erreur qu'on log
+    }).catch(function(err){
+        console.error(err)
+    })
+}
+
+function sendFormData(cliqueLocalStorageData){ // Recuperation de value de la form en JSON pour pouvoir les envoyer au back end et à la page confirmation pour pouvoir afficher 
+                                                //l'ID produit acheté et le nom de l'acheteur pour lui remercier
+    checkForm()// recuperation du fonction checkForm et ses variables
+    const arrayForm = '[]'
+    let formNom = document.getElementById("name").value
+    let formPrenom = document.getElementById("Prenom").value
+    let formAdresse = document.getElementById("adresse").value
+    let formVille = document.getElementById("ville").value
+    let formMail = document.getElementById("email").value
+    
+    for (let i = 0; i < cliqueLocalStorageData.length; i++) {
+        const element = cliqueLocalStorageData[i];
+        
+        let postData = { //JSON du formulaire
+            contact: {
+            firstName: formPrenom,
+            lastName: formNom,
+            address: formAdresse,
+            city:formVille,
+            email:formMail
+           },
+    
+            products: [cliqueLocalStorageData.id]//ajout Id des tous les produits
+        }
+        console.log(postData)
+        /*
+        // Pour pusher les données que je vais récuperer à la page confirmation.html
+        if(postData){
+            let dataSend = getLocalStorageToConfirm.push(postData)
+            console.log(dataSend)
+        }else{// si il n'y a rien, on envoie rien
+            let dataVide = arrayForm.push(arrayForm)
+            console.log(dataVide)
+        }*/
+    }
 }
 
 function effacerElementCart(event) {
@@ -106,59 +182,7 @@ function getCliqueLocalStorageData(){
     return parseStructMeubleJSON
 }
 
-function createData(){
-    // créer une demande de post en utilisant fetch API promises
-    return fetch('confirmation.html',{
-        method:"POST",
-        body: new FormData(this),//ou form
-        headers:{
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    })
-    .then(response => response.text())
-    .then(html => console.log(html))
-    .catch((error) => {
-        console.log(error)
-        alert(error)
-    })
-}
-
-function sendFormData(cliqueLocalStorageData){ // Recuperation de value de la form en JSON pour pouvoir les envoyer au back end et à la page confirmation pour pouvoir afficher 
-                                                //l'ID produit acheté et le nom de l'acheteur pour lui remercier
-    checkForm()// recuperation du fonction checkForm et ses variables
-    const arrayForm = '[]'
-    let formNom = document.getElementById("name").value
-    let formPrenom = document.getElementById("Prenom").value
-    let formAdresse = document.getElementById("adresse").value
-    let formVille = document.getElementById("ville").value
-    let formMail = document.getElementById("email").value
-    
-    for (let i = 0; i < cliqueLocalStorageData.length; i++) {
-        const element = cliqueLocalStorageData[i];
-        
-        let postData = { //JSON du formulaire
-            contact: {
-            firstName: formPrenom,
-            lastName: formNom,
-            address: formAdresse,
-            city:formVille,
-            email:formMail
-           },
-    
-            products: [cliqueLocalStorageData.id]//ajout Id des tous les produits
-        }
-        console.log(postData)
-        /*
-        // Pour pusher les données que je vais récuperer à la page confirmation.html
-        if(postData){
-            let dataSend = getLocalStorageToConfirm.push(postData)
-            console.log(dataSend)
-        }else{// si il n'y a rien, on envoie rien
-            let dataVide = arrayForm.push(arrayForm)
-            console.log(dataVide)
-        }*/
-    }
-}
+//create data ici
 
 function displayData(cliqueLocalStorageData) { // ici pour clonner le produit dans le panier et les affihcer
     for (let i = 0; i < cliqueLocalStorageData.length; i++) {
