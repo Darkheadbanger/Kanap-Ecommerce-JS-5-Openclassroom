@@ -100,48 +100,6 @@ function createAendFormData(cliqueLocalStorageData) { // Recuperation de value d
 function goToConfirmationPage() {
     window.location.href = `${window.location.origin}/panier.html?confirmation.html`
 }
-/*
-function getCreateData(sendFormData) {
-    // créer une demande de post en utilisant fetch API promises
-
-    let myForm = document.getElementById("myForm")
-
-    //on crée la variable pour qui englobe toutes les données de form
-    const formData = new FormData(myForm)
-    console.log(formData)
-    //On passe l'instance de searchParams depuis l'URL string
-    const searchParams = new URLSearchParams()
-    console.log(searchParams)
-
-    // On transfer les datas depuis FormData au searchParams
-    for (let i = 0; i < formData.length; i++) {
-        const arrayFormData = formData[i];
-        searchParams.append(arrayFormData(0), arrayFormData(1))
-    }
-
-    //ic la creation de fetch API avec la méthode POST
-    return fetch('confirmation.html', {
-            method: 'POST',
-            body: searchParams,
-            action: 'confirmation.html',
-            headers: {
-                'Accept': 'application/x-www-form-urlencoded',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        })
-        //Quand la réponse reviens, on va faire un log au console pour dire retourner le text
-        .then(function(response) {
-            return response.text()
-            //Une fois qu'on a le text, on va faire un console log du text
-        }).then(function(text) {
-            console.log(text)
-            //si jamais il y aun problème on catch une erreur qu'on log
-        }).catch(function(err) {
-            console.error(err)
-        })
-}*/
-
-
 
 function effacerElementCart(event) {
     let buttonEffacer = event.target // tous les buttons qu'on clique, on peut effacer
