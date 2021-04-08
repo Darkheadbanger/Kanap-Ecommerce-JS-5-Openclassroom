@@ -59,12 +59,13 @@ function getCreateData(){
     return fetch('confirmation.html', {
         method: 'POST',
         body: searchParams,
+        action: 'confirmation.html',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
     })
-    //Quand la réponse reviens, on va faire un log au console pour dire retpirner le text
+    //Quand la réponse reviens, on va faire un log au console pour dire retourner le text
     .then(function (response){
         return response.text()
         //Une fois qu'on a le text, on va faire un console log du text
