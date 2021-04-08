@@ -21,23 +21,87 @@ function ready(cliqueLocalStorageData) {
             button.addEventListener("click", (e) => {
                 //e.data=i
                 effacerElementCart(e)
-                panierVide(cliqueLocalStorageData)// pour afficher un message "panier vide" si le panier est egal à 
+                panierVide(cliqueLocalStorageData) // pour afficher un message "panier vide" si le panier est egal à 
                 // pour afficher un message "panier vide" si le panier est egal à 
-           })// l'event à un property target qui va permetttre de remonter à tous les elements pour les effacer
+            }) // l'event à un property target qui va permetttre de remonter à tous les elements pour les effacer
         }
 
         let formId = document.getElementById("myForm")
         formId.addEventListener("submit", async (e) => {
             e.preventDefault()
-            let createData = await getCreateData()
-            sendFormData(cliqueLocalStorageData)
-            //goToConfirmationPage()
+            await getSendFormData(cliqueLocalStorageData)
+            //await getCreateData(sendFormData)
+            goToConfirmationPage()
             checkForm()
         })
     })
 }
 
-function getCreateData(){
+function createAendFormData(cliqueLocalStorageData) { // Recuperation de value de la form en JSON pour pouvoir les envoyer au back end et à la page confirmation pour pouvoir afficher 
+    //l'ID produit acheté et le nom de l'acheteur pour lui remercier
+    //checkForm() // recuperation du fonction checkForm et ses variables
+    const arrayForm = '[]'
+    let formNom = document.getElementById("name").value
+    let formPrenom = document.getElementById("Prenom").value
+    let formAdresse = document.getElementById("adresse").value
+    let formVille = document.getElementById("ville").value
+    let formMail = document.getElementById("email").value
+
+    let postData = { //JSON du formulaire
+        contact = {
+            firstName: formPrenom,
+            lastName: formNom,
+            address: formAdresse,
+            city: formVille,
+            email: formMail
+        },
+        products: [cliqueLocalStorageData.id] //ajout Id des tous les produits
+    }
+    console.log(postData)
+
+    //creation du header pour pouvoir header avec le content JSON et peut lire JSON
+    const headers = new headers ({
+        'Content-Type' : 'application/json',
+        'Accept' : 'application/JSON'
+    })
+
+    
+    //Appeller l'URL de l'API BACK END pour puvoir l'envoyer au backend et creation de la methode post avec le headers qui accept format JSON et utilise le mode cors qui permet kles requêtes cross origin pour acceder à divers API 
+    const url = new URL('http://localhost:3000/api/furniture',{
+        method: 'POST',
+        headers: headers,
+        redirect: 'follow',
+        mode: 'cors',
+        credentials:'include',//ici, j'avtive le cookie
+        body= JSON.stringify(postData),
+    })
+
+    //mettre l'URL dans la méthode demande et le mettre dans fetch
+    const requestHeader = new Request(url)
+
+    // Creation du fetch qui va recevoir le API back end appelé requestHeader et le JSON avec la variable postData
+    return fetch(requestHeader)
+                //Quand la réponse reviens, on va faire un log au console pour dire retourner le JSON
+                .then(response => {
+                    if (response.ok) {
+                        return response.JSON()
+                    }else{
+                        return Promise.reject(response.status)
+                    }
+                    //Une fois qu'on a le JSON, on va faire un console log du JSON
+                }).then(response =>{
+                    console.log(response)
+                    //si jamais il y aun problème on catch une erreur qu'on log
+                }).catch(err =>{
+                    console.error(err)
+                })
+}
+
+function goToConfirmationPage() {
+    window.location.href = `${window.location.origin}/panier.html?confirmation.html`
+}
+/*
+function getCreateData(sendFormData) {
     // créer une demande de post en utilisant fetch API promises
 
     let myForm = document.getElementById("myForm")
@@ -57,69 +121,34 @@ function getCreateData(){
 
     //ic la creation de fetch API avec la méthode POST
     return fetch('confirmation.html', {
-        method: 'POST',
-        body: searchParams,
-        action: 'confirmation.html',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    })
-    //Quand la réponse reviens, on va faire un log au console pour dire retourner le text
-    .then(function (response){
-        return response.text()
-        //Une fois qu'on a le text, on va faire un console log du text
-    }).then(function (text){
-        console.log(text)
-        //si jamais il y aun problème on catch une erreur qu'on log
-    }).catch(function(err){
-        console.error(err)
-    })
-}
+            method: 'POST',
+            body: searchParams,
+            action: 'confirmation.html',
+            headers: {
+                'Accept': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+        //Quand la réponse reviens, on va faire un log au console pour dire retourner le text
+        .then(function(response) {
+            return response.text()
+            //Une fois qu'on a le text, on va faire un console log du text
+        }).then(function(text) {
+            console.log(text)
+            //si jamais il y aun problème on catch une erreur qu'on log
+        }).catch(function(err) {
+            console.error(err)
+        })
+}*/
 
-function sendFormData(cliqueLocalStorageData){ // Recuperation de value de la form en JSON pour pouvoir les envoyer au back end et à la page confirmation pour pouvoir afficher 
-                                                //l'ID produit acheté et le nom de l'acheteur pour lui remercier
-    checkForm()// recuperation du fonction checkForm et ses variables
-    const arrayForm = '[]'
-    let formNom = document.getElementById("name").value
-    let formPrenom = document.getElementById("Prenom").value
-    let formAdresse = document.getElementById("adresse").value
-    let formVille = document.getElementById("ville").value
-    let formMail = document.getElementById("email").value
-    
-    for (let i = 0; i < cliqueLocalStorageData.length; i++) {
-        const element = cliqueLocalStorageData[i];
-        
-        let postData = { //JSON du formulaire
-            contact: {
-            firstName: formPrenom,
-            lastName: formNom,
-            address: formAdresse,
-            city:formVille,
-            email:formMail
-           },
-    
-            products: [cliqueLocalStorageData.id]//ajout Id des tous les produits
-        }
-        console.log(postData)
-        /*
-        // Pour pusher les données que je vais récuperer à la page confirmation.html
-        if(postData){
-            let dataSend = getLocalStorageToConfirm.push(postData)
-            console.log(dataSend)
-        }else{// si il n'y a rien, on envoie rien
-            let dataVide = arrayForm.push(arrayForm)
-            console.log(dataVide)
-        }*/
-    }
-}
+
 
 function effacerElementCart(event) {
     let buttonEffacer = event.target // tous les buttons qu'on clique, on peut effacer
     effacerLogique(event)
     setTimeout(() => {
-        buttonEffacer.remove()//
-    },300)
+        buttonEffacer.remove() //
+    }, 300)
 }
 
 function effacerLogique(event) {
@@ -131,7 +160,7 @@ function effacerLogique(event) {
     window.location.reload()
 }
 
-function panierVide(cliqueLocalStorageData){// function pour dire si le panier est vide (=== 0) alors on montre un message "panier est vide" si non (differents de 0 ou !== 0) alors on montre la commande
+function panierVide(cliqueLocalStorageData) { // function pour dire si le panier est vide (=== 0) alors on montre un message "panier est vide" si non (differents de 0 ou !== 0) alors on montre la commande
     /*let messageVide = event.target
     console.log(messageVide)*/
     /* à chaque fois que le produit est effacer, il verifie la taille du panier est egale à 0, si c'est egale à 0 on affiche un text content "panier est vide".
@@ -156,9 +185,9 @@ function panierVide(cliqueLocalStorageData){// function pour dire si le panier e
     }*/
 }
 
-function updateTotalPrice(cliqueLocalStorageData){ //le parametre cliqueLocalStorageData est le variable d'une fonction qui permet de récuperer les données du localStorage
+function updateTotalPrice(cliqueLocalStorageData) { //le parametre cliqueLocalStorageData est le variable d'une fonction qui permet de récuperer les données du localStorage
     let total = 0
-    for (let i = 0; i < cliqueLocalStorageData.length; i++) {// Ici, je récupère le prix et la quantité input directeent du localstorage et je multiplie les deux pour avoir le résultat
+    for (let i = 0; i < cliqueLocalStorageData.length; i++) { // Ici, je récupère le prix et la quantité input directeent du localstorage et je multiplie les deux pour avoir le résultat
         const element = cliqueLocalStorageData[i];
         let elementQuantity = element.quantity
         let elementPrix = element.price / 100
@@ -167,11 +196,11 @@ function updateTotalPrice(cliqueLocalStorageData){ //le parametre cliqueLocalSto
     }
 }
 
-function getCliqueLocalStorageData(){
+function getCliqueLocalStorageData() {
 
     // Je réucpere les données de localStorage
     let panierGetStorageData = localStorage.getItem('userPanier')
-    
+
     console.log(panierGetStorageData)
 
     // Verification qu'il ne soit pas vide
@@ -199,7 +228,7 @@ function displayData(cliqueLocalStorageData) { // ici pour clonner le produit da
     }
 }
 
-function checkForm(){
+function checkForm() {
     const stringTest = /[a-zA-Z]/
     console.log(stringTest)
     const numberTest = /[0-9]/
@@ -212,7 +241,7 @@ function checkForm(){
     //message pour dire si le formulaire ne corresponds pas 
     let messageTest = []
     //Recuperation de chaque form
-    let formNom = document.getElementById("name").value.trim()//La méthode trim() permet de retirer les blancs en début et fin de chaîne
+    let formNom = document.getElementById("name").value.trim() //La méthode trim() permet de retirer les blancs en début et fin de chaîne
     console.log(formNom)
     let formPrenom = document.getElementById("Prenom").value.trim()
     let formAdresse = document.getElementById("adresse").value.trim()
@@ -240,48 +269,44 @@ function checkForm(){
     const invalidMail = document.querySelector(".invalidMail")
     console.log(validMail, invalidMail)
 
-    if(stringTest.test(formNom) === false){
+    if (stringTest.test(formNom) === false) {
         //messageTest = messageTest + "\n" + "Vérifiez/renseigner votre nom"
         invalidNom.textContent = messageTest + "\n" + "Vérifiez/renseigner votre nom"
-    }else{
+    } else {
         //if(numberTest.test(formPrenom) == true || emailTest.test(formPrenom) == true || specialCharTest.test(formPrenom) == true || messageTest == "")
         //validNom.textContent = messageTest + "\n" + "Le nom est ok"
         console.log("Le nom est OK")
     }
 
-    if(stringTest.test(formPrenom) === false){
+    if (stringTest.test(formPrenom) === false) {
         //messageTest = messageTest + "\n" + "Vérifiez/renseigner votre nom"
         invalidPrenom.textContent = messageTest + "\n" + "Vérifiez/renseigner votre prénom"
-    }else{
+    } else {
         console.log("Le prenom est OK")
     }
-    
+
     //Check adresse si c'est ok et pas de numéro spéciale
-    if(specialCharTest.test(formAdresse) == true || emailTest.test(formAdresse) === false || messageTest === ""){
+    if (specialCharTest.test(formAdresse) == true || emailTest.test(formAdresse) === false || messageTest === "") {
         invalidAdresse.textContent = messageTest + "\n" + "Vérifiez/renseigner votre adresse"
-    }else{
-        console.log("L'adresse est OK") 
+    } else {
+        console.log("L'adresse est OK")
     }
     //check la ville
-    if(specialCharTest.test(formVille) == true || emailTest.test(formVille) == true || numberTest.test(formVille) == true || formVille == ""){
+    if (specialCharTest.test(formVille) == true || emailTest.test(formVille) == true || numberTest.test(formVille) == true || formVille == "") {
         invalidVille.textContent = messageTest + "\n" + "Vérifiez/renseigner votre ville"
-    }else{
+    } else {
         console.log("La ville est ok")
     }
     //check email
-    if(emailTest.test(formMail) == false){
+    if (emailTest.test(formMail) == false) {
         invalidMail.textContent = messageTest + "\n" + "Vérifiez/renseigner votre email"
-    }else{
+    } else {
         console.log("La mail est ok")
-        
+
     }
-    
+
     // si l'un de ces champs n'est pas bon; on montre le message d'alert plus la raison
-    if(messageTest != ""){
+    if (messageTest != "") {
         alert("il est necessaire de " + "\n" + messageTest)
     }
 }
-/*
-function goToConfirmationPage(){
-    window.location.href = `${window.location.origin}/panier.html?confirmation.html`
-}*/
