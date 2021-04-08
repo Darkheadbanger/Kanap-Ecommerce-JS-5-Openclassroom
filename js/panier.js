@@ -37,7 +37,7 @@ function ready(cliqueLocalStorageData) {
     })
 }
 
-function createAendFormData(cliqueLocalStorageData) { // Recuperation de value de la form en JSON pour pouvoir les envoyer au back end et à la page confirmation pour pouvoir afficher 
+async function createAendFormData(cliqueLocalStorageData) { // Recuperation de value de la form en JSON pour pouvoir les envoyer au back end et à la page confirmation pour pouvoir afficher 
     //l'ID produit acheté et le nom de l'acheteur pour lui remercier
     //checkForm() // recuperation du fonction checkForm et ses variables
     const arrayForm = '[]'
@@ -60,41 +60,44 @@ function createAendFormData(cliqueLocalStorageData) { // Recuperation de value d
     console.log(postData)
 
     //creation du header pour pouvoir header avec le content JSON et peut lire JSON
-    const headers = new headers ({
-        'Content-Type' : 'application/json',
-        'Accept' : 'application/JSON'
+    const headers = new headers({
+        'Content-Type': 'application/json',
+        'Accept': 'application/JSON'
     })
+    console.log(headers)
 
-    
     //Appeller l'URL de l'API BACK END pour puvoir l'envoyer au backend et creation de la methode post avec le headers qui accept format JSON et utilise le mode cors qui permet kles requêtes cross origin pour acceder à divers API 
-    const url = new URL('http://localhost:3000/api/furniture',{
+    const url = new URL('http://localhost:3000/api/furniture', {
         method: 'POST',
         headers: headers,
         redirect: 'follow',
         mode: 'cors',
-        credentials:'include',//ici, j'avtive le cookie
-        body= JSON.stringify(postData),
+        credentials: 'include', //ici, j'avtive le cookie
+        body = JSON.stringify(postData),
     })
+    console.log(url)
+
 
     //mettre l'URL dans la méthode demande et le mettre dans fetch
     const requestHeader = new Request(url)
+    console.log(hearequestHeaderders)
 
     // Creation du fetch qui va recevoir le API back end appelé requestHeader et le JSON avec la variable postData
     return fetch(requestHeader)
-                //Quand la réponse reviens, on va faire un log au console pour dire retourner le JSON
-                .then(response => {
-                    if (response.ok) {
-                        return response.JSON()
-                    }else{
-                        return Promise.reject(response.status)
-                    }
-                    //Une fois qu'on a le JSON, on va faire un console log du JSON
-                }).then(response =>{
-                    console.log(response)
-                    //si jamais il y aun problème on catch une erreur qu'on log
-                }).catch(err =>{
-                    console.error(err)
-                })
+        //Quand la réponse reviens, on va faire un log au console pour dire retourner le JSON
+        .then(response => {
+            if (response.ok) {
+                return response.JSON()
+            } else {
+                return Promise.reject(response.status)
+            }
+            //Une fois qu'on a le JSON, on va faire un console log du JSON
+        }).then(response => {
+            console.log(response)
+            //si jamais il y aun problème on catch une erreur qu'on log
+        }).catch(err => {
+            console.error(err)
+        })
 }
 
 function goToConfirmationPage() {
