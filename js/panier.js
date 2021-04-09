@@ -1,5 +1,6 @@
 (() => {
     let cliqueLocalStorageData = getCliqueLocalStorageData()
+    console.log(cliqueLocalStorageData)
     displayData(cliqueLocalStorageData)
     updateTotalPrice(cliqueLocalStorageData)
     checkForm()
@@ -29,18 +30,18 @@ function ready(cliqueLocalStorageData) {
         let formId = document.getElementById("myForm")
         formId.addEventListener("submit", async (e) => {
             e.preventDefault()
-            await getSendFormData(cliqueLocalStorageData)
+            await createAndSendFormData(cliqueLocalStorageData)// on prends l'identification pour aller à la page du confirmation
             //await getCreateData(sendFormData)
-            goToConfirmationPage()
             checkForm()
+
         })
     })
 }
 
-async function createAendFormData(cliqueLocalStorageData) { // Recuperation de value de la form en JSON pour pouvoir les envoyer au back end et à la page confirmation pour pouvoir afficher 
+async function createAndSendFormData(cliqueLocalStorageData) { // Recuperation de value de la form en JSON pour pouvoir les envoyer au back end et à la page confirmation pour pouvoir afficher 
     //l'ID produit acheté et le nom de l'acheteur pour lui remercier
     //checkForm() // recuperation du fonction checkForm et ses variables
-    const arrayForm = '[]'
+    //const arrayForm = '[]'
     let formNom = document.getElementById("name").value
     let formPrenom = document.getElementById("Prenom").value
     let formAdresse = document.getElementById("adresse").value
@@ -48,46 +49,45 @@ async function createAendFormData(cliqueLocalStorageData) { // Recuperation de v
     let formMail = document.getElementById("email").value
 
     let postData = { //JSON du formulaire
-        contact = {
+        contact : {
             firstName: formPrenom,
             lastName: formNom,
             address: formAdresse,
             city: formVille,
             email: formMail
         },
-        products: [cliqueLocalStorageData.id] //ajout Id des tous les produits
+        products: cliqueLocalStorageData.map((item) => {return item.id}) //ajout Id des tous les produits, pour chaque element on retourner l'id du produit, orderId
     }
     console.log(postData)
 
     //creation du header pour pouvoir header avec le content JSON et peut lire JSON
-    const headers = new headers({
+    const headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/JSON'
-    })
+    }
     console.log(headers)
 
     //Appeller l'URL de l'API BACK END pour puvoir l'envoyer au backend et creation de la methode post avec le headers qui accept format JSON et utilise le mode cors qui permet kles requêtes cross origin pour acceder à divers API 
-    const url = new URL('http://localhost:3000/api/furniture', {
+    const myRequest = new Request('http://localhost:3000/api/furniture/order', {
         method: 'POST',
-        headers: headers,
         redirect: 'follow',
+        headers: headers,
         mode: 'cors',
-        credentials: 'include', //ici, j'avtive le cookie
-        body = JSON.stringify(postData),
+        body : JSON.stringify(postData),
     })
-    console.log(url)
-
-
-    //mettre l'URL dans la méthode demande et le mettre dans fetch
-    const requestHeader = new Request(url)
-    console.log(hearequestHeaderders)
+    console.log(myRequest)
 
     // Creation du fetch qui va recevoir le API back end appelé requestHeader et le JSON avec la variable postData
-    return fetch(requestHeader)
+    return fetch(myRequest)
         //Quand la réponse reviens, on va faire un log au console pour dire retourner le JSON
-        .then(response => {
+        //Si la réponse est ok, on retourne le JSON de la réponse et on utilise son orderId de la réponse
+        .then(async response => {
             if (response.ok) {
-                return response.JSON()
+                return response.json()
+                .then(function(json){
+                    console.log(json)
+                    goToConfirmationPage(json.orderId) //ici
+                })
             } else {
                 return Promise.reject(response.status)
             }
@@ -98,10 +98,11 @@ async function createAendFormData(cliqueLocalStorageData) { // Recuperation de v
         }).catch(err => {
             console.error(err)
         })
-}
+}//on envoie le total, l'id et le nom de la personne
 
-function goToConfirmationPage() {
-    window.location.href = `${window.location.origin}/panier.html?confirmation.html`
+
+function goToConfirmationPage(orderId) {
+    window.location.href = `${window.location.origin}/confirmation.html?ID:=${orderId}`// L'url pour aller à la page confirmatin
 }
 
 function effacerElementCart(event) {
