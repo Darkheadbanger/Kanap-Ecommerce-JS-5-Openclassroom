@@ -10,10 +10,10 @@
   <meta name="author" content="David Bouhaben"/>
   <meta name="robots" content="index, follow" />
 
-  <link defer rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css"/>
   
-  <script src="./js/confirmation.js" defer></script>
+  <script defer src="./js/confirmation.js"></script>
   <script>// Google analytics</script>
 
   <title>Spécialsite en meuble en chêne Français | Orinoco meuble</title>
@@ -45,40 +45,53 @@
   </header>
 
   <main id="main" >
-    <section class="row align-items-center text-center">
-      <div class="container " id="container-achat">
-        <h1 class=" h3 mt-5 text-woodTitle" id="blog__name">Merci de votre commande, nom !</h1>
-        <p class="text-justify text-center" id="blog__price">Montant total : </p>
-        <p class="text-justify text-center mt-n2" id="blog__id">Votre numéro de commande :</p>
-        <button type="button" class="btn btn-primary bg-wood">Retourner à l'accueil</button>
-      </div>
+    <section class="row align-items-center text-center" id="sectionTemplate">
+      <template id="confirmTemplate">
+        <div class="container " id="container__achat">
+          <h1 class=" h3 mt-5 text-woodTitle">Merci de votre commande, <span id="blog__prenom"><!--nom !--></span></h1>
+          <p class="text-justify text-center" >Montant total :<span id="blog__price"></span> </p>
+          <p class="text-justify text-center mt-n2">Votre numéro de commande : <span id="blog__order__id"></span></p>
+          <a href="index.html">
+            <button type="button" class="btn btn-primary bg-wood back__btn" id="return__btn">
+              <span class="p text-white">Retourner à l'accueil</span>
+            </button>
+            <button type="button" class="btn btn-primary bg-wood back__btn" id="imprimer">
+              <span class="p text-white">Imprimer facture</span>
+            </button>
+          </a>
+        </div>  
+      </template>
     </section>
   </main>
 
   <footer id="footer">
     <div class="bg-woodFooter mt-5">
-      <div class="footer-container">
-        <div class="container">
-          <div class="row pt-4 pb-3">
-            <div class="col">
-              <ul class="list-inline text-center ">
-                <li class="list-inline-item "><a href="#" class="text-white">À propos</a></li>
-                <li class="list-inline-item">&middot;</li>
-                <li class="list-inline-item"><a href="#" class="text-white">Vie privée</a></li>
-                <li class="list-inline-item">&middot;</li>
-                <li class="list-inline-item"><a href="#" class="text-white">Conditions d'utilisations</a></li>
-              </ul>
-            </div>
+       <div class="footer-container">
+          <div class="container">
+             <div class="row pt-4 pb-3">
+                <div class="col">
+                   <ul class="list-inline text-center ">
+                      <li class="list-inline-item ">
+                         <a href="#" class="text-white">À propos</a>
+                      </li>
+                      <li class="list-inline-item">&middot;</li>
+                      <li class="list-inline-item">
+                         <a href="#" class="text-white">Vie privée</a>
+                      </li>
+                      <li class="list-inline-item">&middot;</li>
+                      <li class="list-inline-item">
+                         <a href="#" class="text-white">Conditions d'utilisations</a>
+                      </li>
+                   </ul>
+                </div>
+             </div>
           </div>
-        </div>
-      </div>
+       </div>
     </div>
-  </footer>
-
-
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script defer src="./node_modules/jquery/dist/jquery.min.js" crossorigin="anonymous"></script>
-  <script defer src="./node_modules/@popperjs/core/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-  <script defer src="./node_modules/bootstrap/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+ </footer>
+ <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+ <script defer src="./node_modules/jquery/dist/jquery.min.js"></script>
+ <script defer src="./node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+ <script defer src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,45 +1,30 @@
 (() => {
-    let confirmData = getConfirmData()
-    displayData(confirmData)
-
-    if(document.readyState == "loading"){
-        document.addEventListener("DOMContentLoaded", ready)
-    }else {
-        ready()
-    }
+    let confirmDatas = getConfirmData()
+    displayData(confirmDatas)
 })()
-//Recuperer les données envoyés depuis la page panier, et on affiche dans la page confirmation
-function ready(){
-
-}
 
 function getConfirmData(){
+    let recevoirSessionStorage = sessionStorage.getItem("order")//sessionStorage
+    let parsedSessionStorage = JSON.parse(recevoirSessionStorage)
 
-}
-
-function displayData(confirmData){
-
-}
-
-/*
-//Une funciton pour récuperer le localStorage pour pouvoir reutiliser plus tard
-function getConfirmData(){
-    let setConfirmData = localStorage.getItem("userName")
-    console.log(setConfirmData)
-
-    let setConfirDataParsed = JSON.parse(setConfirmData)
-    console.log(setConfirDataParsed)
-
-    if(!setConfirmData){
-        console.log("Le panier est vide")
+    //Si il n'y a rien dans la page confirmation, on se dirige vers l'index automatiquement
+    if(!recevoirSessionStorage){
+        document.location.href = "index.html"
+    }else{
+        parsedSessionStorage
+        console.log(parsedSessionStorage)
+        sessionStorage.removeItem('order')// ici pour dire une fois qu'on quitte la page confirmation, le sessionStorage disparasse
     }
 
-    return setConfirDataParsed
+    return parsedSessionStorage
 }
 
-function displayData(confirmData){
-    /*for (let i = 0; i < confirmData.length; i++) {
-        const element = confirmData[i];
-        
-    }
-}*/
+function displayData(confirmDatas){
+    const templateAdd = document.getElementById("confirmTemplate")
+    const cloneAdd = document.importNode(templateAdd.content, true)
+    cloneAdd.getElementById("blog__prenom").textContent = confirmDatas.contact.firstName + " !"
+    let parsedNumber = confirmDatas.products.reduce((sum, item) => sum += item.price, 0)
+    cloneAdd.getElementById("blog__price").textContent = (parsedNumber / 100) + " €"
+    cloneAdd.getElementById("blog__order__id").textContent = confirmDatas.orderId
+    document.getElementById("sectionTemplate").appendChild(cloneAdd)
+}

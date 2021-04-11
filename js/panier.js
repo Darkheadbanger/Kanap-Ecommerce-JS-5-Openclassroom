@@ -19,26 +19,33 @@ function ready(cliqueLocalStorageData) {
         console.log(removeCartItemButtons)
         for (let i = 0; i < removeCartItemButtons.length; i++) { // On boucle tous les buttons à l'interieur de la carte, donc on peut effacer ce qui se trouve dans la carte column
             let button = removeCartItemButtons[i]
-            button.addEventListener("click", (e) => {
+            button.addEventListener("click", (event) => {
                 //e.data=i
-                effacerElementCart(e)
-                panierVide(cliqueLocalStorageData) // pour afficher un message "panier vide" si le panier est egal à 
+                effacerElementCart(event, cliqueLocalStorageData)
                 // pour afficher un message "panier vide" si le panier est egal à 
             }) // l'event à un property target qui va permetttre de remonter à tous les elements pour les effacer
         }
-
         let formId = document.getElementById("myForm")
         formId.addEventListener("submit", async (e) => {
             e.preventDefault()
-            await createAndSendFormData(cliqueLocalStorageData)// on prends l'identification pour aller à la page du confirmation
+            await getCreateAndSendFormData(cliqueLocalStorageData)// on prends l'identification pour aller à la page du confirmation
+            //goToConfirmationPage(createAndSendFormData)// j'ai mis cette function ici pour pouvoir récuperer le localStorage
             //await getCreateData(sendFormData)
             checkForm()
-
         })
+        /*
+        let imprimerFacture = document.getElementById(imprimer)
+        imprimerFacture.addEventListener("click", imprimerFacture)*/
     })
 }
+/*imprimer facture
+function imprimerFacture(event){
+    let btnImprimer = event.target
+    console.log(btnImprimer)
+    window.print()
+}*/
 
-async function createAndSendFormData(cliqueLocalStorageData) { // Recuperation de value de la form en JSON pour pouvoir les envoyer au back end et à la page confirmation pour pouvoir afficher 
+async function getCreateAndSendFormData(cliqueLocalStorageData) { // Recuperation de value de la form en JSON pour pouvoir les envoyer au back end et à la page confirmation pour pouvoir afficher 
     //l'ID produit acheté et le nom de l'acheteur pour lui remercier
     //checkForm() // recuperation du fonction checkForm et ses variables
     //const arrayForm = '[]'
@@ -82,11 +89,16 @@ async function createAndSendFormData(cliqueLocalStorageData) { // Recuperation d
         //Quand la réponse reviens, on va faire un log au console pour dire retourner le JSON
         //Si la réponse est ok, on retourne le JSON de la réponse et on utilise son orderId de la réponse
         .then(async response => {
-            if (response.ok) {
+            if(response.ok) {
                 return response.json()
-                .then(function(json){
+                .then((json) =>{
                     console.log(json)
-                    goToConfirmationPage(json.orderId) //ici
+                    /*let orderId = goToConfirmationPage(json.orderId) //ici on récupère le orderId du back end
+                    console.log(orderId)*/
+                    let confirmOrder = sessionStorage.setItem("order", JSON.stringify(json))
+                    console.log(confirmOrder)
+                    let orderId = goToConfirmationPage(json.orderId, confirmOrder) //ici on récupère le orderId du back end
+                    console.log(orderId)
                 })
             } else {
                 return Promise.reject(response.status)
@@ -98,16 +110,27 @@ async function createAndSendFormData(cliqueLocalStorageData) { // Recuperation d
         }).catch(err => {
             console.error(err)
         })
-}//on envoie le total, l'id et le nom de la personne
-
-
+}
+//on envoie le total, l'id et le nom de la personne
+//cette function est pour dire si il n'y a rien dans le sessionStorage produit, on ne peut pas aller sur la page confirmation, à linverse si
 function goToConfirmationPage(orderId) {
-    window.location.href = `${window.location.origin}/confirmation.html?ID:=${orderId}`// L'url pour aller à la page confirmatin
+    let recevoirSessionStorage = sessionStorage.getItem("order")//sessionStorage
+    console.log(recevoirSessionStorage)
+    let parsedSessionStorage = JSON.parse(recevoirSessionStorage)
+    console.log(parsedSessionStorage)
+
+    // si le produit qui se trouve à l'intérieur de products.array est egal à 0 alors on ne peut pas aller sur la page confirmationb à l'inverse oui
+    if(parsedSessionStorage.products == 0){
+        alert("Erreur, retournez à l'index ou ajoutez un produit!")
+    }else{
+        window.location.href = `${window.location.origin}/confirmation.html?ID:=${orderId}`// L'url pour aller à la page confirmation
+    }
 }
 
-function effacerElementCart(event) {
+function effacerElementCart(event, cliqueLocalStorageData) { //j'ajoute cliqueLocalStorageData pour pouvoir faire une confition pour montrer le message panier vide si il n'y a plus de produit sur le panier
     let buttonEffacer = event.target // tous les buttons qu'on clique, on peut effacer
     effacerLogique(event)
+    panierVide(event,cliqueLocalStorageData) // pour afficher un message "panier vide" si le panier est egal à 
     setTimeout(() => {
         buttonEffacer.remove() //
     }, 300)
@@ -122,29 +145,15 @@ function effacerLogique(event) {
     window.location.reload()
 }
 
-function panierVide(cliqueLocalStorageData) { // function pour dire si le panier est vide (=== 0) alors on montre un message "panier est vide" si non (differents de 0 ou !== 0) alors on montre la commande
-    /*let messageVide = event.target
-    console.log(messageVide)*/
-    /* à chaque fois que le produit est effacer, il verifie la taille du panier est egale à 0, si c'est egale à 0 on affiche un text content "panier est vide".
-    Cette div est en display none, et passe en display block à ce moment là/
-    for (let i = 0; i < cliqueLocalStorageData.length; i++) {
-        const showHidden = cliqueLocalStorageData[i];
-        if(showHidden === 0){
-            let none = document.getElementById("container-achat").style.display = "none"
-            console.log(none)
-            document.getElementById("container__tout").innerHTML =
-            `
-            <div class="jumbotron jumbotron-fluid bg-success">
-                <div class="container">
-                <p class="lead">Votre panier est vide, retournez à l'accueil!</p>
-                </div>
-            </div>
-            `
-        }else{// if(hiddenShowProducts !== 0)
-            let block = document.getElementById("container__tout").style.display = "block"
-            console.log(block)
-        }    
-    }*/
+function panierVide(event, cliqueLocalStorageData) { // function pour dire si le panier est vide (=== 0) alors on montre un message "panier est vide" si non (differents de 0 ou !== 0) alors on montre la commande
+    let messageVide = event.target
+    console.log(messageVide)
+
+    // à chaque fois que le produit est effacer, il verifie la taille du panier est egale à 0 et la taille de array, si c'est egale à 0 on affiche un text content "panier est vide".
+    //Cette div est en display none, et passe en display block à ce moment là/
+    let allContainerChanged = document.getElementById("container")
+    console.log(allContainerChanged)
+
 }
 
 function updateTotalPrice(cliqueLocalStorageData) { //le parametre cliqueLocalStorageData est le variable d'une fonction qui permet de récuperer les données du localStorage
@@ -176,7 +185,7 @@ function getCliqueLocalStorageData() {
 
 //create data ici
 
-function displayData(cliqueLocalStorageData) { // ici pour clonner le produit dans le panier et les affihcer
+function displayData(cliqueLocalStorageData) { // ici pour cloner le produit dans le panier et les affihcer
     for (let i = 0; i < cliqueLocalStorageData.length; i++) {
         const localStorageClick = cliqueLocalStorageData[i];
         const templateAdd = document.querySelector(".templateAdd")
