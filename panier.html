@@ -49,13 +49,12 @@
                <div class="container container-achat d-flex justify-content-center" id="container-achat">
                   <div class="row row-achat" id="row-achat">
                      <div class="col mt-2 col-achat d-flex justify-content-around" id="col-achat">
-                        <hr class="separator mt-n2">
 						<span class="ml-5"></span>
-                        <p class=" text-justify mx-5">Produit</p>
-                        <p class=" text-justify mx-5">Name</p>
-                        <p class=" text-justify mx-5">Color</p>
-                        <p class=" text-justify mx-5">Quantity</p>
-                        <p class=" text-justify mx-5">Price</p>
+                        <p class=" text-justify mx-lg-5 mx-md-4 mx-sm-2 d-none d-md-block">Produit</p>
+                        <p class=" text-justify mx-lg-5 mx-md-4 mx-sm-2 d-none d-md-block">Name</p>
+                        <p class=" text-justify mx-lg-5 mx-md-4 mx-sm-2 d-none d-md-block">Color</p>
+                        <p class=" text-justify mx-lg-5 mx-md-4 mx-sm-2 d-none d-md-block">Quantity</p>
+                        <p class=" text-justify mx-lg-5 mx-md-4 mx-sm-2 d-none d-md-block">Price</p>
                      </div>
                   </div>
                </div>
@@ -65,16 +64,16 @@
                      <div class="cart-items">
                            <div class="col-achat" id="col__items">
                               <article class="col mt-2 d-flex justify-content-around col-achat h-25 d-inline-block con__article">
-                                 <div class="card w-25 p-3 h-25 d-inline-md-block">
+                                 <div class="w-25">
                                     <img id="blog__image" src="" alt="" class="img-fluid rounded shadow-lg">
                                  </div>
-                                 <span class="mt-5 h5" id="blog__title"></span>
-                                 <span class="mt-5 blog__color" id="blog__color"></span>
-                                 <span class="mt-5 quantity" id="blog__quantity"></span>
-                                 <span class="h4 blog__price mt-5" id="price__blog"></span>
-                                 <button type="button" class="btn btn-danger btn-md danger-btn h-25 d-inline-block mt-5" id="danger-btn-first">
+                                 <span class="mt-md-5 p ml-md-n3 h5 d-none d-md-block" id="blog__title"></span>
+                                 <span class="mt-md-5 p ml-md-n3 blog__color" id="blog__color"></span>
+                                 <span class="mt-md-5 mr-md-n4 p quantity" id="blog__quantity"></span>
+                                 <span class="mt-md-5 p blog__price ml-md-5" id="price__blog"></span>
+                                 <button type="button" class="mt-md-5 btn btn-danger btn-md danger-btn h-25 d-inline-block" id="danger-btn-first">
                                  <i class="fas fa-trash"></i>
-                                 <span class="p">Effacer</span>
+                                 <span class="p d-md-inline d-sm-none d-none">Effacer</span>
                                  </button>
                               </article>
                            </div>
@@ -86,8 +85,8 @@
                <div class="d-flex justify-content-end element-achat">
                   <div class="col-achat">
                      <div class="col mt-2 d-flex justify-content-around" id="col__achat">
-                        <strong class="total-titre h3" id="titre-total">Total : </strong>
-                        <strong class="total-prix h3 mr-5" id="prix__total"> 0€</strong>
+                        <strong class="total-titre  mr-md-n3" id="titre-total">Total : </strong>
+                        <strong class="total-prix mr-lg-4 mr-md-n5 ml-md-4 mr-n5" id="prix__total"> 0€</strong>
 						<span class="mr-5"></span>
 						<span class="mr-5"></span>
 						<span class="mr-5"></span>
@@ -107,7 +106,7 @@
 					 </div>
 					 <div class="form-group">
 						<label for="Prenom">Prenom:</label>
-						<input type="text" class="form-control input-control" id="Prenom" placeholder="Entrez votre prénom" name="prénom" maxlength="5" pattern="[A-Za-z]{1,32}"  required>
+						<input type="text" class="form-control input-control" id="Prenom" placeholder="Entrez votre prénom" name="prénom" pattern="[A-Za-z]{1,32}"  required>
 						<div class="invalid-feedback invalidPrenom" ><!--Veuillez remplir ce champ.--></div>
                   <div class="valid-feedback validPrenom">Valid</div>
 					 </div>

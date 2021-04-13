@@ -22,9 +22,9 @@ function getConfirmData(){
 function displayData(confirmDatas){
     const templateAdd = document.getElementById("confirmTemplate")
     const cloneAdd = document.importNode(templateAdd.content, true)
-    cloneAdd.getElementById("blog__prenom").textContent = confirmDatas.contact.firstName + " !"
+    cloneAdd.getElementById("blog__prenom").textContent = `${confirmDatas.contact.firstName} !` //confirmDatas.contact.firstName + " !"
     let parsedNumber = confirmDatas.products.reduce((sum, item) => sum += item.price, 0)
-    cloneAdd.getElementById("blog__price").textContent = (parsedNumber / 100) + " €"
+    cloneAdd.getElementById("blog__price").textContent = `${(parsedNumber / 100)} €`//(parsedNumber / 100) + " €"
     cloneAdd.getElementById("blog__order__id").textContent = confirmDatas.orderId
     document.getElementById("sectionTemplate").appendChild(cloneAdd)
 }

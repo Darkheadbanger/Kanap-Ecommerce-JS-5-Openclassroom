@@ -29,22 +29,10 @@ function ready(cliqueLocalStorageData) {
         formId.addEventListener("submit", async (e) => {
             e.preventDefault()
             await getCreateAndSendFormData(cliqueLocalStorageData)// on prends l'identification pour aller à la page du confirmation
-            //goToConfirmationPage(createAndSendFormData)// j'ai mis cette function ici pour pouvoir récuperer le localStorage
-            //await getCreateData(sendFormData)
             checkForm()
         })
-        /*
-        let imprimerFacture = document.getElementById(imprimer)
-        imprimerFacture.addEventListener("click", imprimerFacture)*/
     })
 }
-/*imprimer facture
-function imprimerFacture(event){
-    let btnImprimer = event.target
-    console.log(btnImprimer)
-    window.print()
-}*/
-
 async function getCreateAndSendFormData(cliqueLocalStorageData) { // Recuperation de value de la form en JSON pour pouvoir les envoyer au back end et à la page confirmation pour pouvoir afficher 
     //l'ID produit acheté et le nom de l'acheteur pour lui remercier
     //checkForm() // recuperation du fonction checkForm et ses variables
@@ -55,6 +43,17 @@ async function getCreateAndSendFormData(cliqueLocalStorageData) { // Recuperatio
     let formVille = document.getElementById("ville").value
     let formMail = document.getElementById("email").value
 
+    //On prépare les ID du produit
+    let products = []
+    //On crée un boucle pour pouvoir pusher sois un id sois plus de un id
+    for (let i = 0; i < cliqueLocalStorageData.length; i++) {
+        const product = cliqueLocalStorageData[i];
+        //je fais un booucle pour pusher un id par quantité
+        for (let j = 0; j < product.quantity; j++) {
+            products.push(product.id)
+        }
+    }
+
     let postData = { //JSON du formulaire
         contact : {
             firstName: formPrenom,
@@ -63,7 +62,8 @@ async function getCreateAndSendFormData(cliqueLocalStorageData) { // Recuperatio
             city: formVille,
             email: formMail
         },
-        products: cliqueLocalStorageData.map((item) => {return item.id}) //ajout Id des tous les produits, pour chaque element on retourner l'id du produit, orderId
+        //products: cliqueLocalStorageData.map((item) => {return item.id}) //ajout Id des tous les produits, pour chaque element on retourner l'id du produit, orderId
+        products : products //Avec la nouvelle norme, on peut laisser uniquement products
     }
     console.log(postData)
 
@@ -121,7 +121,8 @@ function goToConfirmationPage(orderId) {
 
     // si le produit qui se trouve à l'intérieur de products.array est egal à 0 alors on ne peut pas aller sur la page confirmationb à l'inverse oui
     if(parsedSessionStorage.products == 0){
-        alert("Erreur, retournez à l'index ou ajoutez un produit!")
+        confirm("Erreur, retournez à l'index ou ajoutez un produit!")
+        document.location.href = "index.html"
     }else{
         window.location.href = `${window.location.origin}/confirmation.html?ID:=${orderId}`// L'url pour aller à la page confirmation
     }

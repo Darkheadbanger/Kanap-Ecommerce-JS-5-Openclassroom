@@ -108,7 +108,7 @@ function getAjoutMeuble(meubleData) {
         imageUrl:meubleData.imageUrl
     }
 
-    var produitFiltre = userPanier.filter(meuble => meuble.id === structMeuble.id && meuble.color === structMeuble.color)
+    let produitFiltre = userPanier.filter(meuble => meuble.id === structMeuble.id && meuble.color === structMeuble.color)
     //si le localStorage est vide on envoie rien
     console.log(produitFiltre)
     if(!userPanier)
