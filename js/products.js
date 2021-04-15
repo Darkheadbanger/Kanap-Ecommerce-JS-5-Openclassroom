@@ -12,10 +12,8 @@
 
 function getMeubleId() {
     // L'extraction de l'ID pour idenitifier quel lien on a cliquer et plus tard pour afficher le bon API (qui se trouve dans ID)
-
     //let params = (new URL(document.location)).searchParams// new pour créer une autre instance qu'on peut retourner plus tard
     //let id = params.get('id')
-
     return (new URL(document.location)).searchParams.get('id')
     //console.log(location)
 }
@@ -46,13 +44,13 @@ function displayMeuble(meubleData) { //j'imagine, Je vais afficher la bonne donn
 
 function ready(meubleData) {
     // Evenement pour ajouter le produit au panier au moment de clique "ajouter au pannier"
-
     const buttonAjout = document.getElementById('buttonAdd')
     buttonAjout.addEventListener('click', (event) => {
         event.preventDefault()
         //let ajoutMeuble = await getAjoutMeuble(meubleData, event)
         getAjoutMeuble(meubleData)
         goToRedirectionToPanier(meubleData.name)
+        console.log(pageSuivantProduitName)
         // Une fonction pour aller à la page shopping avec le ID et le nom
     })
     //ici pour input value pour dire aux utilisateurs que l'utilisateur ne peut choisir au moins 1 produit et non negative ou autre choses que le nombre
@@ -77,8 +75,6 @@ function quantityChanged(event) { //Lier l'input value au bouton pour dire si on
 }
 
 function getAjoutMeuble(meubleData) {
-    meubleData.target
-
     if (localStorage.getItem("userPanier")) {
         console.log("Administration : le panier de l'utilisateur existe dans le localStorage");
     } else {

@@ -5,7 +5,6 @@
   }
 })()
 
-
 function getMeubles() {
   return fetch("http://localhost:3000/api/furniture")
       .then((responseHttp) => responseHttp.json())

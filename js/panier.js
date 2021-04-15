@@ -28,7 +28,8 @@ function ready(cliqueLocalStorageData) {
         let formId = document.getElementById("myForm")
         formId.addEventListener("submit", async (e) => {
             e.preventDefault()
-            await getCreateAndSendFormData(cliqueLocalStorageData)// on prends l'identification pour aller à la page du confirmation
+            let o = await getCreateAndSendFormData(cliqueLocalStorageData)// on prends l'identification pour aller à la page du confirmation
+            console.log(o)
             checkForm()
         })
     })
@@ -111,8 +112,7 @@ async function getCreateAndSendFormData(cliqueLocalStorageData) { // Recuperatio
             console.error(err)
         })
 }
-//on envoie le total, l'id et le nom de la personne
-//cette function est pour dire si il n'y a rien dans le sessionStorage produit, on ne peut pas aller sur la page confirmation, à linverse si
+//on envoie le total, l'id et le nom de la personne//cette function est pour dire si il n'y a rien dans le sessionStorage produit, on ne peut pas aller sur la page confirmation, à linverse si
 function goToConfirmationPage(orderId) {
     let recevoirSessionStorage = sessionStorage.getItem("order")//sessionStorage
     console.log(recevoirSessionStorage)
@@ -128,10 +128,9 @@ function goToConfirmationPage(orderId) {
     }
 }
 
-function effacerElementCart(event, cliqueLocalStorageData) { //j'ajoute cliqueLocalStorageData pour pouvoir faire une confition pour montrer le message panier vide si il n'y a plus de produit sur le panier
+function effacerElementCart(event) { //j'ajoute cliqueLocalStorageData pour pouvoir faire une confition pour montrer le message panier vide si il n'y a plus de produit sur le panier
     let buttonEffacer = event.target // tous les buttons qu'on clique, on peut effacer
     effacerLogique(event)
-    panierVide(event,cliqueLocalStorageData) // pour afficher un message "panier vide" si le panier est egal à 
     setTimeout(() => {
         buttonEffacer.remove() //
     }, 300)
@@ -144,17 +143,6 @@ function effacerLogique(event) {
     localStorageData.splice(donnéeEffacer, 1)
     localStorage.setItem("userPanier", JSON.stringify(localStorageData))
     window.location.reload()
-}
-
-function panierVide(event, cliqueLocalStorageData) { // function pour dire si le panier est vide (=== 0) alors on montre un message "panier est vide" si non (differents de 0 ou !== 0) alors on montre la commande
-    let messageVide = event.target
-    console.log(messageVide)
-
-    // à chaque fois que le produit est effacer, il verifie la taille du panier est egale à 0 et la taille de array, si c'est egale à 0 on affiche un text content "panier est vide".
-    //Cette div est en display none, et passe en display block à ce moment là/
-    let allContainerChanged = document.getElementById("container")
-    console.log(allContainerChanged)
-
 }
 
 function updateTotalPrice(cliqueLocalStorageData) { //le parametre cliqueLocalStorageData est le variable d'une fonction qui permet de récuperer les données du localStorage
