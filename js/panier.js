@@ -90,7 +90,7 @@ async function getCreateAndSendFormData(cliqueLocalStorageData) { // Recuperatio
         //Quand la réponse reviens, on va faire un log au console pour dire retourner le JSON
         //Si la réponse est ok, on retourne le JSON de la réponse et on utilise son orderId de la réponse
         .then(async response => {
-            if(response.ok) {
+            if(response.ok) { 
                 return response.json()
                 .then((json) =>{
                     console.log(json)

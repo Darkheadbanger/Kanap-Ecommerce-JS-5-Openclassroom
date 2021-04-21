@@ -42,6 +42,7 @@ function getConfirmData(){
     //Si il n'y a rien dans la page confirmation, on se dirige vers l'index automatiquement
     if(!recevoirSessionStorage){
         document.location.href = "index.html"
+        alert("error")
     }else{
         parsedSessionStorage
         console.log(parsedSessionStorage)

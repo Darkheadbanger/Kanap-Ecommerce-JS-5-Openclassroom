@@ -6,12 +6,13 @@
 })()
 
 function getMeubles() {
-  return fetch("http://localhost:3000/api/furniture")
+  return fetch("http://localhost:3000/api/furniture")//ou xmlhttprequest ou axios
       .then((responseHttp) => responseHttp.json())
       //.then((meubles) => meubles)
       .catch((error) => {
           alert(error) + document.getElementById(`Error :(`)
       })
+      
 }
 
 function displayMeuble(meuble) {
